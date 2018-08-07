@@ -1,3 +1,3 @@
 <?php
-    echo "Hello World!";
+    echo $_SERVER['HTTP_HOST'];
 ?>
