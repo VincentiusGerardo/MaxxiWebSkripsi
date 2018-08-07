@@ -5,6 +5,6 @@
         }
         
         public function index(){
-            $this->load->view('test');
+            $this->load->view('test');  
         }
     }
