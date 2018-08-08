@@ -23,7 +23,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] .'/WebMaxxi/';
+if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])){
+    $url = 'https://';
+} else {
+    $url = 'http://';
+}
+
+$list = array('127.0.0.1','::1');
+
+if(!in_array($_SERVER['REMOTE_ADDR'],$list)){
+    $config['base_url'] = $url . $_SERVER['HTTP_HOST'] . '/';
+}else{
+    $config['base_url'] = $url . $_SERVER['HTTP_HOST'] . '/WebMaxxi/';
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +47,7 @@ $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] .'/WebMaxxi/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +88,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language'] = 'english';
 
 /*
 |--------------------------------------------------------------------------
