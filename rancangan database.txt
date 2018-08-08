@@ -1,8 +1,20 @@
 Perancangan Database:
 
 ms_karyawan
+- KodeKaryawan varchar(6) primary key,
+- NamaKaryawan text not null,
+- 
 
 ms_role
+- ID_Role int auto_increment primary key,
+- NamaRole text not null,
+- FlagActive char(1) default 'Y' not null
 
 tr_tracking
+- ID_Tracking
 
+- tr_cuti
+
+- ms_jabatan
+
+- ms_department
