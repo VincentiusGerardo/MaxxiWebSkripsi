@@ -3,7 +3,13 @@ Perancangan Database:
 ms_karyawan
 - KodeKaryawan varchar(6) primary key,
 - NamaKaryawan text not null,
-- 
+- Password varchar(255) not null
+- TempatLahir text not null,
+- TanggalLahir date not null,
+- ID_Role int foreign key,
+- Alamat text not null,
+- JenisKelamin char(1) not null,
+- FlagActive char(1) default 'Y' not null
 
 ms_role
 - ID_Role int auto_increment primary key,
@@ -11,10 +17,11 @@ ms_role
 - FlagActive char(1) default 'Y' not null
 
 tr_tracking
-- ID_Tracking
+- ID_Tracking int auto_increment primary key,
+- 
 
-- tr_cuti
+tr_cuti
 
-- ms_jabatan
+ms_jabatan
 
-- ms_department
+ms_department
