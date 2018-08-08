@@ -19,6 +19,22 @@
             $user = $this->input->post('');
             $pass = $this->input->post('');
             
+            $result = $this->model_login->login($user, $pass);
+            $role = $this->model_login->getRole($user);
+                        
+            if($result){
+                if($role == 1){
+                
+                }else if($role == 2){
+
+                }else if($role == 3){
+
+                }else{
+
+                }
+            }else{
+                redirect('Login/');
+            }
         }
         
         public function doLogOut(){

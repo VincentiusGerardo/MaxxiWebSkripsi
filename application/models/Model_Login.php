@@ -43,7 +43,12 @@
             }
         }
         
-        public function getRole(){
+        public function getRole($user){
+            $this->db->select('ID_Role');
+            $this->db->where('KodeKaryawan', $user);
+            $sql = $this->db->get_compiled_select('ms_karyawan');
+            
+            echo $sql;
                 
         }
         

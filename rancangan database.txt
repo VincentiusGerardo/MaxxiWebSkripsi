@@ -1,0 +1,8 @@
+Perancangan Database:
+
+ms_karyawan
+
+ms_role
+
+tr_tracking
+
