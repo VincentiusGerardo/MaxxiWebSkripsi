@@ -45,14 +45,10 @@
         
         public function getRole($user){
             $this->db->select('ID_Role');
+            $this->db->from('ms_karyawan');
             $this->db->where('KodeKaryawan', $user);
-            $sql = $this->db->get_compiled_select('ms_karyawan');
+            $query = $this->db->get();
             
-            echo $sql;
-                
-        }
-        
-        public function getMenu($role){
-            
+            return $query->result();  
         }
     }
