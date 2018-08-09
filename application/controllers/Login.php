@@ -2,7 +2,7 @@
     defined('BASEPATH') OR exit('No direct script access allowed');
     
     class Login extends CI_Controller{
-        public function __construct() {
+        public function __construct(){
             parent::__construct();
             $this->load->model('model_login');
         }
@@ -14,7 +14,16 @@
             if($this->form_validation->run() == FALSE){
                 $this->load->view('login');
             }else{
-                
+                $role = $this->session->userdata('role');
+                if($role == 1){
+                    redirect('Administrator/');
+                }else if($role == 2){
+                    redirect('Director/');
+                }else if($role == 3){
+                    redirect('HRD/');
+                }else{
+                    redirect('Employee/');
+                }
             }
         }
         
@@ -27,12 +36,12 @@
                         
             if($result){
                 $data = array(
-                    'is_logged' => true,
+                    'is_logged' => TRUE,
                     'username' => $this->input->post('username'),
-                    'role' => $role
+                    'role' => $r
                 );
                 $this->session->set_userdata($data);
-                $role = $this->session->userdata['is_logged']['role'];
+                $role =  $this->session->userdata('role');
                 if($role == 1){
                     redirect('Administrator/');
                 }else if($role == 2){
@@ -49,7 +58,12 @@
         
         public function doLogOut(){
             $data = array(
-                
+                'is_logged' => FALSE,
+                'username' => '',
+                'role' => ''
             );
+            $this->session->unset_userdata($data);
+            $this->session->sess_destroy();
+            redirect('Login/');
         }
     }

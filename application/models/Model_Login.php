@@ -49,6 +49,6 @@
             $this->db->where('KodeKaryawan', $user);
             $query = $this->db->get();
             
-            return $query->result();  
+            return $query->row()->ID_Role;  
         }
     }
