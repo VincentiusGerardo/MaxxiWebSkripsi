@@ -25,3 +25,40 @@ tr_cuti
 ms_jabatan
 
 ms_department
+
+
+ms_menu
+- ID_Menu int auto_increment primary key,
+- NamaMenu text not null,
+- URL text,
+- DateAdded datetime,
+- FlagActive char(1) default 'Y'
+
+ms_submenu
+- ID_SubMenu int auto_increment primary key,
+- NamaSubMenu text not null,
+- URL text,
+- DateAdded datetime,
+- FlagActive char(1) default 'Y'
+
+tr_authorizemenu
+- ID_AuthorizeMenu int auto_increment primary key,
+- ID_Menu int,
+- KodeKaryawan varchar(6),
+
+tr_authorizesubmenu
+- ID_AuthorizeSubMenu int auto_increment primary key,
+- ID_SubMenu int,
+- KodeKaryawan varchar(6),
+
+ms_pelanggan
+- ID_Pelanggan int auto_increment primary key,
+- NamaPelanggan text not null,
+- DateAdded datetime
+- FlagActive char(1) default 'Y'
+
+ms_harga
+- ID_Harga int auto_increment primary key,
+- ID_Pelanggan int foreign key,
+- Harga int
+
