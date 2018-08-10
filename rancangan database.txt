@@ -31,14 +31,14 @@ ms_menu
 - ID_Menu int auto_increment primary key,
 - NamaMenu text not null,
 - URL text,
-- DateAdded datetime,
+- List int,
 - FlagActive char(1) default 'Y'
 
 ms_submenu
 - ID_SubMenu int auto_increment primary key,
 - NamaSubMenu text not null,
 - URL text,
-- DateAdded datetime,
+- List int,
 - FlagActive char(1) default 'Y'
 
 tr_authorizemenu

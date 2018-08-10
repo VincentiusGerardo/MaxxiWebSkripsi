@@ -9,10 +9,31 @@
         
         public function index(){
             $data['namaKaryawan'] = $this->model_admin->getUserName($this->session->userdata('username'));
-            
-            $this->load->view('header');
+            $this->getHeader();
             $this->load->view('admin/home',$data);
             $this->load->view('footer');
         }
+        
+        /* Fleet */
+        public function fleet(){
+            $data['fleet'] = $this->model_admin->getFleet();
+            $this->getHeader();
+            $this->load->view();
+            $this->load->view();
+        }
+        
+        public function doInsertFleet(){
+            
+        }
+        
+        public function doUpdateFleet(){
+            
+        }
+        
+        public function doDeleteFleet(){
+            
+        }
+        
+        /* */
         
     }

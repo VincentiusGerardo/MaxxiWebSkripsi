@@ -6,13 +6,34 @@
             parent::__construct();      
         }
         
-        public function getMenu($role){
+        public function getMenu($kode){
+            $this->db->select('b.ID_Menu,b.NamaMenu,b.URL,b.List');
+            $this->db->from('tr_authorizemenu a');
+            $this->db->join('ms_menu b','a.ID_Menu = b.ID_Menu','inner');
+            $this->db->where('a.KodeKaryawan', $kode);
+            
+            $query = $this->db->get();
+            return $query->result();
+            //$query = $this->db->get_compiled_select();
+            //echo $query;
+            /*
+                SELECT b.ID_Menu,b.NamaMenu,b.URL,b.List
+                FROM tr_authorizemenu a, ms_menu b
+                WHERE a.ID_Menu = b.ID_Menu
+                AND b.FlagActive = 'Y'
+                AND a.KodeKaryawan = '$kode'
             $query = $this->db->get_where('ms_menu', array('ID_Role' => $role));
             return $query->result();
+            */
         }
         
-        public function getSubMenu($role){
-            $query = $this->db->get_where('ms_submenu', array('ID_Role' => $role));
+        public function getSubMenu($kode){
+            $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL,b.List');
+            $this->db->from('tr_authorizesubmenu a');
+            $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
+            $this->db->where('a.KodeKaryawan', $kode);
+            
+            $query = $this->db->get();
             return $query->result();
         }
         
