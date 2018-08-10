@@ -1,8 +1,15 @@
-footer{
-	text-align: center;
+footer p{
+    text-align: center;
+    position: fixed;
+    left:0px;
+    bottom:0px;
+    height:11px;
+    width:100%;
+    color: black;
+    font-weight: bold;
 }
 
 .judulHalaman{
-	text-align: center;
+    text-align: center;
 }
 
