@@ -34,6 +34,40 @@
             
         }
         
-        /* */
+        /* Customers */
+        
+        public function customers(){
+            
+        }
+        
+        public function doInsertCustomers(){
+            
+        }
+        
+        public function doUpdateCustomers(){
+            
+        }
+        
+        public function doDeleteCustomers(){
+            
+        }
+        
+        /* Experience */
+        
+        public function experience(){
+            
+        }
+        
+        public function doInsertExperience(){
+            
+        }
+        
+        public function doUpdateExperience(){
+            
+        }
+        
+        public function doDeleteExperience(){
+            
+        }
         
     }
