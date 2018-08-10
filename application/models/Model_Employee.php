@@ -2,7 +2,7 @@
 
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class Model_Employee extends CI_Model{
+    class Model_Employee extends MY_Model{
 
         public function __construct(){
             parent::__construct();
