@@ -126,4 +126,38 @@
         public function deleteExperience(){
             
         }
+        
+        /* Mission Control */
+        
+        public function getKaryawan(){
+            $query = $this->db->get_where('ms_karyawan', array('FlagActive' => 'Y'));
+            return $query->result();
+        }
+        
+        public function getMenuByKode($kode){
+            $this->db->select('a.ID_Menu, a.NamaMenu');
+            $this->db->from('ms_menu a');
+            $this->db->join('tr_authorizemenu b','a.ID_Menu = b.ID_Menu', 'inner');
+            $this->db->where('b.KodeKaryawan', $kode);
+            $query = $this->db->get();
+            
+            return $query->result();
+        }
+        
+        public function getAllMenu(){
+            $query = $this->db->get_where('ms_menu', array('FlagActive' => 'Y'));
+            return $query->result();
+        }
+        
+        public function insertAuthMenu($idmenu,$karyawan){
+                       
+            $data = array(
+                'ID_Menu' => $this->input->post($idmenu),
+                'KodeKaryawan' => $this->input->post($karyawan)
+            );
+            
+            $query = $this->db->set($data)->get_compiled_insert('tr_authorizemenu');
+            
+            echo $query;
+        }
     }

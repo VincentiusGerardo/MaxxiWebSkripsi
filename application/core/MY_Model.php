@@ -41,4 +41,18 @@
             $query = $this->db->get_where('ms_karyawan', array('KodeKaryawan' => $kode));
             return $query->row()->NamaKaryawan;
         }
+        
+        public function updatePass($pass,$kode){
+            $data = array('Password' => $this->hashPassword($pass));
+            $this->db->set($data);
+            $this->db->where('KodeKaryawan', $kode);
+            $query = $this->db->update('ms_karyawan');
+            
+            return $query;
+        }
+        
+        public function hashPassword($pass){
+            $hash = password_hash($pass, PASSWORD_DEFAULT);
+            return $hash;
+        }
     }

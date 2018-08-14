@@ -8,6 +8,8 @@
                 <td id="Menit"><?php echo date("i"); ?></td>
                 <td>:</td>
                 <td id="Detik"><?php echo date("s"); ?></td>
+                <td></td>
+                <td><?php echo date("A"); ?></td>
             </tr>
         </table>
 </div>

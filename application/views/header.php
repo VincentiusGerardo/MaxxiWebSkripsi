@@ -44,11 +44,12 @@
         <script src="<?php echo base_url('js/script.js'); ?>"></script>
         <link rel="stylesheet" href="<?php echo base_url('css/skins/skin-blue.min.css'); ?>">
         <script src="<?php echo base_url('js/bootbox.min.js'); ?>"></script>
+        
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
           <header class="main-header">
-            <a href="<?php echo base_url(); ?>" class="logo">
+            <a class="logo">
               <span class="logo-mini"><b>MaXXi</b></span>
               <span class="logo-lg"><b>Admin</b> MaXXi</span>
             </a>
@@ -93,9 +94,9 @@
               <!-- Sidebar Menu -->
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
-                <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
+                <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
                 <?php foreach($menu as $m){ ?>
-                    <li><a href="<?php echo base_url($m->URL); ?>"><?php echo $m->NamaMenu; ?></a></li>
+                    <li><a href="<?php echo base_url($m->URL); ?>"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
                 <?php } ?>
                 <li class="treeview">
                   <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>

@@ -27,16 +27,16 @@ class MY_Controller extends CI_Controller{
     }
     
     public function doChangePassword(){
-        $old = $this->input->post();
-        $new = $this->input->post();
-        $rep = $this->input->post();
+        $old = $this->input->post('oldPass');
+        $new = $this->input->post('newPass');
+        $rep = $this->input->post('repPass');
         
-        if($new != $rep){
-            
-        }else if($old == $rep){
-            
+        
+        if($new === $rep){
+            $this->my_model->updatePass($new,$this->session->userdata('username'));
+            redirect('./changePassword');
         }else{
-            
+            echo "Pass Beda";
         }
     }
 }
