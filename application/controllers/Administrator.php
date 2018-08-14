@@ -8,9 +8,8 @@
         }
         
         public function index(){
-            $data['namaKaryawan'] = $this->model_admin->getUserName($this->session->userdata('username'));
             $this->getHeader();
-            $this->load->view('admin/home',$data);
+            $this->load->view('admin/home');
             $this->load->view('footer');
         }
         
@@ -37,7 +36,9 @@
         /* Customers */
         
         public function customers(){
-            
+            $this->getHeader();
+            $this->load->view('admin/home');
+            $this->load->view('footer');
         }
         
         public function doInsertCustomers(){
@@ -55,7 +56,9 @@
         /* Experience */
         
         public function experience(){
-            
+            $this->getHeader();
+            $this->load->view('admin/home');
+            $this->load->view('footer');
         }
         
         public function doInsertExperience(){
@@ -69,5 +72,5 @@
         public function doDeleteExperience(){
             
         }
-        
+                
     }

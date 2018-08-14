@@ -7,6 +7,8 @@
         }
         
         public function index(){
-            
+            $this->getHeader();
+            //$this->load->view('director/home');
+            $this->load->view('footer');
         }
     }
