@@ -44,7 +44,6 @@
         <script src="<?php echo base_url('js/script.js'); ?>"></script>
         <link rel="stylesheet" href="<?php echo base_url('css/skins/skin-blue.min.css'); ?>">
         <script src="<?php echo base_url('js/bootbox.min.js'); ?>"></script>
-        <script src="<?php echo base_url('js/jam.js') ?>"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -94,6 +93,7 @@
               <!-- Sidebar Menu -->
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
+                <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
                 <?php foreach($menu as $m){ ?>
                     <li><a href="<?php echo base_url($m->URL); ?>"><?php echo $m->NamaMenu; ?></a></li>
                 <?php } ?>

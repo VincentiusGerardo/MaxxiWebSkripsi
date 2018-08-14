@@ -9,7 +9,7 @@
         
         public function index(){
             $this->getHeader();
-            $this->load->view('admin/home');
+            $this->load->view('home');
             $this->load->view('footer');
         }
         
@@ -17,8 +17,8 @@
         public function fleet(){
             $data['fleet'] = $this->model_admin->getFleet();
             $this->getHeader();
-            $this->load->view();
-            $this->load->view();
+            $this->load->view('admin/fleet');
+            $this->load->view('footer');
         }
         
         public function doInsertFleet(){
@@ -37,7 +37,7 @@
         
         public function customers(){
             $this->getHeader();
-            $this->load->view('admin/home');
+            $this->load->view('admin/customers');
             $this->load->view('footer');
         }
         
@@ -57,7 +57,7 @@
         
         public function experience(){
             $this->getHeader();
-            $this->load->view('admin/home');
+            $this->load->view('admin/experience');
             $this->load->view('footer');
         }
         
@@ -72,5 +72,26 @@
         public function doDeleteExperience(){
             
         }
-                
+        
+        /* UserManagement */
+        
+        public function users(){
+            $this->getHeader();
+            $this->load->view('admin/user');
+            $this->load->view('footer');
+        }
+        
+        public function doInsertUsers(){
+            
+        }
+        
+        public function doUpdateUsers(){
+            
+        }
+        
+        public function doDeleteUsers(){
+            
+        }
+        
+        //
     }
