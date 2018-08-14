@@ -12,7 +12,16 @@
         <!--Bootstrap 3.3.7-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap.min.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap.min.js'); ?>"></script>
-
+        
+        <!--Bootstrap 3.3.7 plugin-->
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-select.min.css'); ?>"/>
+        <script src="<?php echo base_url('js/bootstrap/bootstrap-select.min.js'); ?>"></script>
+        <script src="<?php echo base_url('js/moment.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-datetimepicker.min.css'); ?>"/>
+        <script src="<?php echo base_url('js/bootstrap/bootstrap-datetimepicker.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
+        <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>
+        
         <!--Font Awesome-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('font-awesome/css/font-awesome.min.css'); ?>"/>
 
@@ -34,6 +43,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/style.css'); ?>"/>
         <script src="<?php echo base_url('js/script.js'); ?>"></script>
         <link rel="stylesheet" href="<?php echo base_url('css/skins/skin-blue.min.css'); ?>">
+        <script src="<?php echo base_url('js/bootbox.min.js'); ?>"></script>
+        <script src="<?php echo base_url('js/jam.js') ?>"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
