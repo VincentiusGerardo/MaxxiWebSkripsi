@@ -17,7 +17,7 @@
         public function fleet(){
             $data['fleet'] = $this->model_admin->getFleet();
             $this->getHeader();
-            $this->load->view('admin/fleet');
+            $this->load->view('admin/fleet',$data);
             $this->load->view('footer');
         }
         
@@ -36,8 +36,9 @@
         /* Customers */
         
         public function customers(){
+            $data['customer'] = $this->model_admin->getCustomers();
             $this->getHeader();
-            $this->load->view('admin/customers');
+            $this->load->view('admin/customers',$data);
             $this->load->view('footer');
         }
         

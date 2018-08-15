@@ -92,7 +92,7 @@
         /* Customers */
         
         public function getCustomers(){
-            $query = $this->db->get_where('ms_customers', array('FlagActive' => 'Y'));
+            $query = $this->db->get_where('ms_customer', array('FlagActive' => 'Y'));
             return $query->result();
         }
         
@@ -150,7 +150,7 @@
         }
         
         public function insertAuthMenu($idmenu,$karyawan){
-                       
+            
             $data = array(
                 'ID_Menu' => $this->input->post($idmenu),
                 'KodeKaryawan' => $this->input->post($karyawan)
