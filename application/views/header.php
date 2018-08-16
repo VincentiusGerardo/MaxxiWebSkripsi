@@ -99,14 +99,16 @@
                     <li><a href="<?php echo base_url($m->URL); ?>"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
                 <?php } ?>
                 <li class="treeview">
-                  <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                  <a href="#"><i class="fa fa-link"></i> <span>Mission Control</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                       </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
+                    <li><a href="<?php echo base_url('Administrator/MasterMenu'); ?>">Master Menu</a></li>
+                    <li><a href="<?php echo base_url('Administrator/MasterSubMenu'); ?>">Master Sub Menu</a></li>
+                    <li><a href="<?php echo base_url('Administrator/AuthorizeMenu'); ?>">Authorize Menu</a></li>
+                    <li><a href="<?php echo base_url('Administrator/AuthorizeSubMenu'); ?>">Authorize Sub Menu</a></li>
                   </ul>
                 </li>
               </ul>

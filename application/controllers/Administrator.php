@@ -96,10 +96,10 @@
         
         /* Mission Control */
         
-        public function MissionControl(){
+        public function AuthorizeMenu(){
             $data['karyawan'] = $this->model_admin->getKaryawan();
             $this->getHeader();
-            $this->load->view('admin/MissionControl',$data);
+            $this->load->view('admin/authorizemenu',$data);
             $this->load->view('footer');
         }
         
@@ -114,6 +114,41 @@
         public function doInsertAuthMenu(){
             $kar = $this->input->post('kodeK');
             $id = $this->input->post('menu');
-            $result = $this->model_admin->insertAuthMenu($id,$kar);
+            $menu = array();
+            
+            foreach($id as $i){
+                array_push($menu, array(
+                    'ID_Menu' => $i,
+                    'KodeKaryawan' => $kar
+                ));
+            }
+            $result = $this->model_admin->insertAuthMenu($menu);
+            return $result;
+        }
+        
+        public function MasterMenu(){
+            $data['menu'] = $this->model_admin->getAllMenu();
+            $this->getHeader();
+            $this->load->view('admin/mastermenu',$data);
+            $this->load->view('footer');
+        }
+        
+        public function MasterSubMenu(){
+            $data['submenu'] = $this->model_admin->getAllSubMenu();
+            $this->getHeader();
+            $this->load->view('admin/mastersubmenu',$data);
+            $this->load->view('footer');
+        }
+        
+        public function doInsertMenu(){
+            
+        }
+        
+        public function doInsertSubMenu(){
+            
+        }
+        
+        public function AuthorizeSubMenu(){
+            
         }
     }

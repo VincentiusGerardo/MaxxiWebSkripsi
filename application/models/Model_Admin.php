@@ -149,15 +149,18 @@
             return $query->result();
         }
         
-        public function insertAuthMenu($idmenu,$karyawan){
+        public function getAllSubMenu(){
+            $this->db->select('a.ID_SubMenu, a.NamaSubMenu, b.NamaMenu, a.List');
+            $this->db->from('ms_submenu a');
+            $this->db->join('ms_menu b', 'a.ID_Menu = b.ID_Menu', 'inner');
+            $this->db->where('a.FlagActive','Y');
             
-            $data = array(
-                'ID_Menu' => $this->input->post($idmenu),
-                'KodeKaryawan' => $this->input->post($karyawan)
-            );
-            
-            $query = $this->db->set($data)->get_compiled_insert('tr_authorizemenu');
-            
-            echo $query;
+            $query = $this->db->get();
+
+            return $query->result();
+        }
+        
+        public function insertAuthMenu($data){
+            $query = $this->db->insert_batch('tr_authorizemenu',$data);
         }
     }

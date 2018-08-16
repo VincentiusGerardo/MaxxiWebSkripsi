@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h1 class="judulHalaman">Mission Control</h1>
+        <h1 class="judulHalaman">Authorize Menu</h1>
         <select class="selectpicker" name="karyawan" data-size="5" id="namaKaryawan" title="Select Karyawan">
             <?php foreach($karyawan as $k){ ?>
             <option value="<?php echo $k->KodeKaryawan; ?>"><?php echo $k->NamaKaryawan; ?></option>

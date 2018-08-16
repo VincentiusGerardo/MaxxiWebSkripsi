@@ -31,10 +31,13 @@ class MY_Controller extends CI_Controller{
         $new = $this->input->post('newPass');
         $rep = $this->input->post('repPass');
         
-        
-        if($new === $rep){
+        if(empty($new) || empty($old) || empty($rep)){
+            echo "Lengkapi semuanya!";
+        }else if($new === $rep){
             $this->my_model->updatePass($new,$this->session->userdata('username'));
             redirect('./changePassword');
+        }else if($old === $new){
+            echo "Password tidak boleh sama !";
         }else{
             echo "Pass Beda";
         }
