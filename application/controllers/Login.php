@@ -33,8 +33,8 @@
                 $user = $this->input->post('username');
                 $pass = $this->input->post('password');
 
-                $result = $this->model_login->login($user, $pass);
-                $r = $this->model_login->getRole($user);
+                $result = $this->mLogin->login($user, $pass);
+                $r = $this->mLogin->getRole($user);
 
                 if($result){
                     $data = array(

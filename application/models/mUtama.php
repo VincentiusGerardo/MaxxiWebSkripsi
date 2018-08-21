@@ -9,7 +9,7 @@
         
         /* Menu & SubMenu */
         public function getMenu($kode){
-            $this->db->select('b.ID_Menu,b.NamaMenu,b.URL,b.List');
+            $this->db->select('b.ID_Menu,b.NamaMenu,b.URL');
             $this->db->from('tr_authorizemenu a');
             $this->db->join('ms_menu b','a.ID_Menu = b.ID_Menu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
@@ -30,7 +30,7 @@
         }
         
         public function getSubMenu($kode){
-            $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL,b.List');
+            $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL');
             $this->db->from('tr_authorizesubmenu a');
             $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
