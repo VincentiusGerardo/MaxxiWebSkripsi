@@ -12,7 +12,6 @@
                     <td><?php echo $i; ?></td>
                     <td><?php echo $sm->NamaSubMenu; ?></td>
                     <td><?php echo $sm->NamaMenu; ?></td>
-                    <td><?php echo $sm->List; ?></td>
                     <td></td>
                 </tr>
                 <?php

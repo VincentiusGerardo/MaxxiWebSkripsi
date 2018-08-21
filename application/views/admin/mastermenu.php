@@ -11,7 +11,6 @@
                 <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $m->NamaMenu; ?></td>
-                    <td><?php echo $m->List; ?></td>
                     <td></td>
                 </tr>
                 <?php 

@@ -225,4 +225,13 @@
                 return FALSE;
             }
         }
+        
+        public function insertAuthSubMenu($data){
+            $query = $this->db->insert_batch('tr_authorizesubmenu', $data);
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
     }
