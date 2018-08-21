@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('js/setTable/masterMenu.js'); ?>"></script>
+<script src="<?php echo base_url('js/setTable/Admin/masterMenu.js'); ?>"></script>
 <div class="container">
     <div clas="row">
         <h1 class="judulHalaman">Master Menu</h1>
@@ -13,6 +13,7 @@
                 <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $m->NamaMenu; ?></td>
+                    <td><?php echo $m->URL; ?></td>
                     <td>
                         <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#update<?php echo $m->ID_Menu; ?>">
                             <span class="glyphicon glyphicon-edit"></span>
@@ -44,33 +45,21 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="formInput" action="<?php echo $path . 'doInsertMenu' ?>" method="POST">
                     <div class="form-group">
-                        <label class="control-label col-sm-4">No. Polisi:</label>
+                        <label class="control-label col-sm-4">Menu Name:</label>
                         <div class="col-sm-7">
-                          <input type="text" class="form-control" name="nopol" style="text-transform:uppercase">
+                          <input type="text" class="form-control" name="namaMenu"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Nama Supir:</label>
+                        <label class="control-label col-sm-4">URL:</label>
                         <div class="col-sm-7">
-                          <input type="text" class="form-control" name="namaS">
+                          <input type="text" class="form-control" name="url"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4">Nick Name:</label>
+                        <label class="control-label col-sm-4"></label>
                         <div class="col-sm-7">
-                          <input type="text" class="form-control" name="nickN">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Jenis Armada:</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control" name="JenisA">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-4">Tahun Pembuatan:</label>
-                        <div class="col-sm-7">
-                          <input type="text" class="form-control numberOnly" name="tahunP" maxlength="4">
+                            <p style="color: red;">Kosongkan Jika URL sama dengan Nama Menu</p>
                         </div>
                     </div>
             </div>

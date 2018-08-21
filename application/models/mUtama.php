@@ -247,7 +247,12 @@
             }
         }
         
-        public function insertMasterMenu(){
-            
+        public function insertMasterMenu($data){
+            $res = $this->db->insert('ms_menu',$data);
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
     }

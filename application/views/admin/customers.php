@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('js/setTable/tableCustomers.js'); ?>"></script>
+<script src="<?php echo base_url('js/setTable/Admin/tableCustomers.js'); ?>"></script>
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Customers List</h1>

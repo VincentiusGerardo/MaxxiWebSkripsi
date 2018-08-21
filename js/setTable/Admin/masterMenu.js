@@ -11,6 +11,10 @@ $(function(){
                align: "left",
                halign: "center"
            }, {
+               title: "URL",
+               field: "URL",
+               align: "center"
+           }, {
                title: "Action",
                field: "Action",
                align: "center"

@@ -61,16 +61,18 @@
                   <ul class="nav navbar-nav">
                     <li class="dropdown tasks-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                          <i class="fa fa-user-o"></i> &nbsp; Welcome <?php echo $namaKaryawan; ?>
+                          <i class="fa fa-user-o"></i>
+                          &nbsp;
+                          <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu">
                           <li>
                             <ul class="menu">
-                                <li>
-                                    <a href="<?php echo $path . 'changePassword'; ?>">Change Password</a>
+                            <li>
+                                    <a href="<?php echo $path . 'changePassword'; ?>"><i class="fa fa-key fa-fw"></i> Change Password</a>
                               </li>
                               <li>
-                                  <a href="<?php echo base_url('Login/doLogOut'); ?>">Log Out</a>
+                                  <a href="<?php echo base_url('Login/doLogOut'); ?>"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>
                               </li>
                             </ul>
                           </li>

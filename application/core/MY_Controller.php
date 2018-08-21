@@ -264,9 +264,11 @@
             }
             $result = $this->mUtama->insertAuthMenu($menu);
             if($result){
+                $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                 redirect($this->getPath() . 'AuthorizeMenu');
             }else{
-                echo "Error";
+                $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
+                redirect($this->getPath() . 'AuthorizeMenu');
             }
         }
 
@@ -285,8 +287,31 @@
         }
 
         public function doInsertMenu(){
-
-
+            $this->form_validation->set_rules('namaMenu','MenuName','required|xss_clean|trim');
+            $this->form_validation->set_rules('url','Link','xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                $nama = $this->input->post('namaMenu');
+                $link = $this->input->post('url');
+                if(empty($link)){
+                    $link = $nama;
+                }
+                $dataMenu = array(
+                    'NamaMenu' => $nama,
+                    'URL' => trim(str_replace(" ","",$link))
+                );
+                                
+                $result = $this->mUtama->insertMasterMenu($dataMenu);
+                if($result){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
+                    redirect($this->getPath() . 'MasterMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
+                redirect($this->getPath() . 'MasterMenu');
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There is Still an Empty Input!.</div>");
+                redirect($this->getPath() . 'MasterMenu');
+            }
         }
 
         public function doInsertSubMenu(){
@@ -294,8 +319,9 @@
         }
 
         public function AuthorizeSubMenu(){
+            $data['karyawan'] = $this->mUtama->getKaryawan();
             $this->getHeader();
-            $this->load->view('');
+            $this->load->view('admin/authorizesubmenu',$data);
             $this->load->view('footer');
         }
     }
