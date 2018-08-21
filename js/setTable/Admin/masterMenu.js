@@ -11,10 +11,6 @@ $(function(){
                align: "left",
                halign: "center"
            }, {
-                title: "List",
-                field: "List",
-                align: "center"
-           }, {
                title: "Action",
                field: "Action",
                align: "center"

@@ -16,11 +16,6 @@ $(function(){
                 align: "left",
                 halign: "center"
             }, {
-                title: "List",
-                field: "List",
-                align: "left",
-                halign: "center"
-            }, {
                 title: "Action",
                 field: "Action",
                 align: "center"

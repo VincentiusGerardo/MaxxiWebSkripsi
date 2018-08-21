@@ -71,22 +71,34 @@
             return $query->result();
         }
         
-        public function insertFleet(){
-            //$this->form_validation->set_rules();
-            
-            /*if($this->form_validation->run() == TRUE){
-                
+        public function insertFleet($data){
+            $res = $this->db->insert('ms_fleet',$data);
+            if($res){
+                return TRUE;
             }else{
-                
-            }*/
+                return FALSE;
+            }
         }
         
-        public function updateFleet(){
-            
+        public function updateFleet($no,$data){
+            $cond = array('No' => $no);
+            $res = $this->db->update('ms_fleet',$data,$cond);
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
-        public function deleteFleet(){
-            
+        public function deleteFleet($no){
+            $data = array('FlagActive' => 'N');
+            $cond = array('No' => $no);
+            $res = $this->db->update('ms_fleet',$data,$cond);
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         /* Services */
@@ -207,7 +219,7 @@
         }
         
         public function getAllSubMenu(){
-            $this->db->select('a.ID_SubMenu, a.NamaSubMenu, b.NamaMenu, a.List');
+            $this->db->select('a.ID_SubMenu, a.NamaSubMenu, b.NamaMenu');
             $this->db->from('ms_submenu a');
             $this->db->join('ms_menu b', 'a.ID_Menu = b.ID_Menu', 'inner');
             $this->db->where('a.FlagActive','Y');
@@ -233,5 +245,9 @@
             }else{
                 return FALSE;
             }
+        }
+        
+        public function insertMasterMenu(){
+            
         }
     }

@@ -67,15 +67,7 @@
                           <li>
                             <ul class="menu">
                                 <li>
-                                <?php if($r == 1){ ?>
-                                    <a href="<?php echo base_url('Administrator/changePassword'); ?>">Change Password</a>
-                                <?php }else if($r == 2){ ?>
-                                    <a href="<?php echo base_url('Director/changePassword'); ?>">Change Password</a>
-                                <?php }else if($r == 3){ ?>
-                                    <a href="<?php echo base_url('HRD/changePassword'); ?>">Change Password</a>
-                                <?php }else{ ?>
-                                    <a href="<?php echo base_url('Employee/changePassword'); ?>">Change Password</a>
-                                <?php } ?>
+                                    <a href="<?php echo $path . 'changePassword'; ?>">Change Password</a>
                               </li>
                               <li>
                                   <a href="<?php echo base_url('Login/doLogOut'); ?>">Log Out</a>
