@@ -255,4 +255,27 @@
                 return FALSE;
             }
         }
+        
+        public function updateMasterMenu($kode,$data){
+            $cond = array('ID_Menu' => $kode);
+            $res = $this->db->update('ms_menu',$data,$cond);
+            
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+        
+        public function deleteMasterMenu($kode){
+            $data = array('FlagActive' => 'N');
+            $cond = array('ID_Menu' => $kode);
+            $res = $this->db->update('ms_menu',$data,$cond);
+            
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
     }

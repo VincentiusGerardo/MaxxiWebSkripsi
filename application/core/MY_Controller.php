@@ -82,11 +82,11 @@
         }
 
         public function doInsertFleet(){
-            $this->form_validation->set_rules('nopol','NomorPolisi','required|xss_clean');
-            $this->form_validation->set_rules('namaS','NamaSupir','required|xss_clean');
-            $this->form_validation->set_rules('nickN','NickName','required|xss_clean');
-            $this->form_validation->set_rules('JenisA','JenisArmada','required|xss_clean');
-            $this->form_validation->set_rules('tahunP','TahunPembuatan','required|xss_clean');
+            $this->form_validation->set_rules('nopol','NomorPolisi','required|xss_clean|trim');
+            $this->form_validation->set_rules('namaS','NamaSupir','required|xss_clean|trim');
+            $this->form_validation->set_rules('nickN','NickName','required|xss_clean|trim');
+            $this->form_validation->set_rules('JenisA','JenisArmada','required|xss_clean|trim');
+            $this->form_validation->set_rules('tahunP','TahunPembuatan','required|xss_clean|trim');
             
             if($this->form_validation->run() == TRUE){
                 $noplat = strtoupper($this->input->post('nopol'));
@@ -119,12 +119,12 @@
         }
 
         public function doUpdateFleet(){
-            $this->form_validation->set_rules('nomor','Kode','required|xss_clean');
-            $this->form_validation->set_rules('nopol','NomorPolisi','required|xss_clean');
-            $this->form_validation->set_rules('namaS','NamaSupir','required|xss_clean');
-            $this->form_validation->set_rules('nickN','NickName','required|xss_clean');
-            $this->form_validation->set_rules('JenisA','JenisArmada','required|xss_clean');
-            $this->form_validation->set_rules('tahunP','TahunPembuatan','required|xss_clean');
+            $this->form_validation->set_rules('nomor','Kode','required|xss_clean|trim');
+            $this->form_validation->set_rules('nopol','NomorPolisi','required|xss_clean|trim');
+            $this->form_validation->set_rules('namaS','NamaSupir','required|xss_clean|trim');
+            $this->form_validation->set_rules('nickN','NickName','required|xss_clean|trim');
+            $this->form_validation->set_rules('JenisA','JenisArmada','required|xss_clean|trim');
+            $this->form_validation->set_rules('tahunP','TahunPembuatan','required|xss_clean|trim');
             
             if($this->form_validation->run() == TRUE){
                 $kd = $this->input->post('nomor');
@@ -308,9 +308,51 @@
                     $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
                 redirect($this->getPath() . 'MasterMenu');
                 }
-            }else{
-                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There is Still an Empty Input!.</div>");
+            }
+        }
+        
+        public function doUpdateMenu(){
+            $this->form_validation->set_rules('kode','IdMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('namaMenu','MenuName','required|xss_clean|trim');
+            $this->form_validation->set_rules('url','Link','xss_clean|trim');
+            
+            if($this->form_validation->run() == TRUE){
+                $cod = $this->input->post('kode');
+                $nama = $this->input->post('namaMenu');
+                $link = $this->input->post('url');
+                if(empty($link)){
+                    $link = $nama;
+                }
+                $dataMenu = array(
+                    'NamaMenu' => $nama,
+                    'URL' => trim(str_replace(" ","",$link))
+                );
+                
+                $result = $this->mUtama->updateMasterMenu($cod,$dataMenu);
+                if($result){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
+                    redirect($this->getPath() . 'MasterMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Updated.</div>");
                 redirect($this->getPath() . 'MasterMenu');
+                }
+                
+            }
+        }
+        
+        public function doDeleteMenu(){
+            $this->form_validation->set_rules('kode','IdMenu','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                $cod = $this->input->post('kode');
+                
+                $res = $this->mUtama->deleteMasterMenu($cod);
+                if($res){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
+                    redirect($this->getPath() . 'MasterMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Deleted.</div>");
+                    redirect($this->getPath() . 'MasterMenu');
+                }
             }
         }
 
