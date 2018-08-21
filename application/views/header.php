@@ -95,22 +95,28 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
-                <?php foreach($menu as $m){ ?>
-                    <li><a href="<?php echo base_url($m->URL); ?>"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
-                <?php } ?>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-link"></i> <span>Mission Control</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                      </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('Administrator/MasterMenu'); ?>">Master Menu</a></li>
-                    <li><a href="<?php echo base_url('Administrator/MasterSubMenu'); ?>">Master Sub Menu</a></li>
-                    <li><a href="<?php echo base_url('Administrator/AuthorizeMenu'); ?>">Authorize Menu</a></li>
-                    <li><a href="<?php echo base_url('Administrator/AuthorizeSubMenu'); ?>">Authorize Sub Menu</a></li>
-                  </ul>
-                </li>
+                <?php 
+                    foreach($menu as $m){
+                        if($m->URL === '#'){
+                ?>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span>
+                          <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="<?php echo base_url('Administrator/MasterMenu'); ?>">Master Menu</a></li>
+                          <li><a href="<?php echo base_url('Administrator/MasterSubMenu'); ?>">Master Sub Menu</a></li>
+                          <li><a href="<?php echo base_url('Administrator/AuthorizeMenu'); ?>">Authorize Menu</a></li>
+                          <li><a href="<?php echo base_url('Administrator/AuthorizeSubMenu'); ?>">Authorize Sub Menu</a></li>
+                        </ul>
+                    </li>
+                <?php
+                        }else{
+                ?>
+                    <li><a href="<?php echo $path . $m->URL; ?>"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
+                    <?php } }?>
               </ul>
               <!-- /.sidebar-menu -->
             </section>

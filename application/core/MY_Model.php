@@ -48,7 +48,11 @@
             $this->db->where('KodeKaryawan', $kode);
             $query = $this->db->update('ms_karyawan');
             
-            return $query;
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         public function hashPassword($pass){

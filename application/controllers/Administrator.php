@@ -149,6 +149,8 @@
         }
         
         public function AuthorizeSubMenu(){
-            
+            $this->getHeader();
+            $this->load->view('');
+            $this->load->view('footer');
         }
     }
