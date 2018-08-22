@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2018 at 03:40 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Aug 22, 2018 at 06:23 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -235,7 +235,9 @@ INSERT INTO `ms_fleet` (`No`, `NoPolisi`, `NamaSupir`, `NickName`, `JenisArmada`
 (30, 'B 9279 BYX', 'Santoso', 'Gondrong', 'Tronton Hino', 2013, 'Y'),
 (31, 'B 9060 PCJ', 'Bernadus P', 'Nandar', 'CDE Isuzu', 2014, 'Y'),
 (32, 'B 9322 NAJ', 'Dewanto', 'Dedi', 'Daihatsu GrandMax', 2013, 'Y'),
-(33, 'B 9101 SJ', 'Setiawan', 'Iwan', 'CDE Isuzu', 2007, 'Y');
+(33, 'B 9101 SJ', 'Setiawan', 'Iwan', 'CDE Isuzu', 2007, 'Y'),
+(34, 'B 6362 PS', 'Vincentius Gerard', 'Vincentius', 'Honda Blade R', 2012, 'N'),
+(44, 'B 2611 JO', 'Maria', 'Maria', 'Honda Jazz', 2010, 'N');
 
 -- --------------------------------------------------------
 
@@ -284,7 +286,7 @@ CREATE TABLE `ms_karyawan` (
   `NamaKaryawan` text NOT NULL,
   `Password` varchar(255) NOT NULL,
   `ID_Role` int(11) NOT NULL,
-  `Foto` text NOT NULL,
+  `Foto` text,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -293,10 +295,10 @@ CREATE TABLE `ms_karyawan` (
 --
 
 INSERT INTO `ms_karyawan` (`KodeKaryawan`, `NamaKaryawan`, `Password`, `ID_Role`, `Foto`, `FlagActive`) VALUES
-('0000', 'Administrator', '$2y$10$jcSjVAPQuo/vP326nsNMTubDPPZ.slUoggDy8Q/TMrI/quKmcpr6W', 1, '', 'Y'),
-('0001', 'Director', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', 2, '', 'Y'),
-('0002', 'HRD', '$2y$10$etjxn0cpNewzeDDRG07Jeer9KAE7LyaoQ/5zl4jj1kKKR/.GE12EC', 3, '', 'Y'),
-('0003', 'Employee', '$2y$10$HZ3D5OOZgKgA2b8PESaZ/.TqjLsytKxQN0F03PgHbiN3Li03BWSVy', 4, '', 'Y');
+('0000', 'Administrator', '$2y$10$sKrMBhU2ftFcbhK2AxUr4eze3i62SM8EQTac7nSCwIF4vp.z.4ppW', 1, NULL, 'Y'),
+('0001', 'Director', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', 2, NULL, 'Y'),
+('0002', 'HRD', '$2y$10$etjxn0cpNewzeDDRG07Jeer9KAE7LyaoQ/5zl4jj1kKKR/.GE12EC', 3, NULL, 'Y'),
+('0003', 'Employee', '$2y$10$HZ3D5OOZgKgA2b8PESaZ/.TqjLsytKxQN0F03PgHbiN3Li03BWSVy', 4, NULL, 'Y');
 
 -- --------------------------------------------------------
 
@@ -316,8 +318,14 @@ CREATE TABLE `ms_menu` (
 --
 
 INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `FlagActive`) VALUES
-(1, 'Fleet', 'Fleet', 'Y'),
-(2, 'Customers', 'Customers', 'Y');
+(1, 'About', '#', 'Y'),
+(2, 'Facility', 'Facility', 'Y'),
+(3, 'Customers', 'Customers', 'Y'),
+(4, 'Services', 'Services', 'Y'),
+(5, 'Experience Gallery', 'Experience', 'Y'),
+(6, 'Location & Contact', 'LocationContact', 'Y'),
+(7, 'Mission Control', '#', 'Y'),
+(8, 'User Management', 'Users', 'Y');
 
 -- --------------------------------------------------------
 
@@ -402,6 +410,15 @@ CREATE TABLE `ms_submenu` (
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ms_submenu`
+--
+
+INSERT INTO `ms_submenu` (`ID_SubMenu`, `ID_Menu`, `NamaSubMenu`, `URL`, `FlagActive`) VALUES
+(1, 1, 'Company Profile', 'CompanyProfile', 'Y'),
+(2, 1, 'Fleet', 'Fleet', 'Y'),
+(3, 1, 'Crew', 'Crew', 'Y');
+
 -- --------------------------------------------------------
 
 --
@@ -420,7 +437,21 @@ CREATE TABLE `tr_authorizemenu` (
 
 INSERT INTO `tr_authorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `KodeKaryawan`) VALUES
 (1, 1, '0000'),
-(2, 2, '0000');
+(2, 2, '0000'),
+(3, 3, '0000'),
+(4, 4, '0000'),
+(5, 5, '0000'),
+(6, 6, '0000'),
+(7, 7, '0000'),
+(8, 8, '0000'),
+(9, 10, '0000'),
+(10, 1, '0001'),
+(11, 2, '0001'),
+(12, 3, '0001'),
+(13, 4, '0001'),
+(14, 5, '0001'),
+(15, 6, '0001'),
+(16, 7, '0001');
 
 -- --------------------------------------------------------
 
@@ -601,7 +632,7 @@ ALTER TABLE `ms_facility`
 -- AUTO_INCREMENT for table `ms_fleet`
 --
 ALTER TABLE `ms_fleet`
-  MODIFY `No` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `No` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `ms_harga`
@@ -619,7 +650,7 @@ ALTER TABLE `ms_jabatan`
 -- AUTO_INCREMENT for table `ms_menu`
 --
 ALTER TABLE `ms_menu`
-  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `ms_services`
@@ -637,13 +668,13 @@ ALTER TABLE `ms_servicesimage`
 -- AUTO_INCREMENT for table `ms_submenu`
 --
 ALTER TABLE `ms_submenu`
-  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizesubmenu`

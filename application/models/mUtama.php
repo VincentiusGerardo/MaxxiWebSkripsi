@@ -63,6 +63,26 @@
             return $hash;
         }
         
+        public function getStoredPass($kode){
+            $cond = array('KodeKaryawan' => $kode);
+            $q = $this->db->get_where('ms_karyawan',$cond);
+            
+            if($q->num_rows() > 0){
+                $rs = $q->row();
+                return $rs->Password;
+            }else{
+                return FALSE;
+            }
+        }
+        
+        public function validasi($pass,$kode){
+            if(password_verify($pass, $this->getStoredPass($kode))){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+        
         
         /* Fleet */
         
@@ -272,6 +292,20 @@
             $cond = array('ID_Menu' => $kode);
             $res = $this->db->update('ms_menu',$data,$cond);
             
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+        
+        public function getSubFromMenu(){
+            $query = $this->db->get_where('ms_menu', array('FlagActive' => 'Y', 'URL' => '#'));
+            return $query->result();
+        }
+        
+        public function insertSubMenu($data){
+            $res = $this->db->insert('ms_submenu',$data);
             if($res){
                 return TRUE;
             }else{

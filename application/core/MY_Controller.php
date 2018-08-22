@@ -54,18 +54,26 @@
             $old = $this->input->post('oldPass');
             $new = $this->input->post('newPass');
             $rep = $this->input->post('repPass');
-
-            if(empty($new) || empty($old)){
-                echo "Lengkapi semuanya!";
-            }else if($new === $rep){
-                $result = $this->mUtama->updatePass($new,$this->session->userdata('username'));
-                if($result){
+            
+            // Validasi password lama dengan yang di database
+            $isi = $this->mUtama->validasi($old,$this->session->userdata('username'));
+            if($isi == TRUE){
+               if($old === $new){
+                    $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Password cannot be The Same as Old!</div>");
+                    redirect($this->getPath() . 'changePassword');
+                }else if($new === $rep){
+                    $result = $this->mUtama->updatePass($new,$this->session->userdata('username'));
+                    if($result){
+                        $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Password Changed!</div>");
+                        redirect($this->getPath() . 'changePassword');
+                    }
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Passwords Mismatch!</div>");
                     redirect($this->getPath() . 'changePassword');
                 }
-            }else if($old === $new){
-                echo "Password tidak boleh sama !";
             }else{
-                echo "Pass Beda";
+                $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Wrong Password Inserted.</div>");
+                redirect($this->getPath() . 'changePassword');
             }
         }
 
@@ -279,13 +287,6 @@
             $this->load->view('footer');
         }
 
-        public function MasterSubMenu(){
-            $data['submenu'] = $this->mUtama->getAllSubMenu();
-            $this->getHeader();
-            $this->load->view('admin/mastersubmenu',$data);
-            $this->load->view('footer');
-        }
-
         public function doInsertMenu(){
             $this->form_validation->set_rules('namaMenu','MenuName','required|xss_clean|trim');
             $this->form_validation->set_rules('url','Link','xss_clean|trim');
@@ -306,7 +307,7 @@
                     redirect($this->getPath() . 'MasterMenu');
                 }else{
                     $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
-                redirect($this->getPath() . 'MasterMenu');
+                    redirect($this->getPath() . 'MasterMenu');
                 }
             }
         }
@@ -356,8 +357,52 @@
             }
         }
 
-        public function doInsertSubMenu(){
+        public function MasterSubMenu(){
+            $data['submenu'] = $this->mUtama->getAllSubMenu();
+            $data['men'] = $this->mUtama->getSubFromMenu();
+            $this->getHeader();
+            $this->load->view('admin/mastersubmenu',$data);
+            $this->load->view('footer');
+        }
 
+        public function doInsertSubMenu(){
+            $this->form_validation->set_rules('namaSubMenu','NamaSubMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('menu','NamaMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('url','Link','xss_clean|trim');
+            
+            if($this->form_validation->run() == TRUE){
+                $nama = $this->input->post('namaSubMenu');
+                $namaM = $this->input->post('menu');
+                $link = $this->input->post('url');
+                
+                if(empty($link)){
+                    $link = $nama;
+                }
+                
+                $dataSubMenu = array(
+                    'ID_Menu' => $namaM,
+                    'NamaSubMenu' => $nama,
+                    'URL' => trim(str_replace(" ","",$link))
+                );
+                
+                $result = $this->mUtama->insertSubMenu($dataSubMenu);
+                
+                if($result){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }
+            }
+        }
+
+        public function doUpdateSubMenu(){
+            
+        }
+
+        public function doDeleteSubMenu(){
+            
         }
 
         public function AuthorizeSubMenu(){
