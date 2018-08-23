@@ -16,8 +16,27 @@
             return $role;
         }
         
+        public function setTitle(){
+            $id = $this->getRole();
+            if($id == 1){
+                $title = 'Administrator';
+            }else if($id == 2){
+                $title = 'Director';
+            }else if($id == 3){
+                $title = 'HRD';
+            }else{
+                $title = 'Employee';
+            }
+            return $title;
+        }
+        
+        public function getUserCode(){
+            $k = $this->session->userdata('username');
+            return $k;
+        }
+        
         public function getPath(){
-            $user = $this->session->userdata('role');
+            $user = $this->getRole();
             if($user == 1){
                 $path = base_url('Administrator/');
             }else if($user == 2){
@@ -36,14 +55,16 @@
         }
 
         public function getHeader(){
-            $data['menu'] = $this->mUtama->getMenu($this->session->userdata('username'));
-            $data['submenu'] = $this->mUtama->getSubMenu($this->session->userdata('username'));
-            $data['namaKaryawan'] = $this->mUtama->getUserName($this->session->userdata('username'));
+            $data['menu'] = $this->mUtama->getMenu($this->getUserCode());
+            $data['submenu'] = $this->mUtama->getSubMenu($this->getUserCode());
+            $data['namaKaryawan'] = $this->mUtama->getUserName($this->getUserCode());
             $data['path'] = $this->getPath();
+            $data['judul'] = $this->setTitle();
 
             $this->load->view('header',$data);
         }
-
+        
+        /* Change Password */
         public function changePassword(){
             $this->getHeader();
             $this->load->view('pass');
@@ -56,13 +77,13 @@
             $rep = $this->input->post('repPass');
             
             // Validasi password lama dengan yang di database
-            $isi = $this->mUtama->validasi($old,$this->session->userdata('username'));
+            $isi = $this->mUtama->validasi($old,$this->getUserCode());
             if($isi == TRUE){
                if($old === $new){
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Password cannot be The Same as Old!</div>");
                     redirect($this->getPath() . 'changePassword');
                 }else if($new === $rep){
-                    $result = $this->mUtama->updatePass($new,$this->session->userdata('username'));
+                    $result = $this->mUtama->updatePass($new,$this->getUserCode());
                     if($result){
                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Password Changed!</div>");
                         redirect($this->getPath() . 'changePassword');
@@ -158,7 +179,7 @@
                     redirect($this->getPath() . 'Fleet');
                 }
             }else{
-                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There is Still an Empty Input!.</div>");
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!.</div>");
                 redirect($this->getPath() . 'Fleet');
             }
         }
@@ -182,16 +203,74 @@
         }
 
         /* Customers */
-
         public function customers(){
             $data['customer'] = $this->mUtama->getCustomers();
+            $data['imageurl'] = $this->getUploadPath();
             $this->getHeader();
             $this->load->view('admin/customers',$data);
             $this->load->view('footer');
         }
 
         public function doInsertCustomers(){
+            $this->form_validation->set_rules('namaCustomer','NamaCustomer','required|xss_clean|trim');
+            if(empty($_FILES['gambar']['name'])){
+                $this->form_validation->set_rules('gambar','gambar','required');
+            }
+            
+            if($this->form_validation->run() == TRUE){
+                $name = $this->input->post('namaCustomer');
+                $config['upload_path'] = './media/';
+                $config['allowed_types'] = "jpg|jpeg|png";
+                $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $name));
+                $config['file_ext_tolower'] = TRUE;
+                $config['max_size'] = 2097152;
+                
+                $this->load->library('upload', $config);
+                
+                    
+                if(! $this->upload->do_upload('gambar')){
+                    $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> " . $this->upload->display_errors() . "</div>");
+                    redirect($this->getPath() . 'Customers');
+                }else{
+                    $filename = $this->upload->data('file_name');
+                    $dataCustomer = array(
+                        'NamaCustomer' => $name,
+                        'Image' => $filename
+                    );
+                    $this->load->library('ftp');
+                    $source = 'D:/xampp/htdocs/WebMaxxi/media/' . $filename;
+                    $ftp_config['hostname'] = 'ftp.maxximumservices.com'; 
+                    $ftp_config['username'] = 'u635941118';
+                    $ftp_config['password'] = 'F3licit@';
+                    $ftp_config['port']     = 21;
+                    $ftp_config['debug']    = TRUE;
 
+                    //Connect to the remote server
+                    $this->ftp->connect($ftp_config);
+
+                    //File upload path of remote server
+                    $destination = './public_html/Maxxi/Media/Customer/';
+
+                    //Upload file to the remote server
+                    $this->ftp->upload($source,$destination);
+
+                    //Close FTP connection
+                    $this->ftp->close();
+                    
+                    $result = $this->mUtama->insertCustomers($dataCustomer);
+                    
+                    if($result){
+                        $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Inserted!</div>");
+                        redirect($this->getPath() . 'Customers');
+                    }else{
+                        $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Inserted!</div>");
+                        redirect($this->getPath() . 'Customers');
+                    }
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!</div>");
+                redirect($this->getPath() . 'Customers');
+            }
         }
 
         public function doUpdateCustomers(){
@@ -203,7 +282,6 @@
         }
 
         /* Experience */
-
         public function experience(){
             $this->getHeader();
             $this->load->view('admin/experience');
@@ -222,28 +300,26 @@
 
         }
 
-        /* UserManagement */
-
-        public function users(){
+        /* Facility */
+        public function facility(){
             $this->getHeader();
             $this->load->view('admin/user');
             $this->load->view('footer');
         }
 
-        public function doInsertUsers(){
+        public function doInsertFacility(){
 
         }
 
-        public function doUpdateUsers(){
+        public function doUpdateFacility(){
 
         }
 
-        public function doDeleteUsers(){
+        public function doDeleteFacility(){
 
         }
 
         /* Mission Control */
-
         public function AuthorizeMenu(){
             $data['karyawan'] = $this->mUtama->getKaryawan();
             $this->getHeader();
@@ -253,9 +329,9 @@
 
         public function getMenuByID(){
             $kd = $this->input->post('kode');
+            $data['kode'] = $kd;
             $data['selectedmenu'] = $this->mUtama->getMenuByKode($kd);
             $data['menu'] = $this->mUtama->getAllMenu();
-            $data['kode'] = $kd;
             $this->load->view('admin/showRoles',$data);
         }
 
@@ -398,17 +474,90 @@
         }
 
         public function doUpdateSubMenu(){
+            $this->form_validation->set_rules('no','ID_SubMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('namaSubMenu','NamaSubMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('menu','NamaMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('url','Link','xss_clean|trim');
             
+            if($this->form_validation->run() == TRUE){
+                $nomor = $this->input->post('no');
+                $namaS = $this->input->post('namaSubMenu');
+                $idM = $this->input->post('menu');
+                $link = $this->input->post('url');
+                
+                if(empty($link)){
+                    $link = $namaS;
+                }
+                
+                $dataUpdate = array(
+                    'ID_Menu' => $idM,
+                    'NamaSubMenu' => $namaS,
+                    'URL' => trim(str_replace(" ","",$link))
+                );
+                
+                $result = $this->mUtama->updateSubMenu($nomor,$dataUpdate);
+                
+                if($result){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Updated.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+            }
         }
 
         public function doDeleteSubMenu(){
+            $this->form_validation->set_rules('no','ID_SubMenu','required|xss_clean|trim');
             
+            if($this->form_validation->run() == TRUE){
+                $kode = $this->input->post('no');
+                
+                $result = $this->mUtama->deleteSubMenu($kode);
+                
+                if($result){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Updated.</div>");
+                    redirect($this->getPath() . 'MasterSubMenu');
+                }
+            }
         }
 
         public function AuthorizeSubMenu(){
             $data['karyawan'] = $this->mUtama->getKaryawan();
             $this->getHeader();
             $this->load->view('admin/authorizesubmenu',$data);
+            $this->load->view('footer');
+        }
+        
+        public function getSubMenuByID(){
+            $kd = $this->input->post('kode');
+            $data['kode'] = $kd;
+            $data['selectedmenu'] = $this->mUtama->getSubMenuByKode($kd);
+            $data['menu'] = $this->mUtama->getAllSub();
+            $this->load->view('admin/showSubRoles',$data);
+        }
+        
+        /* Location & Contact */
+        public function LocationContact(){
+            $this->getHeader();
+            $this->load->view('footer');
+        }
+        
+        /* Services */
+        public function services(){
+            $this->getHeader();
+            $this->load->view('footer');
+        }
+        
+        /* Cuti */
+        public function cuti(){
+            $this->getHeader();
             $this->load->view('footer');
         }
     }

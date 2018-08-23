@@ -13,6 +13,7 @@
             $this->db->from('tr_authorizemenu a');
             $this->db->join('ms_menu b','a.ID_Menu = b.ID_Menu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
+            $this->db->where('b.FlagActive', 'Y');
             
             $query = $this->db->get();
             return $query->result();
@@ -34,6 +35,7 @@
             $this->db->from('tr_authorizesubmenu a');
             $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
+            $this->db->where('b.FlagActive', 'Y');
             
             $query = $this->db->get();
             return $query->result();
@@ -185,8 +187,13 @@
             return $query->result();
         }
         
-        public function insertCustomers(){
-            
+        public function insertCustomers($data){
+            $res = $this->db->insert('ms_customer',$data);
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         public function updateCustomers(){
@@ -204,7 +211,7 @@
             return $query->result();
         }
         
-        public function insertExperience(){
+        public function insertExperience($data){
             
         }
         
@@ -239,13 +246,18 @@
         }
         
         public function getAllSubMenu(){
-            $this->db->select('a.ID_SubMenu, a.NamaSubMenu, b.NamaMenu');
+            $this->db->select('a.ID_SubMenu, a.NamaSubMenu, b.NamaMenu,a.ID_Menu,a.URL');
             $this->db->from('ms_submenu a');
             $this->db->join('ms_menu b', 'a.ID_Menu = b.ID_Menu', 'inner');
             $this->db->where('a.FlagActive','Y');
             
             $query = $this->db->get();
 
+            return $query->result();
+        }
+        
+        public function getAllSub(){
+            $query = $this->db->get_where('ms_submenu', array('FlagActive' => 'Y'));
             return $query->result();
         }
         
@@ -311,5 +323,38 @@
             }else{
                 return FALSE;
             }
+        }
+        
+        public function updateSubMenu($id,$data){
+            $cond = array('ID_SubMenu' => $id);
+            $res = $this->db->update('ms_submenu',$data,$cond);
+            
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+        
+        public function deleteSubMenu($id){
+            $data = array('FlagActive' => 'N');
+            $cond = array('ID_SubMenu' => $id);
+            $res = $this->db->update('ms_submenu', $data,$cond);
+            
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+        }
+        
+        public function getSubMenuByKode($n){
+            $this->db->select('a.ID_SubMenu, a.NamaSubMenu');
+            $this->db->from('ms_submenu a');
+            $this->db->join('tr_authorizesubmenu b','a.ID_SubMenu = b.ID_SubMenu', 'inner');
+            $this->db->where('b.KodeKaryawan', $kode);
+            $query = $this->db->get();
+            
+            return $query->result();
         }
     }

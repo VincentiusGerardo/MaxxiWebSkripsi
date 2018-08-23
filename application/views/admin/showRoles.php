@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('js/setTable/showrole.js'); ?>"></script>
+<script src="<?php echo base_url('js/setTable/Admin/showrole.js'); ?>"></script>
 <form action="<?php echo base_url('Administrator/doInsertAuthMenu'); ?>" method="POST">
     <input type="hidden" name="kodeK" value="<?php echo $kode; ?>" />
     <table class="table" id="tableRoles" data-height="400">
