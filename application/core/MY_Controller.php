@@ -55,9 +55,9 @@
         }
 
         public function getHeader(){
-            $data['menu'] = $this->mUtama->getMenu($this->getUserCode());
-            $data['submenu'] = $this->mUtama->getSubMenu($this->getUserCode());
-            $data['namaKaryawan'] = $this->mUtama->getUserName($this->getUserCode());
+            $data['menu'] = $this->model_utama->getMenu($this->getUserCode());
+            $data['submenu'] = $this->model_utama->getSubMenu($this->getUserCode());
+            $data['namaKaryawan'] = $this->model_utama->getUserName($this->getUserCode());
             $data['path'] = $this->getPath();
             $data['judul'] = $this->setTitle();
 
@@ -77,13 +77,13 @@
             $rep = $this->input->post('repPass');
             
             // Validasi password lama dengan yang di database
-            $isi = $this->mUtama->validasi($old,$this->getUserCode());
+            $isi = $this->model_utama->validasi($old,$this->getUserCode());
             if($isi == TRUE){
                if($old === $new){
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Password cannot be The Same as Old!</div>");
                     redirect($this->getPath() . 'changePassword');
                 }else if($new === $rep){
-                    $result = $this->mUtama->updatePass($new,$this->getUserCode());
+                    $result = $this->model_utama->updatePass($new,$this->getUserCode());
                     if($result){
                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Password Changed!</div>");
                         redirect($this->getPath() . 'changePassword');
@@ -100,7 +100,7 @@
 
         /* Fleet */
         public function fleet(){
-            $data['fleet'] = $this->mUtama->getFleet();
+            $data['fleet'] = $this->model_utama->getFleet();
             $this->getHeader();
             if($this->getRole() == 1){
                 $this->load->view('admin/fleet',$data);
@@ -132,7 +132,7 @@
                     'TahunPembuatan' => $tahun
                 );
                 
-                $result = $this->mUtama->insertFleet($dataFleet);
+                $result = $this->model_utama->insertFleet($dataFleet);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                     redirect($this->getPath() . 'Fleet');
@@ -170,7 +170,7 @@
                     'JenisArmada' => $ja,
                     'TahunPembuatan' => $tp
                 );
-                $result = $this->mUtama->updateFleet($kd,$dataUpdate);
+                $result = $this->model_utama->updateFleet($kd,$dataUpdate);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
                     redirect($this->getPath() . 'Fleet');
@@ -190,7 +190,7 @@
             if($this->form_validation->run() == TRUE){
                 $kd = $this->input->post('nomor');
                 
-                $res = $this->mUtama->deleteFleet($kd);
+                $res = $this->model_utama->deleteFleet($kd);
                 
                 if($res){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
@@ -204,7 +204,7 @@
 
         /* Customers */
         public function customers(){
-            $data['customer'] = $this->mUtama->getCustomers();
+            $data['customer'] = $this->model_utama->getCustomers();
             $data['imageurl'] = $this->getUploadPath();
             $this->getHeader();
             $this->load->view('admin/customers',$data);
@@ -257,7 +257,7 @@
                     //Close FTP connection
                     $this->ftp->close();
                     
-                    $result = $this->mUtama->insertCustomers($dataCustomer);
+                    $result = $this->model_utama->insertCustomers($dataCustomer);
                     
                     if($result){
                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Inserted!</div>");
@@ -321,7 +321,7 @@
 
         /* Mission Control */
         public function AuthorizeMenu(){
-            $data['karyawan'] = $this->mUtama->getKaryawan();
+            $data['karyawan'] = $this->model_utama->getKaryawan();
             $this->getHeader();
             $this->load->view('admin/authorizemenu',$data);
             $this->load->view('footer');
@@ -330,8 +330,8 @@
         public function getMenuByID(){
             $kd = $this->input->post('kode');
             $data['kode'] = $kd;
-            $data['selectedmenu'] = $this->mUtama->getMenuByKode($kd);
-            $data['menu'] = $this->mUtama->getAllMenu();
+            $data['selectedmenu'] = $this->model_utama->getMenuByKode($kd);
+            $data['menu'] = $this->model_utama->getAllMenu();
             $this->load->view('admin/showRoles',$data);
         }
 
@@ -346,7 +346,7 @@
                     'KodeKaryawan' => $kar
                 ));
             }
-            $result = $this->mUtama->insertAuthMenu($menu);
+            $result = $this->model_utama->insertAuthMenu($menu);
             if($result){
                 $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                 redirect($this->getPath() . 'AuthorizeMenu');
@@ -357,7 +357,7 @@
         }
 
         public function MasterMenu(){
-            $data['menu'] = $this->mUtama->getAllMenu();
+            $data['menu'] = $this->model_utama->getAllMenu();
             $this->getHeader();
             $this->load->view('admin/mastermenu',$data);
             $this->load->view('footer');
@@ -377,7 +377,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
                                 
-                $result = $this->mUtama->insertMasterMenu($dataMenu);
+                $result = $this->model_utama->insertMasterMenu($dataMenu);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                     redirect($this->getPath() . 'MasterMenu');
@@ -405,7 +405,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
                 
-                $result = $this->mUtama->updateMasterMenu($cod,$dataMenu);
+                $result = $this->model_utama->updateMasterMenu($cod,$dataMenu);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
                     redirect($this->getPath() . 'MasterMenu');
@@ -422,7 +422,7 @@
             if($this->form_validation->run() == TRUE){
                 $cod = $this->input->post('kode');
                 
-                $res = $this->mUtama->deleteMasterMenu($cod);
+                $res = $this->model_utama->deleteMasterMenu($cod);
                 if($res){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
                     redirect($this->getPath() . 'MasterMenu');
@@ -434,8 +434,8 @@
         }
 
         public function MasterSubMenu(){
-            $data['submenu'] = $this->mUtama->getAllSubMenu();
-            $data['men'] = $this->mUtama->getSubFromMenu();
+            $data['submenu'] = $this->model_utama->getAllSubMenu();
+            $data['men'] = $this->model_utama->getSubFromMenu();
             $this->getHeader();
             $this->load->view('admin/mastersubmenu',$data);
             $this->load->view('footer');
@@ -461,7 +461,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
                 
-                $result = $this->mUtama->insertSubMenu($dataSubMenu);
+                $result = $this->model_utama->insertSubMenu($dataSubMenu);
                 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
@@ -495,7 +495,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
                 
-                $result = $this->mUtama->updateSubMenu($nomor,$dataUpdate);
+                $result = $this->model_utama->updateSubMenu($nomor,$dataUpdate);
                 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
@@ -516,7 +516,7 @@
             if($this->form_validation->run() == TRUE){
                 $kode = $this->input->post('no');
                 
-                $result = $this->mUtama->deleteSubMenu($kode);
+                $result = $this->model_utama->deleteSubMenu($kode);
                 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
@@ -529,7 +529,7 @@
         }
 
         public function AuthorizeSubMenu(){
-            $data['karyawan'] = $this->mUtama->getKaryawan();
+            $data['karyawan'] = $this->model_utama->getKaryawan();
             $this->getHeader();
             $this->load->view('admin/authorizesubmenu',$data);
             $this->load->view('footer');
@@ -538,8 +538,8 @@
         public function getSubMenuByID(){
             $kd = $this->input->post('kode');
             $data['kode'] = $kd;
-            $data['selectedmenu'] = $this->mUtama->getSubMenuByKode($kd);
-            $data['menu'] = $this->mUtama->getAllSub();
+            $data['selectedmenu'] = $this->model_utama->getSubMenuByKode($kd);
+            $data['menu'] = $this->model_utama->getAllSub();
             $this->load->view('admin/showSubRoles',$data);
         }
         
