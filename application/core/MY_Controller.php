@@ -8,7 +8,7 @@
             if(!$this->session->userdata('is_logged')){
                 redirect(base_url());
             }
-            $this->load->model('mUtama');
+            $this->load->model('model_utama');
         }
         
         public function getRole(){
