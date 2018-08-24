@@ -302,8 +302,9 @@
 
         /* Facility */
         public function facility(){
+            $data['facility'] = $this->model_utama->getFacility();
             $this->getHeader();
-            $this->load->view('admin/user');
+            $this->load->view('admin/facility',$data);
             $this->load->view('footer');
         }
 
