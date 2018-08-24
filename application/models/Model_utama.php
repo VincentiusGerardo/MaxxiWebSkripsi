@@ -1,7 +1,7 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class mUtama extends CI_Model{
+    class Model_utama extends CI_Model{
 
         public function __construct(){
             parent::__construct();
