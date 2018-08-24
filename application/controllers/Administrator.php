@@ -4,7 +4,6 @@
     class Administrator extends MY_Controller{
         public function __construct() {
             parent::__construct();
-            $this->load->model('mUtama');
         }
         
         public function index(){
