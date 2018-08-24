@@ -78,9 +78,9 @@ if(!in_array($_SERVER['REMOTE_ADDR'], $list)){
     $db['default'] = array(
         'dsn'	=> '',
         'hostname' => 'mysql.hostinger.co.id',
-        'username' => 'u635941118_admin',
-        'password' => 'F3licit@',
-        'database' => 'u635941118_maxxi',
+        'username' => 'u635941118_adm',
+        'password' => 'Kalbis@123',
+        'database' => 'u635941118_test',
         'dbdriver' => 'mysqli',
         'dbprefix' => '',
         'pconnect' => FALSE,
