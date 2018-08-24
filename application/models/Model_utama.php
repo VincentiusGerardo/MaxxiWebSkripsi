@@ -352,7 +352,7 @@
             $this->db->select('a.ID_SubMenu, a.NamaSubMenu');
             $this->db->from('ms_submenu a');
             $this->db->join('tr_authorizesubmenu b','a.ID_SubMenu = b.ID_SubMenu', 'inner');
-            $this->db->where('b.KodeKaryawan', $kode);
+            $this->db->where('b.KodeKaryawan', $n);
             $query = $this->db->get();
             
             return $query->result();
