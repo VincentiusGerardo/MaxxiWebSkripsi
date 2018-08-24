@@ -34,7 +34,7 @@
                 $pass = $this->input->post('password');
 
                 $result = $this->model_login->login($user, $pass);
-                $r = $this->mLogin->getRole($user);
+                $r = $this->model_login->getRole($user);
 
                 if($result){
                     $data = array(
