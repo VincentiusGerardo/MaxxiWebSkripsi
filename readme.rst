@@ -1,4 +1,18 @@
 ###################
+What is WebMaXXi
+###################
+
+WebMaXXi is a web based application for PT. Perdana Maxxi International users. This web based app is based on CodeIgniter framework for PHP. With the usage of AdminLTE Template and Bootstrap plugins, jQuery 3.3.1 and MySQL Database.
+
+The web application is build using:
+- Netbeans 8.2
+- PHP 7.28
+- phpmyadmin 4.8.3
+- AdminLTE 2.4.5
+- jQuery 3.3.1
+- Bootstrap 3.3.7
+
+###################
 What is CodeIgniter
 ###################
 
