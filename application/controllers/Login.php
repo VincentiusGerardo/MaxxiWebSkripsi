@@ -4,7 +4,7 @@
     class Login extends CI_Controller{
         public function __construct(){
             parent::__construct();
-            $this->load->model('mLogin');
+            $this->load->model('model_login');
         }
         
         public function index(){            
@@ -33,7 +33,7 @@
                 $user = $this->input->post('username');
                 $pass = $this->input->post('password');
 
-                $result = $this->mLogin->login($user, $pass);
+                $result = $this->model_login->login($user, $pass);
                 $r = $this->mLogin->getRole($user);
 
                 if($result){
