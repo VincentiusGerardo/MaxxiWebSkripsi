@@ -268,7 +268,7 @@
 //                     }else{
 //                         $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Inserted!</div>");
 //                         redirect($this->getPath() . 'Customers');
-//                     }
+                     }
                  }
 //             }else{
 //                 $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!</div>");
