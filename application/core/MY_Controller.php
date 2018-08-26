@@ -219,7 +219,7 @@
             
             if($this->form_validation->run() == TRUE){
                 $name = $this->input->post('namaCustomer');
-                $config['upload_path'] = 'https://maxximumservices.com/Maxxi/Media/Customer/';
+                $config['upload_path'] = './Media/Customer/';
                 $config['allowed_types'] = "jpg|jpeg|png";
                 $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $name));
                 $config['file_ext_tolower'] = TRUE;
@@ -256,11 +256,78 @@
         }
 
         public function doUpdateCustomers(){
+            $this->form_validation->set_rules('nomor','ID','required|xss_clean|trim');
+            $this->form_validation->set_rules('namaCustomer','NamaCustomer','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                if(empty($_FILES['gambar']['name'])){
+                    $id = $this->input->post('nomor');
+                    $name = $this->input->post('namaCustomer');
+                    
+                    $dataUpdate = array(
+                        'NamaCustomer' => $name
+                    );
+                    
+                    $result = $this->model_utama->updateCustomers($id,$dataUpdate);
+                    
+                    if($result){
+                        $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Updated!</div>");
+                        redirect($this->getPath() . 'Customers');
+                    }else{
+                        $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Updated!</div>");
+                        redirect($this->getPath() . 'Customers');
+                    }
+                }else{
+                    $id = $this->input->post('nomor');
+                    $name = $this->input->post('namaCustomer');
+                    $config['upload_path'] = './Media/Customer/';
+                    $config['allowed_types'] = "jpg|jpeg|png";
+                    $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $name));
+                    $config['file_ext_tolower'] = TRUE;
+                    $config['max_size'] = 2097152;
 
+                    $this->load->library('upload', $config);
+                    if(! $this->upload->do_upload('gambar')){
+                        $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> " . $this->upload->display_errors() . "</div>");
+                        redirect($this->getPath() . 'Customers');
+                    }else{
+                        $filename = $this->upload->data('file_name');
+                        $dataUpdate = array(
+                            'NamaCustomer' => $name,
+                            'Image' => $filename
+                        );
+                        $result = $this->model_utama->updateCustomers($id,$dataUpdate);
+
+                        if($result){
+                            $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Updated!</div>");
+                            redirect($this->getPath() . 'Customers');
+                        }else{
+                            $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Updated!</div>");
+                            redirect($this->getPath() . 'Customers');
+                        }
+                    }
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> Company Name can't be Empty!</div>");
+                 redirect($this->getPath() . 'Customers');
+            }
         }
 
         public function doDeleteCustomers(){
-
+            $this->form_validation->set_rules('nomor','ID','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                
+                $kd = $this->input->post('nomor');
+                
+                $res = $this->model_utama->deleteCustomers($kd);
+                
+                if($res){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
+                    redirect($this->getPath() . 'Customers');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Deleted.</div>");
+                    redirect($this->getPath() . 'Customers');
+                }
+            }
         }
 
         /* Experience */

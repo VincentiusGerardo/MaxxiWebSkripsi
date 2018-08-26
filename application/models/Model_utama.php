@@ -196,12 +196,26 @@
             }
         }
         
-        public function updateCustomers(){
-            
+        public function updateCustomers($id,$data){
+            $cond = array('idCustomer' => $id);
+            $res = $this->db->update('ms_customer',$data,$cond);
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
-        public function deleteCustomers(){
+        public function deleteCustomers($id){
+            $cond = array('idCustomer' => $id);
+            $data = array('FlagActive' => 'N');
+            $res = $this->db->update('ms_customer', $data,$cond);
             
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         /* Experience Gallery */

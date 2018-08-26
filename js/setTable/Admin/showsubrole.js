@@ -9,7 +9,8 @@ $(document).ready(function(){
                 field: 'NamaSubMenu',
                 align: 'left',
                 halign: 'center',
-                sortable: true
+                sortable: true,
+                width: "50%"
             }
         ]
     });

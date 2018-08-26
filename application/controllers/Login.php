@@ -56,6 +56,7 @@
                         redirect('Employee/');
                     }
                 }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Invalid Username or Password!</div>");
                     redirect(base_url());
                 } 
             }

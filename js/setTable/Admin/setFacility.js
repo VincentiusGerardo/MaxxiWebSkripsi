@@ -14,7 +14,8 @@ $(function(){
                 title: "Keterangan",
                 field: "Keterangan",
                 align: "left",
-                halign: "center"
+                halign: "center",
+                width: "500px"
             }, {
                 title: "Image",
                 field: "Image",

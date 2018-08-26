@@ -29,6 +29,14 @@
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
+        
+        <script>
+            $(function(){
+                $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+                    $(".alert").slideUp(500);
+                });
+            });
+        </script>
     </head>
     <body class="hold-transition login-page">
         <div class="login-box">
@@ -36,7 +44,7 @@
                 <a href="<?php echo base_url(); ?>"><b>Admin</b> MaXXi</a>
             </div>
             <div class="login-box-body">
-                <p class="login-box-msg"></p>
+                <p class="login-box-msg"><?php echo $this->session->flashdata('message'); ?></p>
                 <form action="<?php echo base_url('Login/doLogin'); ?>" method="POST">
                     <div class="form-group has-feedback">
                         <input type="text" name="username" class="form-control" placeholder="Kode Karyawan" required/>
