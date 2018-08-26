@@ -16,5 +16,6 @@
                 <td>&nbsp;</td>
                 <td><?php echo date("A"); ?></td>
             </tr>
+			<tr><?php echo APPPATH; ?></tr>
         </table>
 </div>
