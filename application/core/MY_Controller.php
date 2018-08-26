@@ -248,7 +248,7 @@
                     //Connect to the remote server
                     $this->ftp->connect($ftp_config);
 
-							$list = $this->ftp->list_files('/home/u635941118 /public_html/backend/');
+							$list = $this->ftp->list_files('/home/u635941118 /public_html/backend/media/');
 
 							print_r($list);
                     //File upload path of remote server
