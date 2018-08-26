@@ -219,7 +219,7 @@
             
             if($this->form_validation->run() == TRUE){
                 $name = $this->input->post('namaCustomer');
-                $config['upload_path'] = $this->getUploadPath() . 'Maxxi/Media/Customer/';
+                $config['upload_path'] = 'https://maxximumservices.com/Maxxi/Media/Customer/';
                 $config['allowed_types'] = "jpg|jpeg|png";
                 $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $name));
                 $config['file_ext_tolower'] = TRUE;
