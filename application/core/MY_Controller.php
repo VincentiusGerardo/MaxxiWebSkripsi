@@ -219,7 +219,7 @@
             
             if($this->form_validation->run() == TRUE){
                 $name = $this->input->post('namaCustomer');
-                $config['upload_path'] = './media/';
+                $config['upload_path'] = $this->getUploadPath() . 'Maxxi/Media/Customer/';
                 $config['allowed_types'] = "jpg|jpeg|png";
                 $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $name));
                 $config['file_ext_tolower'] = TRUE;
@@ -237,36 +237,17 @@
                         'NamaCustomer' => $name,
                         'Image' => $filename
                     );
-                    $this->load->library('ftp');
-                    $source = '/home/u635941118 /public_html/backend/media/' . $filename;
-                    $ftp_config['hostname'] = 'ftp.maxximumservices.com'; 
-                    $ftp_config['username'] = 'u635941118';
-                    $ftp_config['password'] = 'F3licit@';
-                    $ftp_config['port']     = 21;
-                    $ftp_config['debug']    = TRUE;
-
-                    //Connect to the remote server
-                    $this->ftp->connect($ftp_config);
-echo $source;
-							
-                    //File upload path of remote server
-                    //$destination = '/home/u635941118 /public_html/Maxxi/Media/Customer/';
-
-                     //Upload file to the remote server
-                     //$this->ftp->upload($source,$destination, 'ascii', 0775);
-
-                    //Close FTP connection
-                    $this->ftp->close();
                     
-                     // = $this->model_utama->insertCustomers($dataCustomer);
                     
-                     //if($result){
-                     //    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Inserted!</div>");
-                      //   redirect($this->getPath() . 'Customers');
-                     //}else{
-                      //   $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Inserted!</div>");
-                      //   redirect($this->getPath() . 'Customers');
-                     //}
+                    $result = $this->model_utama->insertCustomers($dataCustomer);
+                    
+                     if($result){
+                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Inserted!</div>");
+                         redirect($this->getPath() . 'Customers');
+                     }else{
+                         $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Inserted!</div>");
+                         redirect($this->getPath() . 'Customers');
+                     }
                  }
              }else{
                  $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!</div>");
