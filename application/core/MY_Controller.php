@@ -238,7 +238,7 @@
                         'Image' => $filename
                     );
                     $this->load->library('ftp');
-                    $source = 'D:/xampp/htdocs/WebMaxxi/media/' . $filename;
+                    $source = '/home/u635941118 /public_html/backend/media/' . $filename;
                     $ftp_config['hostname'] = 'ftp.maxximumservices.com'; 
                     $ftp_config['username'] = 'u635941118';
                     $ftp_config['password'] = 'F3licit@';
@@ -249,10 +249,10 @@
                     $this->ftp->connect($ftp_config);
 
                     //File upload path of remote server
-                    $destination = './public_html/Maxxi/Media/Customer/';
+                    $destination = '/home/u635941118 /public_html/Maxxi/Media/Customer/';
 
                     //Upload file to the remote server
-                    $this->ftp->upload($source,$destination);
+                    $this->ftp->upload($source,$destination, 'ascii', 0775);
 
                     //Close FTP connection
                     $this->ftp->close();
