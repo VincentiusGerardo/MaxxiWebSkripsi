@@ -247,15 +247,13 @@
 
                     //Connect to the remote server
                     $this->ftp->connect($ftp_config);
-
-							$list = $this->ftp->list_files('/home/u635941118 /public_html/backend/media/');
-
-							print_r($list);
+echo $source;
+							
                     //File upload path of remote server
-//                     $destination = '/home/u635941118 /public_html/Maxxi/Media/Customer/';
+                    //$destination = '/home/u635941118 /public_html/Maxxi/Media/Customer/';
 
-//                     //Upload file to the remote server
-//                     $this->ftp->upload($source,$destination, 'ascii', 0775);
+                     //Upload file to the remote server
+                     //$this->ftp->upload($source,$destination, 'ascii', 0775);
 
                     //Close FTP connection
                     $this->ftp->close();
