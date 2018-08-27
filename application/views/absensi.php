@@ -87,6 +87,7 @@
                         $("#tombol").html("<img src = <?php echo base_url('Media/loading.gif'); ?> />");
                     },
                     success:function(html){
+                        $("#tombol").remove();
                         $("#buatNama").html(html);
                         setTimeout(function(){ location.href =  window.location.href; }, 3000);
                     }
@@ -98,7 +99,7 @@
                     data: {x:x},
                     success:function(html){
                         $("#foto").attr("src", "<?php echo base_url(); ?>Media/Karyawan/" + html);
-                        //setTimeout(function(){ location.href =  window.location.href; }, 3000);
+                        setTimeout(function(){ location.href =  window.location.href; }, 3000);
                     }
                 });
             });

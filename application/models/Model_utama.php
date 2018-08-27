@@ -426,7 +426,20 @@
             }else{
                 return FALSE;
             }
+        }
+        
+        public function getGambar($kode){
+            $this->db->select('Foto');
+            $this->db->from('ms_karyawan');
+            $this->db->where('KodeKaryawan',$kode);
             
+            $query = $this->db->get();
+            
+            if($query){
+                return $query->row()->Foto;
+            }else{
+                return FALSE;
+            }
         }
         
         

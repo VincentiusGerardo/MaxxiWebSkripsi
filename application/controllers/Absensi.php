@@ -29,6 +29,12 @@
             if($this->form_validation->run() == TRUE){
                 $kode = $this->input->post('x');
                 $res = $this->model_utama->getGambar($kode);
+                
+                if($res){
+                    echo $res;
+                }else{
+                    echo "ERROR";
+                }
             }
         }
     }
