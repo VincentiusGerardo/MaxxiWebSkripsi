@@ -13,7 +13,22 @@
         }
         
         public function doAbsensi(){
-            $kode = $this->input->post('');
+            $this->form_validation->set_rules('x','KodeKaryawan','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                $kode = $this->input->post('x');
+                $tgl = date('Y-m-d');
+                
+                $result = $this->model_utama->absensi($kode,$tgl);
+            }else{
+                echo "Kode Karyawan Kosong!";
+            }
         }
         
+        public function getGambar(){
+            $this->form_validation->set_rules('x','KodeKaryawan','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                $kode = $this->input->post('x');
+                $res = $this->model_utama->getGambar($kode);
+            }
+        }
     }

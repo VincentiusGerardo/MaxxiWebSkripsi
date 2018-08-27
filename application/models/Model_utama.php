@@ -371,4 +371,63 @@
             
             return $query->result();
         }
+        
+        /* Absensi */
+        public function absensi($id,$date){
+            $this->db->select('*');
+            $this->db->from('tr_absensi');
+            $this->db->where('KodeKaryawan', $id);
+            $this->db->where('Tanggal', $date);
+            $this->db->where('ClockOut IS NULL');
+            
+            $query = $this->db->get();
+            if($query->num_rows() > 0){
+                //echo "Clock Out";
+                $this->clockout($id,$date);
+            }else{
+                //echo "Clock In";
+                $this->clockin($id,$date);
+            }
+        }
+        
+        public function clockin($id,$date){
+            $waktu = date("H:i:s");
+            $data = array(
+                'KodeKaryawan' => $id,
+                'Tanggal' => $date,
+                'ClockIn' => $waktu
+            );
+            
+            $res = $this->db->insert('tr_absensi',$data);
+            if($res){
+                $query = $this->db->get_where('ms_karyawan',array('KodeKaryawan' => $id));
+                $r = $query->row()->NamaKaryawan;
+                echo "Welcome " . $r;
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+//            $sql = $this->db->set($data)->get_compiled_insert('tr_absensi');
+//            echo $sql;
+        }
+        
+        public function clockout($id,$date){
+            $waktu = date("H:i:s");
+            // Get Waktu Clock In
+            $sql = $this->db->get_where('tr_absensi', array('KodeKaryawan' => $id,'Tanggal' => $date));
+            $cin = $sql->row()->ClockIn;
+            
+            $query = "UPDATE tr_absensi SET ClockOut = ?, LamaKerja = TIMEDIFF(?,?) WHERE KodeKaryawan = ? AND Tanggal = ?";
+            if($this->db->query($query, array($waktu, $waktu, $cin, $id,$date))){   
+                $query = $this->db->get_where('ms_karyawan',array('KodeKaryawan' => $id));
+                $r = $query->row()->NamaKaryawan;
+                echo "Goodbye " . $r;
+                return TRUE;
+            }else{
+                return FALSE;
+            }
+            
+        }
+        
+        
     }

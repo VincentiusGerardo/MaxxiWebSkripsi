@@ -30,34 +30,78 @@
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
         
-        <script>
+        <script src="<?php echo base_url('js/jam.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/form.css'); ?>"/>
+    </head>
+    <body>
+        <div class="container account-wall" style="margin-top: 25px;">
+            <div class="row tengah">                
+                <div class="col-lg-4-offset-4">
+                    <div class="penting">Absensi</div>
+                    <div class="penting"><?php echo date("l, j F Y"); ?></div>
+                    <table class="penting tengah2">
+                        <tr>
+                            <td id="Jam"><?php echo date("h"); ?></td>
+                            <td>:</td>
+                            <td id="Menit"><?php echo date("i"); ?></td>
+                            <td>:</td>
+                            <td id="Detik"><?php echo date("s"); ?></td>
+                            <td>&nbsp;</td>
+                            <td><?php echo date("A"); ?></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+	<div class="col-lg-4"></div>
+	<div class="col-lg-4 tengah">
+            <img src="media/nopic.jpg" class="img-circle img-responsive tengah" width="200px" height="200px" id="foto"><br>
+            <div id="buatNama"></div><br>
+            <form id="formAbsen">
+                <div class="form-group">
+                  <label for="kode">Kode Karyawan:</label>
+                  <input type="text" class="form-control" id="KodeKaryawan" name="kdk" autofocus maxlength="6">
+                </div>
+                <div id="tombol">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+	</div>
+	
+	</div>
+        <script type="text/javascript">
             $(function(){
-                $(".alert").fadeTo(2000, 500).slideUp(500, function(){
-                    $(".alert").slideUp(500);
+                $("img").on("error",function(){
+                    $(this).attr("src", "media/nopic.jpg");
                 });
             });
-        </script>
-    </head>
-    <body class="hold-transition login-page">
-        <div class="login-box">
-            <div class="login-box-body">
-                <p class="login-box-msg"><?php echo $this->session->flashdata('message'); ?></p>
-                <form action="<?php echo base_url('Login/doLogin'); ?>" method="POST">
-                    <div class="form-group has-feedback">
-                        <input type="text" name="username" class="form-control" placeholder="Kode Karyawan" required/>
-                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <input type="password" name="password" class="form-control" placeholder="Password" required/>
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-12 col-lg-12">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+
+            $("#formAbsen").submit(function(e){
+                e.preventDefault();
+                var x = $("#KodeKaryawan").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('Absensi/doAbsensi'); ?>',
+                    data: {x:x},
+                    beforeSend:function(){
+                        $("#tombol").html("<img src = <?php echo base_url('Media/loading.gif'); ?> />");
+                    },
+                    success:function(html){
+                        $("#buatNama").html(html);
+                        setTimeout(function(){ location.href =  window.location.href; }, 3000);
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url('Absensi/getGambar'); ?>',
+                    data: {x:x},
+                    success:function(html){
+                        $("#foto").attr("src", "<?php echo base_url(); ?>Media/Karyawan/" + html);
+                        //setTimeout(function(){ location.href =  window.location.href; }, 3000);
+                    }
+                });
+            });
+	</script>
     </body>
 </html>
