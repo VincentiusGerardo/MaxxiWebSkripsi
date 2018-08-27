@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2018 at 06:23 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Aug 27, 2018 at 07:16 PM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -117,7 +117,7 @@ CREATE TABLE `ms_customer` (
 --
 
 INSERT INTO `ms_customer` (`idCustomer`, `NamaCustomer`, `Image`, `FlagActive`) VALUES
-(1, 'PT. Ford Motor Indonesia', 'PT.-Ford-Motor-Indonesia.jpg', 'Y'),
+(1, 'PT. Ford Motor Indonesia', 'PT-Ford-Motor-Indonesia.jpg', 'Y'),
 (2, 'PT. Lautan Luas', 'PT.-Lautan-Luas.jpg', 'Y'),
 (3, 'PT. Kenko Kanzen Indonesia', 'PT.-Kenko-Kanzen-Indonesia.jpg', 'Y'),
 (4, 'CV. Kobe & Lina Food', 'CV.-Kobe-&-Lina-Food.jpg', 'Y'),
@@ -128,7 +128,9 @@ INSERT INTO `ms_customer` (`idCustomer`, `NamaCustomer`, `Image`, `FlagActive`) 
 (9, 'PT. Tunas Daya Mustika', 'PT.-Tunas-Daya-Mustika.jpg', 'Y'),
 (10, 'CMC', 'CMC.jpg', 'Y'),
 (11, 'Indokomas', 'Indokomas.jpg', 'Y'),
-(12, 'PT. Hanwa Indonesia', 'PT.-Hanwa-Indonesia.jpg', 'Y');
+(12, 'PT. Hanwa Indonesia', 'PT.-Hanwa-Indonesia.jpg', 'Y'),
+(13, 'PT. Kalbe', 'PT-Kalbe.jpg', 'Y'),
+(18, 'PT. Maju Mundur Cantik', 'PT-Maju-Mundur-Cantik.jpg', 'N');
 
 -- --------------------------------------------------------
 
@@ -295,8 +297,8 @@ CREATE TABLE `ms_karyawan` (
 --
 
 INSERT INTO `ms_karyawan` (`KodeKaryawan`, `NamaKaryawan`, `Password`, `ID_Role`, `Foto`, `FlagActive`) VALUES
-('0000', 'Administrator', '$2y$10$sKrMBhU2ftFcbhK2AxUr4eze3i62SM8EQTac7nSCwIF4vp.z.4ppW', 1, NULL, 'Y'),
-('0001', 'Director', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', 2, NULL, 'Y'),
+('0000', 'Administrator', '$2y$10$sKrMBhU2ftFcbhK2AxUr4eze3i62SM8EQTac7nSCwIF4vp.z.4ppW', 1, '0000.jpg', 'Y'),
+('0001', 'Director', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', 2, '0001.jpg', 'Y'),
 ('0002', 'HRD', '$2y$10$etjxn0cpNewzeDDRG07Jeer9KAE7LyaoQ/5zl4jj1kKKR/.GE12EC', 3, NULL, 'Y'),
 ('0003', 'Employee', '$2y$10$HZ3D5OOZgKgA2b8PESaZ/.TqjLsytKxQN0F03PgHbiN3Li03BWSVy', 4, NULL, 'Y');
 
@@ -325,7 +327,8 @@ INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `FlagActive`) VALUES
 (5, 'Experience Gallery', 'Experience', 'Y'),
 (6, 'Location & Contact', 'LocationContact', 'Y'),
 (7, 'Mission Control', '#', 'Y'),
-(8, 'User Management', 'Users', 'Y');
+(8, '', 'Users', 'N'),
+(9, 'Cuti', 'Cuti', 'Y');
 
 -- --------------------------------------------------------
 
@@ -417,7 +420,47 @@ CREATE TABLE `ms_submenu` (
 INSERT INTO `ms_submenu` (`ID_SubMenu`, `ID_Menu`, `NamaSubMenu`, `URL`, `FlagActive`) VALUES
 (1, 1, 'Company Profile', 'CompanyProfile', 'Y'),
 (2, 1, 'Fleet', 'Fleet', 'Y'),
-(3, 1, 'Crew', 'Crew', 'Y');
+(3, 1, 'Crew', 'Crew', 'Y'),
+(4, 7, 'Master Menu', 'MasterMenu', 'Y'),
+(5, 7, 'Master Sub Menu', 'MasterSubMenu', 'Y'),
+(6, 7, 'Authorize Menu', 'AuthorizeMenu', 'Y'),
+(7, 7, 'Authorize Sub Menu', 'AuthorizeSubMenu', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tr_absensi`
+--
+
+CREATE TABLE `tr_absensi` (
+  `ID_Absensi` int(11) NOT NULL,
+  `KodeKaryawan` varchar(10) DEFAULT NULL,
+  `Tanggal` date DEFAULT NULL,
+  `ClockIn` time DEFAULT NULL,
+  `ClockOut` time DEFAULT NULL,
+  `LamaKerja` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tr_absensi`
+--
+
+INSERT INTO `tr_absensi` (`ID_Absensi`, `KodeKaryawan`, `Tanggal`, `ClockIn`, `ClockOut`, `LamaKerja`) VALUES
+(1, '0000', '2018-08-25', '11:26:00', '23:33:15', '00:00:00'),
+(2, '0000', '2018-08-26', '23:10:21', '23:33:15', '00:00:00'),
+(3, '0000', '2018-08-22', '23:12:15', '23:33:15', '00:00:00'),
+(4, '0000', '2018-08-27', '23:14:15', '23:59:30', '00:45:15'),
+(5, '0001', '2018-08-27', '23:39:54', '23:40:13', '00:00:19'),
+(14, '0000', '2018-08-27', '23:52:42', '23:59:30', '00:45:15'),
+(15, '0000', '2018-08-27', '23:52:49', '23:59:30', '00:45:15'),
+(16, '0000', '2018-08-28', '00:02:31', '00:15:38', '00:13:07'),
+(17, '0000', '2018-08-28', '00:02:53', '00:15:38', '00:13:07'),
+(18, '0001', '2018-08-28', '00:03:19', '00:14:42', '00:11:23'),
+(21, '0000', '2018-08-28', '00:11:37', '00:15:38', '00:13:07'),
+(22, '0000', '2018-08-28', '00:12:28', '00:15:38', '00:13:07'),
+(23, '0000', '2018-08-28', '00:13:32', '00:15:38', '00:13:07'),
+(24, '0001', '2018-08-28', '00:14:29', '00:14:42', '00:11:23'),
+(25, '0000', '2018-08-28', '00:14:52', '00:15:38', '00:13:07');
 
 -- --------------------------------------------------------
 
@@ -451,7 +494,8 @@ INSERT INTO `tr_authorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `KodeKaryawan`) V
 (13, 4, '0001'),
 (14, 5, '0001'),
 (15, 6, '0001'),
-(16, 7, '0001');
+(16, 7, '0001'),
+(17, 9, '0000');
 
 -- --------------------------------------------------------
 
@@ -571,6 +615,12 @@ ALTER TABLE `ms_submenu`
   ADD PRIMARY KEY (`ID_SubMenu`);
 
 --
+-- Indexes for table `tr_absensi`
+--
+ALTER TABLE `tr_absensi`
+  ADD PRIMARY KEY (`ID_Absensi`);
+
+--
 -- Indexes for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
@@ -614,7 +664,7 @@ ALTER TABLE `ms_compro`
 -- AUTO_INCREMENT for table `ms_customer`
 --
 ALTER TABLE `ms_customer`
-  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `ms_experience`
@@ -650,7 +700,7 @@ ALTER TABLE `ms_jabatan`
 -- AUTO_INCREMENT for table `ms_menu`
 --
 ALTER TABLE `ms_menu`
-  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ms_services`
@@ -668,13 +718,19 @@ ALTER TABLE `ms_servicesimage`
 -- AUTO_INCREMENT for table `ms_submenu`
 --
 ALTER TABLE `ms_submenu`
-  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tr_absensi`
+--
+ALTER TABLE `tr_absensi`
+  MODIFY `ID_Absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizesubmenu`
