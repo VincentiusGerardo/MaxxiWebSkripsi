@@ -4,7 +4,7 @@
         <h1 class="judulHalaman">Customers List</h1>
         <div id="msg"><?php echo $this->session->flashdata('message'); ?></div>
         <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addCustomer"><span class="glyphicon glyphicon-plus"></span> Add</button>
-        <table id="tableCustomers" data-height="450" data-search="true">
+        <table id="tableCustomers" data-height="400" data-search="true">
             <tbody>
                 <?php
                     $i = 1;

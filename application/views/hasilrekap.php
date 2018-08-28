@@ -1,22 +1,21 @@
-<table border="1">
-    <thead>
-        <tr>
-        <td>No</td>
-        <td>Tanggal</td>
-        <td>Clock In</td>
-        <td>Clock Out</td>
-        <td>Lama Kerja</td>
-        </tr>
-    </thead>
+<script src="<?php echo base_url('js/setTable/tableRekap.js'); ?>"></script>
+<table id="tableR" data-height="325">
     <tbody>
-        <?php foreach($hasil as $h){ ?>
+        <?php $i = 1; foreach($hasil as $h){ ?>
         <tr>
-            <td><?php echo $h->ID_Absensi; ?></td>
-            <td><?php echo date("d-m-Y",strtotime($h->Tanggal)); ?></td>
+            <td><?php echo $i; ?></td>
+            <td><?php echo date("j F Y",strtotime($h->Tanggal)); ?></td>
             <td><?php echo $h->ClockIn; ?></td>
-            <td><?php echo $h->ClockOut; ?></td>
-            <td><?php echo $h->LamaKerja; ?></td>
+            <td><?php echo $h->ClockOut==null?"-":$h->ClockOut; ?></td>
+            <td><?php echo $h->LamaKerja==null?"-":$h->LamaKerja; ?></td>
         </tr>
-        <?php } ?>
+        <?php $i++; } ?>
     </tbody>
 </table>
+<div class="pull-right" style="font-weight: bolder; font-size: 16px; margin-right: 3px; margin-top: 3px;">
+    <table>
+        <td>Total Jam Kerja &nbsp;</td>
+        <td>: &nbsp;</td>
+        <td><?php echo $total==null?"00:00:00":$total; ?></td>
+    </table>
+</div>

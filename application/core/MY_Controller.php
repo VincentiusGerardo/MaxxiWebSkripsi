@@ -223,15 +223,75 @@
         }
         
         public function doInsertCompanyProfile(){
+            $this->form_validation->set_rules('namaMenu','NamaMenu','required|xss_clean|trim');
+            $this->form_validation->set_rules('isiText','Keterangan','required|xss_clean|trim');
             
+            if($this->form_validation->run() == TRUE){
+                $nama = $this->input->post('namaMenu');
+                $isi = $this->input->post('isiText');
+                
+                $data = array(
+                    'header' => $nama,
+                    'isi' => $isi
+                );
+                
+                $result = $this->model_utama->insertComPro($data);
+                
+                if($result){
+                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }
+            }else{
+               $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!.</div>");
+                redirect($this->getPath() . 'CompanyProfile');
+            }
         }
         
         public function doUpdateCompanyProfile(){
+            $this->form_validation->set_rules('kode','KodeComPro','required|xss_clean|trim');
+            $this->form_validation->set_rules('isiText','Keterangan','required|xss_clean|trim');
             
+            if($this->form_validation->run() == TRUE){
+                $id = $this->input->post('kode');
+                $isi = $this->input->post('isiText');
+                
+                $data = array(
+                    'isi' => $isi
+                );
+                
+                $result = $this->model_utama->updateComPro($id,$data);
+                if($result){
+                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Updated.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!.</div>");
+                redirect($this->getPath() . 'CompanyProfile');
+            }
         }
         
         public function doDeleteCompanyProfile(){
+            $this->form_validation->set_rules('kode','KodeComPro','required|xss_clean|trim');
             
+            if($this->form_validation->run() == TRUE){
+                $kd = $this->input->post('kode');
+                
+                $res = $this->model_utama->deleteComPro($kd);
+                
+                if($res){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Deleted.</div>");
+                    redirect($this->getPath() . 'CompanyProfile');
+                }
+            }
         }
 
         /* Customers */
@@ -653,22 +713,36 @@
         
         public function RekapAbsensi(){
             $this->getHeader();
-            $this->load->view('rekap');
+            if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
+                $data['karyawan'] = $this->model_utama->getKaryawan();
+                $this->load->view('rekapAtasan',$data);
+            }else{
+                $this->load->view('rekap');
+            }
             $this->load->view('footer');
         }
         
         public function getDataAbsen(){
             $this->form_validation->set_rules('a','From','required|xss_clean|trim');
             $this->form_validation->set_rules('b','To','required|xss_clean|trim');
+            if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
+                $this->form_validation->set_rules('c','KodeKaryawan','required|xss_clean|trim');
+            }
             
             if($this->form_validation->run() == TRUE){
                 $f = date("Y-m-d",strtotime($this->input->post('a')));
                 $t = date("Y-m-d",strtotime($this->input->post('b')));
                 
-                $data['hasil'] = $this->model_utama->getAbsen($this->getUserCode(),$f,$t);
-                $this->load->view('hasilrekap',$data);
-            }else{
+                if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
+                    $kode = $this->input->post('c');
+                    $data['hasil'] = $this->model_utama->getAbsen($kode,$f,$t);
+                    $data['total'] = $this->model_utama->getTotalJam($kode,$f,$t);
+                }else{
+                    $data['hasil'] = $this->model_utama->getAbsen($this->getUserCode(),$f,$t);
+                    $data['total'] = $this->model_utama->getTotalJam($this->getUserCode(),$f,$t);
+                }
                 
+                $this->load->view('hasilrekap',$data);
             }
         }
     }

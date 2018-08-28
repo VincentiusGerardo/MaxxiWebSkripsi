@@ -149,16 +149,37 @@
             return $query->result();
         }
         
-        public function insertAbout(){
-            
+        public function insertComPro($data){
+            $query = $this->db->insert('ms_compro',$data);
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
-        public function updateAbout(){
+        public function updateComPro($id,$data){
+            $cond = array('id_compro' => $id);
+            $query = $this->db->update('ms_compro',$data,$cond);
             
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
-        public function deleteAbout(){
+        public function deleteComPro($id){
+            $cond = array('id_compro' => $id);
+            $data = array('FlagActive' => 'N');
             
+            $query = $this->db->update('ms_compro',$data,$cond);
+            
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         /* Facility */
@@ -447,6 +468,7 @@
             $this->db->from('tr_absensi');
             $this->db->where('KodeKaryawan',$kode);
             $this->db->where('Tanggal BETWEEN "'. $from . '" AND "' . $to .'"');
+            $this->db->order_by('Tanggal', 'ASC');
             
             $sql = $this->db->get();
             
@@ -455,5 +477,19 @@
             echo $sql;*/
         }
         
+        public function getTotalJam($kode,$from,$to){
+            $this->db->select('SEC_TO_TIME( SUM( TIME_TO_SEC( LamaKerja ) ) ) AS timeSum ');
+            $this->db->from('tr_absensi');
+            $this->db->where('KodeKaryawan',$kode);
+            $this->db->where('Tanggal BETWEEN "'. $from . '" AND "' . $to .'"');
+            
+            $query = $this->db->get();
+            
+            if($query){
+                return $query->row()->timeSum;
+            }else{
+                return FALSE;
+            }
+        }
         
     }

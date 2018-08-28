@@ -4,7 +4,7 @@
         <h1 class="judulHalaman">Fleet List</h1>
         <div id="msg"><?php echo $this->session->flashdata('message'); ?></div>
         <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addFleet"><span class="glyphicon glyphicon-plus"></span> Add</button>
-        <table id="tableFleet" data-height="450" data-search="true">
+        <table id="tableFleet" data-height="400" data-search="true">
             <tbody>
                 <?php
                     $i = 1;

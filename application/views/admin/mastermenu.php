@@ -4,7 +4,7 @@
         <h1 class="judulHalaman">Master Menu</h1>
         <div id="msg"><?php echo $this->session->flashdata('message'); ?></div>
         <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addMenu"><span class="glyphicon glyphicon-plus"></span> Add</button>
-        <table id="msMenu" data-height="450" data-search="true">
+        <table id="msMenu" data-height="400" data-search="true">
             <tbody>
                 <?php 
                     $i = 1;
