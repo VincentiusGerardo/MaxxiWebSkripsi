@@ -54,7 +54,7 @@
             </div>
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4 tengah">
-            <img src="media/nopic.jpg" class="img-circle img-responsive tengah" width="200px" height="200px" id="foto"><br>
+            <img src="<?php echo base_url('Media/nopic.jpg'); ?>" class="img-circle img-responsive tengah" width="200px" height="200px" id="foto"><br>
             <div id="buatNama"></div><br>
             <form id="formAbsen">
                 <div class="form-group">
