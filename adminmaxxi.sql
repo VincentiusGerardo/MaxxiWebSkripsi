@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2018 at 07:16 PM
+-- Generation Time: Aug 28, 2018 at 01:42 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -312,6 +312,7 @@ CREATE TABLE `ms_menu` (
   `ID_Menu` int(11) NOT NULL,
   `NamaMenu` text NOT NULL,
   `URL` text NOT NULL,
+  `Logo` text NOT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -319,16 +320,18 @@ CREATE TABLE `ms_menu` (
 -- Dumping data for table `ms_menu`
 --
 
-INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `FlagActive`) VALUES
-(1, 'About', '#', 'Y'),
-(2, 'Facility', 'Facility', 'Y'),
-(3, 'Customers', 'Customers', 'Y'),
-(4, 'Services', 'Services', 'Y'),
-(5, 'Experience Gallery', 'Experience', 'Y'),
-(6, 'Location & Contact', 'LocationContact', 'Y'),
-(7, 'Mission Control', '#', 'Y'),
-(8, '', 'Users', 'N'),
-(9, 'Cuti', 'Cuti', 'Y');
+INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `Logo`, `FlagActive`) VALUES
+(1, 'About', '#', ' fa-question-circle-o', 'Y'),
+(2, 'Facility', 'Facility', '', 'N'),
+(3, 'Customers', 'Customers', 'fa-users', 'Y'),
+(4, 'Services', 'Services', 'fa-truck', 'Y'),
+(5, 'Experience Gallery', 'Experience', '', 'N'),
+(6, 'Location & Contact', 'LocationContact', 'fa-location-arrow', 'Y'),
+(7, 'Mission Control', '#', 'fa-rocket', 'Y'),
+(8, '', 'Users', '', 'N'),
+(9, 'Cuti', 'Cuti', 'fa-calendar-plus-o', 'Y'),
+(10, 'Image Upload', '#', 'fa-image', 'Y'),
+(11, 'Rekap Absensi', 'RekapAbsensi', 'fa-calendar', 'Y');
 
 -- --------------------------------------------------------
 
@@ -495,7 +498,8 @@ INSERT INTO `tr_authorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `KodeKaryawan`) V
 (14, 5, '0001'),
 (15, 6, '0001'),
 (16, 7, '0001'),
-(17, 9, '0000');
+(17, 9, '0000'),
+(18, 11, '0000');
 
 -- --------------------------------------------------------
 
@@ -700,7 +704,7 @@ ALTER TABLE `ms_jabatan`
 -- AUTO_INCREMENT for table `ms_menu`
 --
 ALTER TABLE `ms_menu`
-  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ms_services`
@@ -730,7 +734,7 @@ ALTER TABLE `tr_absensi`
 -- AUTO_INCREMENT for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizesubmenu`

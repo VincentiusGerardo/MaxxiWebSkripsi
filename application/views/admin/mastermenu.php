@@ -57,6 +57,13 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-4">Icon:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" name="icon"/>
+                          <a href="https://fontawesome.com/v4.7.0/cheatsheet/" target="_blank">Bisa di lihat di sini</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-4"></label>
                         <div class="col-sm-7">
                             <p style="color: red;">Kosongkan Jika URL sama dengan Nama Menu</p>
@@ -98,6 +105,13 @@
                         <label class="control-label col-sm-4"></label>
                         <div class="col-sm-7">
                             <p style="color: red;">Kosongkan Jika URL sama dengan Nama Menu</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Icon:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="icon" value="<?php echo $m->Logo; ?>"/>
+                          <a href="https://fontawesome.com/v4.7.0/cheatsheet/" target="_blank">Bisa di lihat di sini</a>
                         </div>
                     </div>
             </div>

@@ -1,6 +1,9 @@
 $(function(){
     $(".selectpicker").selectpicker();
-    $(".datetimepicker").datetimepicker();
+    //Date picker
+    $('.datepicker').datepicker({
+        autoclose: true
+    })
     
     // Input number only
     $(".numberOnly").keypress(function(e){
@@ -14,5 +17,11 @@ $(function(){
     // Alert Slide Up
     $(".alert").fadeTo(2000, 500).slideUp(500, function(){
         $(".alert").slideUp(500);
+    });
+    
+    //Summernote
+    $(".summernote").summernote({
+        height: 300,                 // set editor height
+        disableResizeEditor: true
     });
 });

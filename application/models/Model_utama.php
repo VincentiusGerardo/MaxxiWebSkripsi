@@ -9,7 +9,7 @@
         
         /* Menu & SubMenu */
         public function getMenu($kode){
-            $this->db->select('b.ID_Menu,b.NamaMenu,b.URL');
+            $this->db->select('b.ID_Menu,b.NamaMenu,b.URL,b.Logo');
             $this->db->from('tr_authorizemenu a');
             $this->db->join('ms_menu b','a.ID_Menu = b.ID_Menu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
@@ -31,7 +31,7 @@
         }
         
         public function getSubMenu($kode){
-            $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL');
+            $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu');
             $this->db->from('tr_authorizesubmenu a');
             $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
             $this->db->where('a.KodeKaryawan', $kode);
@@ -144,8 +144,8 @@
         
         /* About */
         
-        public function getAbout(){
-            $query = $this->db->get_where('ms_about', array('FlagActive' => 'Y'));
+        public function getComPro(){
+            $query = $this->db->get_where('ms_compro', array('FlagActive' => 'Y'));
             return $query->result();
         }
         
@@ -440,6 +440,19 @@
             }else{
                 return FALSE;
             }
+        }
+        
+        public function getAbsen($kode,$from,$to){
+            $this->db->select('*');
+            $this->db->from('tr_absensi');
+            $this->db->where('KodeKaryawan',$kode);
+            $this->db->where('Tanggal BETWEEN "'. $from . '" AND "' . $to .'"');
+            
+            $sql = $this->db->get();
+            
+            return $sql->result();
+            /*$sql = $this->db->get_compiled_select();
+            echo $sql;*/
         }
         
         

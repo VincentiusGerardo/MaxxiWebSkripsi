@@ -49,11 +49,6 @@
             return $path;
         }
 
-        public function getUploadPath(){
-            $url = "https://maxximumservices.com/Maxxi/";
-            return $url;
-        }
-
         public function getHeader(){
             $data['menu'] = $this->model_utama->getMenu($this->getUserCode());
             $data['submenu'] = $this->model_utama->getSubMenu($this->getUserCode());
@@ -98,7 +93,7 @@
             }
         }
 
-        /* Fleet */
+        /* About -Fleet - Company Profile -Crew */
         public function fleet(){
             $data['fleet'] = $this->model_utama->getFleet();
             $this->getHeader();
@@ -201,11 +196,47 @@
                 }
             }
         }
+        
+        public function crew(){
+            $this->getHeader();
+            $this->load->view('admin/crew');
+            $this->load->view('footer');
+        }
+        
+        public function doInsertCrew(){
+            
+        }
+        
+        public function doUpdateCrew(){
+            
+        }
+        
+        public function doDeleteCrew(){
+            
+        }
+        
+        public function CompanyProfile(){
+            $data['compro'] = $this->model_utama->getComPro();
+            $this->getHeader();
+            $this->load->view('admin/compro',$data);
+            $this->load->view('footer');
+        }
+        
+        public function doInsertCompanyProfile(){
+            
+        }
+        
+        public function doUpdateCompanyProfile(){
+            
+        }
+        
+        public function doDeleteCompanyProfile(){
+            
+        }
 
         /* Customers */
         public function customers(){
             $data['customer'] = $this->model_utama->getCustomers();
-            $data['imageurl'] = $this->getUploadPath();
             $this->getHeader();
             $this->load->view('admin/customers',$data);
             $this->load->view('footer');
@@ -330,7 +361,7 @@
             }
         }
 
-        /* Experience */
+        /* Image Upload -Experience - Background -ServicesImage -Facility */
         public function experience(){
             $this->getHeader();
             $this->load->view('admin/experience');
@@ -416,15 +447,18 @@
         public function doInsertMenu(){
             $this->form_validation->set_rules('namaMenu','MenuName','required|xss_clean|trim');
             $this->form_validation->set_rules('url','Link','xss_clean|trim');
+            $this->form_validation->set_rules('icon','icon','required|xss_clean|trim');
             if($this->form_validation->run() == TRUE){
                 $nama = $this->input->post('namaMenu');
                 $link = $this->input->post('url');
+                $icon = $this->input->post('icon');
                 if(empty($link)){
                     $link = $nama;
                 }
                 $dataMenu = array(
                     'NamaMenu' => $nama,
-                    'URL' => trim(str_replace(" ","",$link))
+                    'URL' => trim(str_replace(" ","",$link)),
+                    'Logo' => $icon
                 );
                                 
                 $result = $this->model_utama->insertMasterMenu($dataMenu);
@@ -442,17 +476,19 @@
             $this->form_validation->set_rules('kode','IdMenu','required|xss_clean|trim');
             $this->form_validation->set_rules('namaMenu','MenuName','required|xss_clean|trim');
             $this->form_validation->set_rules('url','Link','xss_clean|trim');
-            
+            $this->form_validation->set_rules('icon','icon','required|xss_clean|trim');
             if($this->form_validation->run() == TRUE){
                 $cod = $this->input->post('kode');
                 $nama = $this->input->post('namaMenu');
                 $link = $this->input->post('url');
+                $icon = $this->input->post('icon');
                 if(empty($link)){
                     $link = $nama;
                 }
                 $dataMenu = array(
                     'NamaMenu' => $nama,
-                    'URL' => trim(str_replace(" ","",$link))
+                    'URL' => trim(str_replace(" ","",$link)),
+                    'Logo' => $icon
                 );
                 
                 $result = $this->model_utama->updateMasterMenu($cod,$dataMenu);
@@ -609,5 +645,30 @@
         public function cuti(){
             $this->getHeader();
             $this->load->view('footer');
+        }
+        
+        public function doInsertCuti(){
+            
+        }
+        
+        public function RekapAbsensi(){
+            $this->getHeader();
+            $this->load->view('rekap');
+            $this->load->view('footer');
+        }
+        
+        public function getDataAbsen(){
+            $this->form_validation->set_rules('a','From','required|xss_clean|trim');
+            $this->form_validation->set_rules('b','To','required|xss_clean|trim');
+            
+            if($this->form_validation->run() == TRUE){
+                $f = date("Y-m-d",strtotime($this->input->post('a')));
+                $t = date("Y-m-d",strtotime($this->input->post('b')));
+                
+                $data['hasil'] = $this->model_utama->getAbsen($this->getUserCode(),$f,$t);
+                $this->load->view('hasilrekap',$data);
+            }else{
+                
+            }
         }
     }

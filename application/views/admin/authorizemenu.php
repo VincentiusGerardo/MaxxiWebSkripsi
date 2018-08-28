@@ -21,7 +21,7 @@
            url: "<?php echo base_url('Administrator/getMenuByID'); ?>",
            data:{ kode: kode },
            beforeSend:function(){
-               $("#forRoles").html('<img src="<?php echo base_url('media/loading.gif'); ?>" class="gambarloadingajax"/>');
+               $("#forRoles").html('<img src="<?php echo base_url('Media/loading.gif'); ?>" class="gambarloadingajax"/>');
            },
            success:function(a){
                $("#forRoles").html(a);

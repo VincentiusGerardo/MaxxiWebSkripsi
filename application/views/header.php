@@ -17,8 +17,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-select.min.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-select.min.js'); ?>"></script>
         <script src="<?php echo base_url('js/moment.js'); ?>"></script>
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-datetimepicker.min.css'); ?>"/>
-        <script src="<?php echo base_url('js/bootstrap/bootstrap-datetimepicker.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'); ?>"/>
+        <script src="<?php echo base_url('bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>
         
@@ -44,6 +44,9 @@
         <script src="<?php echo base_url('js/script.js'); ?>"></script>
         <link rel="stylesheet" href="<?php echo base_url('css/skins/skin-blue.min.css'); ?>">
         
+        <!--Summernote-->
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('dist/summernote.css'); ?>"/>
+        <script src="<?php echo base_url('dist/summernote.min.js'); ?>"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
         <div class="wrapper">
@@ -91,9 +94,24 @@
                 <?php 
                     foreach($menu as $m){
                         if($m->URL === '#'){
+                            if($m->ID_Menu == 1){
                 ?>
                     <li class="treeview">
-                        <a href="#"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span>
+                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
+                          <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="<?php echo $path . 'CompanyProfile'; ?>">Company Profile</a></li>
+                          <li><a href="<?php echo $path . 'Fleet'; ?>">Fleet</a></li>
+                        </ul>
+                    </li>
+                <?php
+                            }else if($m->ID_Menu == 7){
+                ?>
+                    <li class="treeview">
+                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
                           <span class="pull-right-container">
                               <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -106,9 +124,26 @@
                         </ul>
                     </li>
                 <?php
+                            }else if($m->ID_Menu == 10){
+                ?>
+                     <li class="treeview">
+                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
+                          <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li><a href="<?php echo $path . 'BackgroundImage'; ?>">Background Image</a></li>
+                          <li><a href="<?php echo $path . 'ServicesImage'; ?>">Services Image</a></li>
+                          <li><a href="<?php echo $path . 'ExperienceImage'; ?>">Experience Image </a></li>
+                          <li><a href="<?php echo $path . 'FacilityImage'; ?>">Facility Image</a></li>
+                        </ul>
+                    </li>  
+                <?php
+                            }
                         }else{
                 ?>
-                    <li><a href="<?php echo $path . $m->URL; ?>"><i class="fa fa-link"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
+                    <li><a href="<?php echo $path . $m->URL; ?>"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
                     <?php } }?>
               </ul>
               <!-- /.sidebar-menu -->

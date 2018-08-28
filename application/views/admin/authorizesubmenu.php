@@ -20,7 +20,7 @@
             url: "<?php echo base_url('Administrator/getSubMenuByID'); ?>",
             data: { kd: kd },
             beforeSend:function(){
-                $("#forRoles").html('<img src="<?php echo base_url('media/loading.gif'); ?>" class="gambarloadingajax"/>');
+                $("#forRoles").html('<img src="<?php echo base_url('Media/loading.gif'); ?>" class="gambarloadingajax"/>');
             },
             success:function(as){
                 $("#forRoles").html(as);
