@@ -71,7 +71,7 @@
         <script type="text/javascript">
             $(function(){
                 $("img").on("error",function(){
-                    $(this).attr("src", "media/nopic.jpg");
+                    $(this).attr("src", "<?php echo base_url('Media/nopic.jpg'); ?>");
                 });
             });
 
