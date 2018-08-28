@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2018 at 01:42 PM
+-- Generation Time: Aug 28, 2018 at 04:56 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -97,7 +97,8 @@ INSERT INTO `ms_compro` (`id_compro`, `header`, `isi`, `FlagActive`) VALUES
 (1, 'About Us', '<p>Perusahaan ini berdiri sejak tahun 1998 dengan nama semula PT. Putera Perdana International (sesuai Akte Notaris Juliaan Nimrod Siregar, SH, No 75 tanggal 12 November 1999).</p><p>Pada tahun 2000, seluruh saham dan management perusahaan diambil alih oleh GroupRaplima Utama dan nama perusahaan berubah menjadi PT. Perdana Maxxi International (Akte Notaris Rusnaldy, SH, No.5-X-2000 tanggal 25 Maret 2000).<br></p>', 'Y'),
 (2, 'Licenses', '<ol><li>Pengesahan Akta Pendirian No.C-13391 HT.01.01.TH.2003</li><li>Persetujuan Akta Perubahan No.C-23397 HT.01.04.TH.2005</li><li>Persetujuan Akta Perubahan AHU-51703.AH.01.02.TH.2008</li><li>Surat Pengukuhan Pengusaha Kena Pajak No.PEM-085/WPJ.20/Kp.0103/2007</li><li>Surat Keterangan Domisili Perusahaan No.0369/1.824.1/09</li><li>Surat Izin Jasa Pengurusan Transportasi ( SIUJPT ) No.13/ SIUJPT / DISHUB / I / 2006</li><li>Tanda Daftar Perusahaan Perseroan Terbatas No.09.04.1.63.19109</li><li>Surat Keterangan Terdaftar No. PEM-02/WPJ.20/KP.0103/2006</li><li>Surat Izin Tempat Usaha No. SK.1372/09/08</li><li>Nomor Pokok Wajib Pajak No.02.245.458.1-001.000<br></li></ol>', 'Y'),
 (3, 'Tujuan Perusahaan', '<p>PT Perdana Maxxi International berdiri untuk membantu meningkatkan perdagangan dalam negeri dengan membantu pengiriman dalam negeri secara tepat dan aman di Indonesia, serta pengiriman eksport&nbsp; dan&nbsp; import.</p><p>Perkembangan&nbsp; teknologi&nbsp; dan&nbsp; peningkatkan&nbsp; kegiatan&nbsp; ekonomi&nbsp; di&nbsp; berbagai sektor usaha telah menumbuhkan permintaan yang dinamis akan jasa-jasa angkutan dalam maupun luar negeri dengan volume dan kapasitas yang besar.</p><p> Untuk dapat memberikan proteksi dan layanan yang&nbsp; cepat,&nbsp; fleksibel&nbsp; dan&nbsp; terpercaya&nbsp; maka&nbsp; PT.&nbsp; Perdana&nbsp; Maxxi&nbsp; International&nbsp; telah&nbsp; menjalin kerjasama dengan perusahaan â€“ perusahaan forwading dan shipping yang ada di dalam dan diluar negeri karena hanya dengan pengelolaan penyebaran yang di dukung dengan kepentingan mitra usaha / customer akan terjamin dengan aman dan terpercaya.Untuk dapat menjamin keamanan dari jasa&nbsp; yang&nbsp; kami&nbsp; berikan,&nbsp; kami&nbsp; telah&nbsp; menjalin&nbsp; kerjasama&nbsp; dengan <b>PT. Howden&nbsp; Indonesia</b>&nbsp; sebagai Perusahaan Broker Asuransi termuka.<br></p>', 'Y'),
-(4, 'Visi & Misi Perusahaan', '<p>Memberikan <b>Maximum Service </b>kepada Perusahaan dan Perorangan dengan rasa <b>AMAN, CEPAT, dan TEPAT </b>dalam meningkatkan perdanganan, export, import, dan domestic serta dengan <b>Harga </b>yang sangat kompetitif.</p>', 'Y');
+(4, 'Visi & Misi Perusahaan', '<p>Memberikan <b>Maximum Service </b>kepada Perusahaan dan Perorangan dengan rasa <b>AMAN, CEPAT, dan TEPAT </b>dalam meningkatkan perdanganan, export, import, dan domestic serta dengan <b>Harga </b>yang sangat kompetitif.</p>', 'Y'),
+(5, 'testing', '<p>asdasda</p><p>sdasdad<br></p>', 'N');
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,7 @@ INSERT INTO `ms_facility` (`id_facility`, `header`, `keterangan`, `gambar`, `Fla
 (7, 'Our Front Office', NULL, 'front.jpg', 'Y'),
 (8, 'Our Crane', NULL, 'P_09062016044933_photocollage.jpg', 'Y'),
 (9, 'Our Forklift', NULL, 'FORKLIFT-STACKER-HYDRAULIC-1000-KG-STRADDLE-LEG-MANUAL-TWM-172029914247-3.jpg', 'Y'),
-(10, 'test', NULL, 'air-freight-worldwide.jpg', 'Y'),
+(10, 'test', NULL, 'air-freight-worldwide.jpg', 'N'),
 (11, 'testing', NULL, '1055140-pure-background.jpg', 'N'),
 (12, 'testing', NULL, '1055140-pure-background.jpg', 'N');
 
@@ -336,6 +337,29 @@ INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `Logo`, `FlagActive`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ms_role`
+--
+
+CREATE TABLE `ms_role` (
+  `ID_Role` int(11) NOT NULL,
+  `NamaRole` text NOT NULL,
+  `FlagActive` char(1) NOT NULL DEFAULT 'Y'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ms_role`
+--
+
+INSERT INTO `ms_role` (`ID_Role`, `NamaRole`, `FlagActive`) VALUES
+(1, 'Administrator', 'Y'),
+(2, 'Director', 'Y'),
+(3, 'HRD', 'Y'),
+(4, 'Employee', 'Y'),
+(5, 'Reciever', 'Y');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ms_services`
 --
 
@@ -449,7 +473,7 @@ CREATE TABLE `tr_absensi` (
 --
 
 INSERT INTO `tr_absensi` (`ID_Absensi`, `KodeKaryawan`, `Tanggal`, `ClockIn`, `ClockOut`, `LamaKerja`) VALUES
-(1, '0000', '2018-08-25', '11:26:00', '23:33:15', '00:00:00'),
+(1, '0000', '2018-08-01', '11:26:00', '23:33:15', '00:00:00'),
 (2, '0000', '2018-08-26', '23:10:21', '23:33:15', '00:00:00'),
 (3, '0000', '2018-08-22', '23:12:15', '23:33:15', '00:00:00'),
 (4, '0000', '2018-08-27', '23:14:15', '23:59:30', '00:45:15'),
@@ -463,7 +487,7 @@ INSERT INTO `tr_absensi` (`ID_Absensi`, `KodeKaryawan`, `Tanggal`, `ClockIn`, `C
 (22, '0000', '2018-08-28', '00:12:28', '00:15:38', '00:13:07'),
 (23, '0000', '2018-08-28', '00:13:32', '00:15:38', '00:13:07'),
 (24, '0001', '2018-08-28', '00:14:29', '00:14:42', '00:11:23'),
-(25, '0000', '2018-08-28', '00:14:52', '00:15:38', '00:13:07');
+(25, '0000', '2018-08-28', '00:14:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -601,6 +625,12 @@ ALTER TABLE `ms_menu`
   ADD PRIMARY KEY (`ID_Menu`);
 
 --
+-- Indexes for table `ms_role`
+--
+ALTER TABLE `ms_role`
+  ADD PRIMARY KEY (`ID_Role`);
+
+--
 -- Indexes for table `ms_services`
 --
 ALTER TABLE `ms_services`
@@ -662,7 +692,7 @@ ALTER TABLE `ms_background`
 -- AUTO_INCREMENT for table `ms_compro`
 --
 ALTER TABLE `ms_compro`
-  MODIFY `id_compro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_compro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ms_customer`
@@ -705,6 +735,12 @@ ALTER TABLE `ms_jabatan`
 --
 ALTER TABLE `ms_menu`
   MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `ms_role`
+--
+ALTER TABLE `ms_role`
+  MODIFY `ID_Role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ms_services`

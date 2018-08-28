@@ -197,8 +197,16 @@
             
         }
         
-        public function deleteFacility(){
+        public function deleteFacility($id){
+            $cond = array('id_facility' => $id);
+            $data = array('FlagActive' => 'N');
+            $res = $this->db->update('ms_facility',$data,$cond);
             
+            if($res){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         /* Customers */
@@ -462,6 +470,8 @@
                 return FALSE;
             }
         }
+        
+        /* Rekap Absensi */
         
         public function getAbsen($kode,$from,$to){
             $this->db->select('*');

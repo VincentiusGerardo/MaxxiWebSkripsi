@@ -422,7 +422,7 @@
         }
 
         /* Image Upload -Experience - Background -ServicesImage -Facility */
-        public function experience(){
+        public function experienceimage(){
             $this->getHeader();
             $this->load->view('admin/experience');
             $this->load->view('footer');
@@ -441,7 +441,7 @@
         }
 
         /* Facility */
-        public function facility(){
+        public function facilityimage(){
             $data['facility'] = $this->model_utama->getFacility();
             $this->getHeader();
             $this->load->view('admin/facility',$data);
@@ -457,7 +457,22 @@
         }
 
         public function doDeleteFacility(){
-
+            $this->form_validation->set_rules('nomor','ID','required|xss_clean|trim');
+            if($this->form_validation->run() == TRUE){
+                $kd = $this->input->post('nomor');
+                
+                $res = $this->model_utama->deleteFacility($kd);
+                
+                if($res){
+                   $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
+                    redirect($this->getPath() . 'facilityimage');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Deleted.</div>");
+                    redirect($this->getPath() . 'facilityimage');
+                }
+            }else{
+                redirect($this->getPath() . 'facilityimage');
+            }
         }
 
         /* Mission Control */
