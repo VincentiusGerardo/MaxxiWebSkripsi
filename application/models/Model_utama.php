@@ -189,8 +189,13 @@
             return $query->result();
         }
         
-        public function insertFacility(){
-            
+        public function insertFacility($data){
+            $query = $this->db->insert('ms_facility',$data);
+            if($query){
+                return TRUE;
+            }else{
+                return FALSE;
+            }
         }
         
         public function updateFacility(){

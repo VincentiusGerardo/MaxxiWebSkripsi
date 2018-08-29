@@ -32,14 +32,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Customer</h4>
+          <h4 class="modal-title">Add Facility</h4>
         </div>
         <div class="modal-body">
             <form class="form-horizontal" enctype="multipart/form-data" id="formInput" action="<?php echo $path . 'doInsertFacility' ?>" method="POST">
             <div class="form-group">
               <label class="control-label col-sm-4">Header:</label>
               <div class="col-sm-7">
-                <input type="text" class="form-control" name="namaCustomer">
+                <input type="text" class="form-control" name="header">
               </div>
             </div>
             <div class="form-group">
@@ -68,20 +68,21 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Customer</h4>
+          <h4 class="modal-title">Update Facility</h4>
         </div>
         <div class="modal-body">
-            <form class="form-horizontal" enctype="multipart/form-data" id="formInput" action="<?php echo $path . 'doInsertFacility' ?>" method="POST">
+            <form class="form-horizontal" enctype="multipart/form-data" id="formInput" action="<?php echo $path . 'doUpdateFacility' ?>" method="POST">
+                <input type="hidden" value="<?php echo $f->id_facility; ?>" name="nomor"/>
             <div class="form-group">
               <label class="control-label col-sm-4">Header:</label>
               <div class="col-sm-7">
-                <input type="text" class="form-control" name="namaCustomer">
+                  <input type="text" class="form-control" name="header" value="<?php echo $f->header; ?>">
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-sm-4">Keterangan:</label>
               <div class="col-sm-7">
-                  <textarea class="summernote form-control" name="isiKet"></textarea>
+                  <textarea class="summernote form-control" name="isiKet"><?php echo $f->keterangan; ?></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -92,7 +93,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-success">Save changes</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         </form>
       </div>

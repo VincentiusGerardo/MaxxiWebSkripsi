@@ -319,7 +319,7 @@
                 $this->load->library('upload', $config);
                 
                     
-                if(! $this->upload->do_upload('gambar')){
+                if(!$this->upload->do_upload('gambar')){
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> " . $this->upload->display_errors() . "</div>");
                     redirect($this->getPath() . 'Customers');
                 }else{
@@ -449,11 +449,53 @@
         }
 
         public function doInsertFacility(){
-
+            $this->form_validation->set_rules('header','Header','required|xss_clean|trim');
+            $this->form_validation->set_rules('isiKet','Keterangan','required|xss_clean|trim');
+            if(empty($_FILES['gambar']['name'])){
+                $this->form_validation->set_rules('gambar','gambar','required');
+            }
+            
+            if($this->form_validation->run() == TRUE){
+                $head = $this->input->post('header');
+                $ket = $this->input->post('isiKet');
+                $config['upload_path'] = './Media/Facility/';
+                $config['allowed_types'] = "jpg|jpeg|png";
+                $config['file_name'] = str_replace(".", "", str_replace(" ", "-", $head));
+                $config['file_ext_tolower'] = TRUE;
+                $config['max_size'] = 2097152;
+                
+                $this->load->library('upload', $config);
+                
+                     
+                if(!$this->upload->do_upload('gambar')){
+                    $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> " . $this->upload->display_errors() . "</div>");
+                    redirect($this->getPath() . 'facilityimage');
+                }else{
+                    $img = $this->upload->data('file_name');
+                    $dataFacility = array(
+                        'header' => $head,
+                        'keterangan' => $ket,
+                        'gambar' => $img
+                    );
+                    
+                    $result = $this->model_utama->insertFacility($dataFacility);
+                    
+                    if($result){
+                        $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Customer Inserted!</div>");
+                        redirect($this->getPath() . 'facilityimage');
+                    }else{
+                        $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Customer can't be Inserted!</div>");
+                        redirect($this->getPath() . 'facilityimage');
+                    }
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> There's Still an Empty Input!</div>");
+                redirect($this->getPath() . 'facilityimage');
+            }
         }
 
         public function doUpdateFacility(){
-
+            $this->form_validation->set_rules();
         }
 
         public function doDeleteFacility(){
@@ -471,6 +513,7 @@
                     redirect($this->getPath() . 'facilityimage');
                 }
             }else{
+                $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Deleted.</div>");
                 redirect($this->getPath() . 'facilityimage');
             }
         }
@@ -719,6 +762,7 @@
         /* Cuti */
         public function cuti(){
             $this->getHeader();
+            $this->load->view('employee/cuti');
             $this->load->view('footer');
         }
         
@@ -732,7 +776,7 @@
                 $data['karyawan'] = $this->model_utama->getKaryawan();
                 $this->load->view('rekapAtasan',$data);
             }else{
-                $this->load->view('rekap');
+                $this->load->view('employee/rekap');
             }
             $this->load->view('footer');
         }
