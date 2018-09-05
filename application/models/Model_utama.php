@@ -507,4 +507,18 @@
             }
         }
         
+        /* Cuti */
+        public function getCuti($kode){
+            $query = $this->db->get_where('tr_cuti',array('KodeKaryawan' => $kode));
+            return $query->result();
+        }
+        
+        public function insertCuti(){
+            
+        }
+        
+        public function updateCuti(){
+            
+        }
+        
     }

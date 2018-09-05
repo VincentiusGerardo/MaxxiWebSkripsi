@@ -762,11 +762,22 @@
         /* Cuti */
         public function cuti(){
             $this->getHeader();
-            $this->load->view('employee/cuti');
+            if($this->getRole() == 1){
+                
+            }else if($this->getRole() == 2){
+                
+            }else{
+                $data[] = $this->model_utama->getCuti($this->getUserCode());
+                $this->load->view('employee/cuti');
+            }
             $this->load->view('footer');
         }
         
         public function doInsertCuti(){
+            
+        }
+        
+        public function doUpdateCuti(){
             
         }
         
