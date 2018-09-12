@@ -5,6 +5,8 @@
 
         public function __construct(){
             parent::__construct();
+            
+            // Check session
             if(!$this->session->userdata('is_logged')){
                 redirect(base_url());
             }

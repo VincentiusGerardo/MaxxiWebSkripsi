@@ -437,6 +437,18 @@
                 redirect($this->getPath() . 'facilityimage');
             }
         }
+        
+          /* Location & Contact */
+        public function LocationContact(){
+            $this->getHeader();
+            $this->load->view('footer');
+        }
+        
+        /* Services */
+        public function services(){
+            $this->getHeader();
+            $this->load->view('footer');
+        }
 
         /* Mission Control */
         public function AuthorizeMenu(){
@@ -666,16 +678,5 @@
             $data['menu'] = $this->model_utama->getAllSub();
             $this->load->view('admin/showSubRoles',$data);
         }
-        
-        /* Location & Contact */
-        public function LocationContact(){
-            $this->getHeader();
-            $this->load->view('footer');
-        }
-        
-        /* Services */
-        public function services(){
-            $this->getHeader();
-            $this->load->view('footer');
-        }
+       
     }
