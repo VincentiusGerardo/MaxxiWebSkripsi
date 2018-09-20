@@ -224,7 +224,7 @@
                     redirect($this->getPath() . 'MasterSubMenu');
                 }
             }
-        }
+        } 
 
         public function AuthorizeSubMenu(){
             $data['karyawan'] = $this->model_utama->getKaryawan();
