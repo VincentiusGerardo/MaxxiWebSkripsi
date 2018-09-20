@@ -5,8 +5,7 @@
 
         public function __construct(){
             parent::__construct();
-            
-            // Check session
+            // check session user
             if(!$this->session->userdata('is_logged')){
                 redirect(base_url());
             }
@@ -94,7 +93,7 @@
                 redirect($this->getPath() . 'changePassword');
             }
         }
-        
+       
         /* Cuti */
         public function cuti(){
             $this->getHeader();
@@ -150,5 +149,9 @@
                 
                 $this->load->view('hasilrekap',$data);
             }
+        }
+        
+        public function a(){
+            
         }
     }

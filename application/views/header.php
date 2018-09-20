@@ -93,8 +93,7 @@
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
                 <?php 
                     foreach($menu as $m){
-                        if($m->URL === '#'){
-                            if($m->ID_Menu == 1){
+                        if($m->ID_Menu === '#'){
                 ?>
                     <li class="treeview">
                         <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
@@ -108,39 +107,6 @@
                         </ul>
                     </li>
                 <?php
-                            }else if($m->ID_Menu == 7){
-                ?>
-                    <li class="treeview">
-                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
-                          <span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                          <li><a href="<?php echo base_url('Administrator/MasterMenu'); ?>">Master Menu</a></li>
-                          <li><a href="<?php echo base_url('Administrator/MasterSubMenu'); ?>">Master Sub Menu</a></li>
-                          <li><a href="<?php echo base_url('Administrator/AuthorizeMenu'); ?>">Authorize Menu</a></li>
-                          <li><a href="<?php echo base_url('Administrator/AuthorizeSubMenu'); ?>">Authorize Sub Menu</a></li>
-                        </ul>
-                    </li>
-                <?php
-                            }else if($m->ID_Menu == 10){
-                ?>
-                     <li class="treeview">
-                        <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
-                          <span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                          <li><a href="<?php echo $path . 'BackgroundImage'; ?>">Background Image</a></li>
-                          <li><a href="<?php echo $path . 'ServicesImage'; ?>">Services Image</a></li>
-                          <li><a href="<?php echo $path . 'ExperienceImage'; ?>">Experience Image </a></li>
-                          <li><a href="<?php echo $path . 'FacilityImage'; ?>">Facility Image</a></li>
-                        </ul>
-                    </li>  
-                <?php
-                            }
                         }else{
                 ?>
                     <li><a href="<?php echo $path . $m->URL; ?>"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span></a></li>
