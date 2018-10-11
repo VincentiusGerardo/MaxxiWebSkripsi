@@ -28,14 +28,14 @@ if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])){
 } else {
     $url = 'http://';
 }
-
+/*
 $list = array('127.0.0.1','::1');
 
 if(!in_array($_SERVER['REMOTE_ADDR'],$list)){
     $config['base_url'] = $url . $_SERVER['HTTP_HOST'] . '/';
-}else{
+}else{*/
     $config['base_url'] = $url . $_SERVER['HTTP_HOST'] . '/WebMaxxi/';
-}
+//}
 
 /*
 |--------------------------------------------------------------------------

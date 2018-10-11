@@ -9,14 +9,13 @@
             if(!$this->session->userdata('is_logged')){
                 redirect(base_url());
             }
-            $this->load->model('model_utama');
         }
-        
+
         public function getRole(){
             $role = $this->session->userdata('role');
             return $role;
         }
-        
+
         public function setTitle(){
             $id = $this->getRole();
             if($id == 1){
@@ -30,12 +29,12 @@
             }
             return $title;
         }
-        
+
         public function getUserCode(){
             $k = $this->session->userdata('username');
             return $k;
         }
-        
+
         public function getPath(){
             $user = $this->getRole();
             if($user == 1){
@@ -59,7 +58,7 @@
 
             $this->load->view('header',$data);
         }
-        
+
         /* Change Password */
         public function changePassword(){
             $this->getHeader();
@@ -71,7 +70,7 @@
             $old = $this->input->post('oldPass');
             $new = $this->input->post('newPass');
             $rep = $this->input->post('repPass');
-            
+
             // Validasi password lama dengan yang di database
             $isi = $this->model_utama->validasi($old,$this->getUserCode());
             if($isi == TRUE){
@@ -93,29 +92,29 @@
                 redirect($this->getPath() . 'changePassword');
             }
         }
-       
+
         /* Cuti */
         public function cuti(){
             $this->getHeader();
             if($this->getRole() == 1){
-                
+
             }else if($this->getRole() == 2){
-                
+
             }else{
                 $data[] = $this->model_utama->getCuti($this->getUserCode());
                 $this->load->view('employee/cuti');
             }
             $this->load->view('footer');
         }
-        
+
         public function doInsertCuti(){
-            
+
         }
-        
+
         public function doUpdateCuti(){
-            
+
         }
-        
+
         public function RekapAbsensi(){
             $this->getHeader();
             if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
@@ -126,18 +125,18 @@
             }
             $this->load->view('footer');
         }
-        
+
         public function getDataAbsen(){
             $this->form_validation->set_rules('a','From','required|xss_clean|trim');
             $this->form_validation->set_rules('b','To','required|xss_clean|trim');
             if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
                 $this->form_validation->set_rules('c','KodeKaryawan','required|xss_clean|trim');
             }
-            
+
             if($this->form_validation->run() == TRUE){
                 $f = date("Y-m-d",strtotime($this->input->post('a')));
                 $t = date("Y-m-d",strtotime($this->input->post('b')));
-                
+
                 if($this->getRole() == 1 || $this->getRole() == 2 || $this->getRole() == 3){
                     $kode = $this->input->post('c');
                     $data['hasil'] = $this->model_utama->getAbsen($kode,$f,$t);
@@ -146,12 +145,9 @@
                     $data['hasil'] = $this->model_utama->getAbsen($this->getUserCode(),$f,$t);
                     $data['total'] = $this->model_utama->getTotalJam($this->getUserCode(),$f,$t);
                 }
-                
+
                 $this->load->view('hasilrekap',$data);
             }
         }
-        
-        public function a(){
-            
-        }
+
     }

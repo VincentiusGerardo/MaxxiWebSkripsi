@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-$list = array('127.0.0.1','::1');
+/*$list = array('127.0.0.1','::1');
 if(!in_array($_SERVER['REMOTE_ADDR'], $list)){
     $db['default'] = array(
         'dsn'	=> '',
@@ -96,7 +96,7 @@ if(!in_array($_SERVER['REMOTE_ADDR'], $list)){
         'failover' => array(),
         'save_queries' => TRUE
     );
-}else{
+}else{*/
     $db['default'] = array(
         'dsn'	=> '',
         'hostname' => 'localhost',
@@ -118,4 +118,4 @@ if(!in_array($_SERVER['REMOTE_ADDR'], $list)){
         'failover' => array(),
         'save_queries' => TRUE
     );
-}
+//}
