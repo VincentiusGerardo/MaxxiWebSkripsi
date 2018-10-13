@@ -93,7 +93,7 @@
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
                 <?php 
                     foreach($menu as $m){
-                        if($m->ID_Menu === '#'){
+                        if($m->URL === '#'){
                 ?>
                     <li class="treeview">
                         <a href="#"><i class="fa <?php echo $m->Logo; ?>"></i> <span><?php echo $m->NamaMenu; ?></span>
