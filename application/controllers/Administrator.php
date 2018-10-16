@@ -234,11 +234,32 @@
         }
 
         public function getSubMenuByID(){
-            $kd = $this->input->post('kode');
+            $kd = $this->input->post('kd');
             $data['kode'] = $kd;
             $data['selectedmenu'] = $this->model_utama->getSubMenuByKode($kd);
             $data['menu'] = $this->model_utama->getAllSub();
             $this->load->view('admin/showSubRoles',$data);
+        }
+
+        public function doInsertAuthSubMenu(){
+          $kar = $this->input->post('kodeK');
+          $idSub = $this->input->post('submenu');
+          $sub = array();
+
+          foreach($idSub as $s){
+            array_push($sub,array(
+              'ID_SubMenu' => $s,
+              'KodeKaryawan' => $kar
+            ));
+          }
+          $result = $this->model_utama->insertAuthSubMenu($sub);
+          if($result){
+              $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
+              redirect($this->getPath() . 'AuthorizeSubMenu');
+          }else{
+              $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Data can't be Inserted.</div>");
+              redirect($this->getPath() . 'AuthorizeSubMenu');
+          }
         }
 
     }

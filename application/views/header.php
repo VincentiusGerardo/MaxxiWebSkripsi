@@ -12,7 +12,7 @@
         <!--Bootstrap 3.3.7-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap.min.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap.min.js'); ?>"></script>
-        
+
         <!--Bootstrap 3.3.7 plugin-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-select.min.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-select.min.js'); ?>"></script>
@@ -21,7 +21,7 @@
         <script src="<?php echo base_url('bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap-table.css'); ?>"/>
         <script src="<?php echo base_url('js/bootstrap/bootstrap-table.js'); ?>"></script>
-        
+
         <!--Font Awesome-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('font-awesome/css/font-awesome.min.css'); ?>"/>
 
@@ -38,12 +38,12 @@
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
-        
+
         <!--Custom CSS/JS-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/style.css'); ?>"/>
         <script src="<?php echo base_url('js/script.js'); ?>"></script>
         <link rel="stylesheet" href="<?php echo base_url('css/skins/skin-blue.min.css'); ?>">
-        
+
         <!--Summernote-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('dist/summernote.css'); ?>"/>
         <script src="<?php echo base_url('dist/summernote.min.js'); ?>"></script>
@@ -91,7 +91,7 @@
               <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MENU</li>
                 <li><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i><span>Home</span></a></li>
-                <?php 
+                <?php
                     foreach($menu as $m){
                         if($m->URL === '#'){
                 ?>
@@ -102,8 +102,15 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                          <li><a href="<?php echo $path . 'CompanyProfile'; ?>">Company Profile</a></li>
-                          <li><a href="<?php echo $path . 'Fleet'; ?>">Fleet</a></li>
+                          <?php
+                            $sql = "select b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu from tr_authorizesubmenu a, ms_submenu b where a.ID_SubMenu = b.ID_SubMenu and a.KodeKaryawan = ? and b.FlagActive = 'Y' and b.ID_Menu = ?";
+                            $query = $this->db->query($sql, array($kodeUser,$m->ID_Menu)) ;
+                            foreach($query->result() as $s){
+                          ?>
+                          <li><a href="<?php echo $path . $s->URL; ?>"><?php echo $s->NamaSubMenu ?></a></li>
+                        <?php
+                          }
+                        ?>
                         </ul>
                     </li>
                 <?php

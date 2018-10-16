@@ -30,7 +30,7 @@
             */
         }
 
-        public function getSubMenu($kode){
+        /*public function getSubMenu($kode){
             $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu');
             $this->db->from('tr_authorizesubmenu a');
             $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
@@ -39,7 +39,7 @@
 
             $query = $this->db->get();
             return $query->result();
-        }
+        }*/
 
         public function getUserName($kode){
             $query = $this->db->get_where('ms_karyawan', array('KodeKaryawan' => $kode));

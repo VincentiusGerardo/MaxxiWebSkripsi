@@ -8,7 +8,7 @@
                 <td><input type="checkbox" name="menu[]" value="<?php echo $m->ID_Menu; ?>"/></td>
                 <td><?php echo $m->NamaMenu; ?></td>
             </tr>
-        <?php } ?>   
+        <?php } ?>
         </tbody>
     </table>
     <div style="margin-top: 5px;">

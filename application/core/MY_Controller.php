@@ -51,10 +51,10 @@
 
         public function getHeader(){
             $data['menu'] = $this->model_utama->getMenu($this->getUserCode());
-            $data['submenu'] = $this->model_utama->getSubMenu($this->getUserCode());
             $data['namaKaryawan'] = $this->model_utama->getUserName($this->getUserCode());
             $data['path'] = $this->getPath();
             $data['judul'] = $this->setTitle();
+            $data['kodeUser'] = $this->getUserCode();
 
             $this->load->view('header',$data);
         }
