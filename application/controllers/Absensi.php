@@ -32,7 +32,7 @@
                 if($res){
                     echo $res;
                 }else{
-                    echo "ERROR";
+                    echo "Picture Not Found";
                 }
             }
         }

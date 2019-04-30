@@ -261,12 +261,14 @@
 
         public function clockout($id,$date){
             $waktu = date("H:i:s");
+            // Get ID Terakhir dari user
+            $s = $this->db->query('SELECT ID_Absensi FROM tr_absensi WHERE KodeKaryawan = ? AND Tanggal = ? ORDER BY ID_Absensi DESC LIMIT 1',array($id,$date))->row()->ID_Absensi;
             // Get Waktu Clock In
-            $sql = $this->db->get_where('tr_absensi', array('KodeKaryawan' => $id,'Tanggal' => $date));
+            $sql = $this->db->get_where('tr_absensi', array('KodeKaryawan' => $id,'Tanggal' => $date, 'ID_Absensi' => $s));
             $cin = $sql->row()->ClockIn;
 
-            $query = "UPDATE tr_absensi SET ClockOut = ?, LamaKerja = TIMEDIFF(?,?) WHERE KodeKaryawan = ? AND Tanggal = ?";
-            if($this->db->query($query, array($waktu, $waktu, $cin, $id,$date))){
+            $query = "UPDATE tr_absensi SET ClockOut = ?, LamaKerja = TIMEDIFF(?,?) WHERE KodeKaryawan = ? AND Tanggal = ? AND ID_Absensi = ?";
+            if($this->db->query($query, array($waktu, $waktu, $cin, $id,$date,$s))){
                 $query = $this->db->get_where('ms_karyawan',array('KodeKaryawan' => $id));
                 $r = $query->row()->NamaKaryawan;
                 echo "Goodbye " . $r;
