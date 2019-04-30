@@ -11,9 +11,7 @@
             if(!$this->session->userdata('is_logged')){
                 $this->load->view('login');
             }else{
-                $r = $this->session->userdata('role');
-
-                $this->pageRedirct($r);
+                redirect('Module/');
             }
         }
 
@@ -37,31 +35,16 @@
 
                     $this->session->set_userdata($data);
                     $role =  $this->session->userdata('role');
-
-                    $this->pageRedirct($role);
+                    redirect('Module/','refresh');
                 }else{
                     $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Invalid Username or Password!</div>");
-                    redirect(base_url());
+                    redirect(base_url(),'refresh');
                 }
             }
         }
 
-        public function pageRedirct($role){
-          if($role == 1){
-              $dir =  'Administrator/';
-          }else if($role == 2){
-              $dir =  'Director/';
-          }else if($role == 3){
-              $dir =  'HRD/';
-          }else{
-              $dir =  'Employee/';
-          }
-
-          return redirect($dir);
-        }
-
         public function doLogOut(){
             $this->session->sess_destroy();
-            redirect(base_url());
+            redirect(base_url(),'refresh');
         }
     }

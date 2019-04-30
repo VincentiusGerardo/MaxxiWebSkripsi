@@ -9,7 +9,7 @@
 
         public function login($user, $pass){
             if($this->validatePass($pass)){
-                $cond = array('KodeKaryawan' => $user);
+                $cond = array('ID_Karyawan' => $user);
                 $query = $this->db->get_where('ms_karyawan',$cond);
                 
                 if($query->num_rows() > 0){
@@ -32,7 +32,7 @@
         
         public function getStored(){
             $kdk = $this->input->post('username');
-            $cond = array('KodeKaryawan' => $kdk);
+            $cond = array('ID_Karyawan' => $kdk);
             $query = $this->db->get_where('ms_karyawan', $cond);
             
             if($query->num_rows() > 0){
@@ -46,7 +46,7 @@
         public function getRole($user){
             $this->db->select('ID_Role');
             $this->db->from('ms_karyawan');
-            $this->db->where('KodeKaryawan', $user);
+            $this->db->where('ID_Karyawan', $user);
             $query = $this->db->get();
             
             return $query->row()->ID_Role;  

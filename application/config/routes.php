@@ -52,3 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/* Custom Routes */
+
+$route['Module/Cuti'] = 'Cuti/index';
+$route['Source/do/(:any)'] = 'Cuti/$1';
+
+$route['Module/MissionControl'] = 'MissionControl/index';
+$route['Source/do/(:any)'] = 'MissionControl/$1';
+
+$route['Module/Karyawan'] = 'Karyawan/index';
+$route['Source/do/(:any)'] = 'Karyawan/$1';

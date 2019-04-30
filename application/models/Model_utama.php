@@ -12,7 +12,7 @@
             $this->db->select('b.ID_Menu,b.NamaMenu,b.URL,b.Logo');
             $this->db->from('tr_authorizemenu a');
             $this->db->join('ms_menu b','a.ID_Menu = b.ID_Menu','inner');
-            $this->db->where('a.KodeKaryawan', $kode);
+            $this->db->where('a.ID_Karyawan', $kode);
             $this->db->where('b.FlagActive', 'Y');
 
             $query = $this->db->get();
@@ -24,7 +24,7 @@
                 FROM tr_authorizemenu a, ms_menu b
                 WHERE a.ID_Menu = b.ID_Menu
                 AND b.FlagActive = 'Y'
-                AND a.KodeKaryawan = '$kode'
+                AND a.ID_Karyawan = '$kode'
             $query = $this->db->get_where('ms_menu', array('ID_Role' => $role));
             return $query->result();
             */
@@ -34,7 +34,7 @@
             $this->db->select('b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu');
             $this->db->from('tr_authorizesubmenu a');
             $this->db->join('ms_submenu b','a.ID_SubMenu = b.ID_SubMenu','inner');
-            $this->db->where('a.KodeKaryawan', $kode);
+            $this->db->where('a.ID_Karyawan', $kode);
             $this->db->where('b.FlagActive', 'Y');
 
             $query = $this->db->get();
@@ -42,15 +42,15 @@
         }*/
 
         public function getUserName($kode){
-            $query = $this->db->get_where('ms_karyawan', array('KodeKaryawan' => $kode));
+            $query = $this->db->get_where('ms_karyawan', array('ID_Karyawan' => $kode));
             return $query->row()->NamaKaryawan;
         }
 
         /* Change Password */
         public function updatePass($pass,$kode){
-            $data = array('Password' => $this->hashPassword($pass));
+            $data = array('Password' => password_hash($pass, PASSWORD_DEFAULT));
             $this->db->set($data);
-            $this->db->where('KodeKaryawan', $kode);
+            $this->db->where('ID_Karyawan', $kode);
             $query = $this->db->update('ms_karyawan');
 
             if($query){
@@ -60,13 +60,8 @@
             }
         }
 
-        public function hashPassword($pass){
-            $hash = password_hash($pass, PASSWORD_DEFAULT);
-            return $hash;
-        }
-
         public function getStoredPass($kode){
-            $cond = array('KodeKaryawan' => $kode);
+            $cond = array('ID_Karyawan' => $kode);
             $q = $this->db->get_where('ms_karyawan',$cond);
 
             if($q->num_rows() > 0){
@@ -96,7 +91,7 @@
             $this->db->select('a.ID_Menu, a.NamaMenu');
             $this->db->from('ms_menu a');
             $this->db->join('tr_authorizemenu b','a.ID_Menu = b.ID_Menu', 'inner');
-            $this->db->where('b.KodeKaryawan', $kode);
+            $this->db->where('b.ID_Karyawan', $kode);
             $query = $this->db->get();
 
             return $query->result();
@@ -214,7 +209,7 @@
             $this->db->select('a.ID_SubMenu, a.NamaSubMenu');
             $this->db->from('ms_submenu a');
             $this->db->join('tr_authorizesubmenu b','a.ID_SubMenu = b.ID_SubMenu', 'inner');
-            $this->db->where('b.KodeKaryawan', $n);
+            $this->db->where('b.ID_Karyawan', $n);
             $query = $this->db->get();
 
             return $query->result();
@@ -224,7 +219,7 @@
         public function absensi($id,$date){
             $this->db->select('*');
             $this->db->from('tr_absensi');
-            $this->db->where('KodeKaryawan', $id);
+            $this->db->where('ID_Karyawan', $id);
             $this->db->where('Tanggal', $date);
             $this->db->where('ClockOut IS NULL');
 
@@ -241,14 +236,14 @@
         public function clockin($id,$date){
             $waktu = date("H:i:s");
             $data = array(
-                'KodeKaryawan' => $id,
+                'ID_Karyawan' => $id,
                 'Tanggal' => $date,
                 'ClockIn' => $waktu
             );
 
             $res = $this->db->insert('tr_absensi',$data);
             if($res){
-                $query = $this->db->get_where('ms_karyawan',array('KodeKaryawan' => $id));
+                $query = $this->db->get_where('ms_karyawan',array('ID_Karyawan' => $id));
                 $r = $query->row()->NamaKaryawan;
                 echo "Welcome " . $r;
                 return TRUE;
@@ -262,14 +257,14 @@
         public function clockout($id,$date){
             $waktu = date("H:i:s");
             // Get ID Terakhir dari user
-            $s = $this->db->query('SELECT ID_Absensi FROM tr_absensi WHERE KodeKaryawan = ? AND Tanggal = ? ORDER BY ID_Absensi DESC LIMIT 1',array($id,$date))->row()->ID_Absensi;
+            $s = $this->db->query('SELECT ID_Absensi FROM tr_absensi WHERE ID_Karyawan = ? AND Tanggal = ? ORDER BY ID_Absensi DESC LIMIT 1',array($id,$date))->row()->ID_Absensi;
             // Get Waktu Clock In
-            $sql = $this->db->get_where('tr_absensi', array('KodeKaryawan' => $id,'Tanggal' => $date, 'ID_Absensi' => $s));
+            $sql = $this->db->get_where('tr_absensi', array('ID_Karyawan' => $id,'Tanggal' => $date, 'ID_Absensi' => $s));
             $cin = $sql->row()->ClockIn;
 
-            $query = "UPDATE tr_absensi SET ClockOut = ?, LamaKerja = TIMEDIFF(?,?) WHERE KodeKaryawan = ? AND Tanggal = ? AND ID_Absensi = ?";
+            $query = "UPDATE tr_absensi SET ClockOut = ?, LamaKerja = TIMEDIFF(?,?) WHERE ID_Karyawan = ? AND Tanggal = ? AND ID_Absensi = ?";
             if($this->db->query($query, array($waktu, $waktu, $cin, $id,$date,$s))){
-                $query = $this->db->get_where('ms_karyawan',array('KodeKaryawan' => $id));
+                $query = $this->db->get_where('ms_karyawan',array('ID_Karyawan' => $id));
                 $r = $query->row()->NamaKaryawan;
                 echo "Goodbye " . $r;
                 return TRUE;
@@ -281,7 +276,7 @@
         public function getGambar($kode){
             $this->db->select('Foto');
             $this->db->from('ms_karyawan');
-            $this->db->where('KodeKaryawan',$kode);
+            $this->db->where('ID_Karyawan',$kode);
 
             $query = $this->db->get();
 
@@ -297,7 +292,7 @@
         public function getAbsen($kode,$from,$to){
             $this->db->select('*');
             $this->db->from('tr_absensi');
-            $this->db->where('KodeKaryawan',$kode);
+            $this->db->where('ID_Karyawan',$kode);
             $this->db->where('Tanggal BETWEEN "'. $from . '" AND "' . $to .'"');
             $this->db->order_by('Tanggal', 'ASC');
 
@@ -311,7 +306,7 @@
         public function getTotalJam($kode,$from,$to){
             $this->db->select('SEC_TO_TIME( SUM( TIME_TO_SEC( LamaKerja ) ) ) AS timeSum ');
             $this->db->from('tr_absensi');
-            $this->db->where('KodeKaryawan',$kode);
+            $this->db->where('ID_Karyawan',$kode);
             $this->db->where('Tanggal BETWEEN "'. $from . '" AND "' . $to .'"');
 
             $query = $this->db->get();
@@ -325,7 +320,7 @@
 
         /* Cuti */
         public function getCuti($kode){
-            $query = $this->db->get_where('tr_cuti',array('KodeKaryawan' => $kode));
+            $query = $this->db->get_where('tr_cuti',array('ID_Karyawan' => $kode));
             return $query->result();
         }
 
