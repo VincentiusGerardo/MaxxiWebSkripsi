@@ -7,7 +7,7 @@
                 <div class="col-lg-4">
                     <select class="selectpicker form-control" id="idk" name="kdk" data-size="5" data-live-search="true" title="Select Employee">
                         <?php foreach($karyawan as $k){ ?>
-                            <option value="<?php echo $k->ID_Karyawan; ?>"><?php echo $k->NamaKaryawan; ?></option>
+                            <option value="<?= $k->ID_Karyawan ?>"><?= $k->NamaKaryawan ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -61,14 +61,14 @@
             var c = $("#idk").val();
             $.ajax({
                 type: "POST",
-                url : "<?php echo base_url('Source/do/getAbsensi') ?>",
+                url : "<?= base_url('Source/do/getAbsensi') ?>",
                 data: {
                     a:a,
                     b:b,
                     c:c
                 },
                 beforeSend:function(){
-                    $("#isiTable").html('<img src="<?php echo base_url('Media/loading.gif'); ?>" class="gambarloadingajax"/>');
+                    $("#isiTable").html('<img src="<?= base_url('Media/loading.gif') ?>" class="gambarloadingajax"/>');
                 },
                 success:function(html){
                     $("#isiTable").html(html);
@@ -85,13 +85,13 @@
             var b = $("#to").val();
             $.ajax({
                 type: "POST",
-                url : "<?php echo base_url('Source/do/getAbsensi') ?>",
+                url : "<?= base_url('Source/do/getAbsensi') ?>",
                 data: {
                     a:a,
                     b:b
                 },
                 beforeSend:function(){
-                    $("#isiTable").html('<img src="<?php echo base_url('Media/loading.gif'); ?>" class="gambarloadingajax"/>');
+                    $("#isiTable").html('<img src="<?= base_url('Media/loading.gif') ?>" class="gambarloadingajax"/>');
                 },
                 success:function(html){
                     $("#isiTable").html(html);

@@ -4,9 +4,10 @@
     class MissionControl extends MY_Controller{
         public function __construct(){
             parent::__construct();
+            $this->load->model('model_missioncontrol','mMissionControl');
         }
         public function AuthorizeMenu(){
-            $data['karyawan'] = $this->mUtama->getKaryawan();
+            $data['karyawan'] = $this->mMissionControl->getKaryawan();
             $this->getHeader();
             $this->load->view('authorizemenu',$data);
             $this->load->view('footer');
@@ -15,8 +16,8 @@
         public function getMenuByID(){
             $kd = $this->input->post('kode');
             $data['kode'] = $kd;
-            $data['selectedmenu'] = $this->mUtama->getMenuByKode($kd);
-            $data['menu'] = $this->mUtama->getAllMenu();
+            $data['selectedmenu'] = $this->mMissionControl->getMenuByKode($kd);
+            $data['menu'] = $this->mMissionControl->getAllMenu();
             $this->load->view('showRoles',$data);
         }
 
@@ -31,7 +32,7 @@
                     'KodeKaryawan' => $kar
                 ));
             }
-            $result = $this->mUtama->insertAuthMenu($menu);
+            $result = $this->mMissionControl->insertAuthMenu($menu);
             if($result){
                 $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                 redirect(base_url('MissionControl/AuthorizeMenu'));
@@ -42,7 +43,7 @@
         }
 
         public function MasterMenu(){
-            $data['menu'] = $this->mUtama->getAllMenu();
+            $data['menu'] = $this->mMissionControl->getAllMenu();
             $this->getHeader();
             $this->load->view('mastermenu',$data);
             $this->load->view('footer');
@@ -65,7 +66,7 @@
                     'Logo' => $icon
                 );
 
-                $result = $this->mUtama->insertMasterMenu($dataMenu);
+                $result = $this->mMissionControl->insertMasterMenu($dataMenu);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
                     redirect(base_url('MissionControl/MasterMenu'));
@@ -95,7 +96,7 @@
                     'Logo' => $icon
                 );
 
-                $result = $this->mUtama->updateMasterMenu($cod,$dataMenu);
+                $result = $this->mMissionControl->updateMasterMenu($cod,$dataMenu);
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
                     redirect(base_url('MissionControl/MasterMenu'));
@@ -112,7 +113,7 @@
             if($this->form_validation->run() == TRUE){
                 $cod = $this->input->post('kode');
 
-                $res = $this->mUtama->deleteMasterMenu($cod);
+                $res = $this->mMissionControl->deleteMasterMenu($cod);
                 if($res){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Deleted.</div>");
                     redirect(base_url('MissionControl/MasterMenu'));
@@ -124,8 +125,8 @@
         }
 
         public function MasterSubMenu(){
-            $data['submenu'] = $this->mUtama->getAllSubMenu();
-            $data['men'] = $this->mUtama->getSubFromMenu();
+            $data['submenu'] = $this->mMissionControl->getAllSubMenu();
+            $data['men'] = $this->mMissionControl->getSubFromMenu();
             $this->getHeader();
             $this->load->view('mastersubmenu',$data);
             $this->load->view('footer');
@@ -151,7 +152,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
 
-                $result = $this->mUtama->insertSubMenu($dataSubMenu);
+                $result = $this->mMissionControl->insertSubMenu($dataSubMenu);
 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
@@ -185,7 +186,7 @@
                     'URL' => trim(str_replace(" ","",$link))
                 );
 
-                $result = $this->mUtama->updateSubMenu($nomor,$dataUpdate);
+                $result = $this->mMissionControl->updateSubMenu($nomor,$dataUpdate);
 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
@@ -206,7 +207,7 @@
             if($this->form_validation->run() == TRUE){
                 $kode = $this->input->post('no');
 
-                $result = $this->mUtama->deleteSubMenu($kode);
+                $result = $this->mMissionControl->deleteSubMenu($kode);
 
                 if($result){
                     $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Updated.</div>");
@@ -219,7 +220,7 @@
         }
 
         public function AuthorizeSubMenu(){
-            $data['karyawan'] = $this->mUtama->getKaryawan();
+            $data['karyawan'] = $this->mMissionControl->getKaryawan();
             $this->getHeader();
             $this->load->view('authorizesubmenu',$data);
             $this->load->view('footer');
@@ -228,8 +229,8 @@
         public function getSubMenuByID(){
             $kd = $this->input->post('kd');
             $data['kode'] = $kd;
-            $data['selectedmenu'] = $this->mUtama->getSubMenuByKode($kd);
-            $data['menu'] = $this->mUtama->getAllSub();
+            $data['selectedmenu'] = $this->mMissionControl->getSubMenuByKode($kd);
+            $data['menu'] = $this->mMissionControl->getAllSub();
             $this->load->view('showSubRoles',$data);
         }
 
@@ -244,7 +245,7 @@
               'KodeKaryawan' => $kar
             ));
           }
-          $result = $this->mUtama->insertAuthSubMenu($sub);
+          $result = $this->mMissionControl->insertAuthSubMenu($sub);
           if($result){
               $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data has been Inserted.</div>");
               redirect(base_url('MissionControl/AuthorizeSubMenu'));

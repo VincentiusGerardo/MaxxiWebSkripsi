@@ -1,4 +1,4 @@
-<script src="<?php echo base_url('js/setTable/tableCuti.js'); ?>"></script>
+<script src="<?= base_url('js/setTable/tableCuti.js') ?>"></script>
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Cuti Karyawan</h1>

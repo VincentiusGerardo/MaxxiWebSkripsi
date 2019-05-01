@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Change Password</h1><br/>
-        <div id="msg"><?php echo $this->session->flashdata("message"); ?></div>
-        <form class="form-horizontal cold-lg-8" action="<?php echo base_url('Administrator/doChangePassword'); ?>" method="POST">
+        <div id="msg"><?= $this->session->flashdata("message") ?></div>
+        <form class="form-horizontal cold-lg-8" action="<?= base_url('Administrator/doChangePassword') ?>" method="POST">
             <div class="form-group">
                 <label class="control-label col-sm-4">Old Password:</label>
                 <div class="col-sm-5">

@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Authorize Sub Menu</h1>
-        <div id="msg"><?php echo $this->session->flashdata('message'); ?></div>
+        <div id="msg"><?= $this->session->flashdata('message') ?></div>
         <select class="selectpicker" title="Select Karyawan" data-size="5" name="kodeK" data-live-search="true" id="selectKaryawan">
             <?php foreach($karyawan as $k){ ?>
-            <option value="<?php echo $k->KodeKaryawan; ?>"><?php echo $k->NamaKaryawan; ?></option>
+            <option value="<?= $k->ID_Karyawan ?>"><?= $k->NamaKaryawan ?></option>
             <?php } ?>
         </select>
         <br><br>
@@ -18,10 +18,10 @@
         var kd = $(this).val();
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('Administrator/getSubMenuByID'); ?>",
+            url: "<?= base_url('Administrator/getSubMenuByID') ?>",
             data: { kd: kd },
             beforeSend:function(){
-                $("#forRoles").html('<img src="<?php echo base_url('Media/loading.gif'); ?>" class="gambarloadingajax"/>');
+                $("#forRoles").html('<img src="<?= base_url('Media/loading.gif') ?>" class="gambarloadingajax"/>');
             },
             success:function(as){
                 $("#forRoles").html(as);

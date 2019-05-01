@@ -1,12 +1,12 @@
-<script src="<?php echo base_url('js/setTable/Admin/showrole.js'); ?>"></script>
-<form action="<?php echo base_url('Administrator/doInsertAuthMenu'); ?>" method="POST">
-    <input type="hidden" name="kodeK" value="<?php echo $kode; ?>" />
+<script src="<?= base_url('js/setTable/Admin/showrole.js') ?>"></script>
+<form action="<?= base_url('Administrator/doInsertAuthMenu') ?>" method="POST">
+    <input type="hidden" name="kodeK" value="<?= $kode ?>" />
     <table class="table" id="tableRoles" data-height="350">
         <tbody>
         <?php foreach($menu as $m){ ?>
             <tr>
-                <td><input type="checkbox" name="menu[]" value="<?php echo $m->ID_Menu; ?>"/></td>
-                <td><?php echo $m->NamaMenu; ?></td>
+                <td><input type="checkbox" name="menu[]" value="<?= $m->ID_Menu ?>"/></td>
+                <td><?= $m->NamaMenu ?></td>
             </tr>
         <?php } ?>
         </tbody>

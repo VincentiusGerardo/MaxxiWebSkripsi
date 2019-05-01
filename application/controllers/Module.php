@@ -4,6 +4,7 @@
    class Module extends MY_Controller{
        public function __construct(){
            parent::__construct();
+           $this->load->model('model_absensi','mAbsensi');
        }
 
        public function index(){
@@ -24,13 +25,13 @@
             $rep = $this->input->post('repPass');
 
             // Validasi password lama dengan yang di database
-            $isi = $this->mUtama->validasi($old,$this->session->userdata('username'));
+            $isi = $this->mAbsensi->validasi($old,$this->session->userdata('username'));
             if($isi == TRUE){
                if($old === $new){
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Password cannot be The Same as Old!</div>");
                     redirect(base_url('Module/ChangePassword'));
                 }else if($new === $rep){
-                    $result = $this->mUtama->updatePass($new,$this->session->userdata('username'));
+                    $result = $this->mAbsensi->updatePass($new,$this->session->userdata('username'));
                     if($result){
                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Password Changed!</div>");
                         redirect(base_url('Module/ChangePassword'));
@@ -48,7 +49,7 @@
         public function RekapAbsensi(){
             $this->getHeader();
             if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2 || $this->session->userdata('role') == 3){
-                $data['karyawan'] = $this->mUtama->getKaryawan();
+                $data['karyawan'] = $this->mAbsensi->getKaryawan();
                 $this->load->view('rekap',$data);
             }else{
                 $this->load->view('rekap');
@@ -69,11 +70,11 @@
 
                 if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2 || $this->session->userdata('role') == 3){
                     $kode = $this->input->post('c');
-                    $data['hasil'] = $this->mUtama->getAbsen($kode,$f,$t);
-                    $data['total'] = $this->mUtama->getTotalJam($kode,$f,$t);
+                    $data['hasil'] = $this->mAbsensi->getAbsen($kode,$f,$t);
+                    $data['total'] = $this->mAbsensi->getTotalJam($kode,$f,$t);
                 }else{
-                    $data['hasil'] = $this->mUtama->getAbsen($this->session->userdata('username'),$f,$t);
-                    $data['total'] = $this->mUtama->getTotalJam($this->session->userdata('username'),$f,$t);
+                    $data['hasil'] = $this->mAbsensi->getAbsen($this->session->userdata('username'),$f,$t);
+                    $data['total'] = $this->mAbsensi->getTotalJam($this->session->userdata('username'),$f,$t);
                 }
 
                 $this->load->view('hasilrekap',$data);

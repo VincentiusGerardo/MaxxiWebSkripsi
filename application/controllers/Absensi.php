@@ -5,6 +5,7 @@
 
         public function __construct(){
             parent::__construct();
+            $this->load->model('model_absensi','mAbsensi');
         }
 
         public function index(){
@@ -17,7 +18,7 @@
                 $kode = $this->input->post('x');
                 $tgl = date('Y-m-d');
 
-                $result = $this->mUtama->absensi($kode,$tgl);
+                $result = $this->mAbsensi->absensi($kode,$tgl);
             }else{
                 echo "Kode Karyawan Kosong!";
             }
@@ -27,7 +28,7 @@
             $this->form_validation->set_rules('x','KodeKaryawan','required|xss_clean|trim');
             if($this->form_validation->run() == TRUE){
                 $kode = $this->input->post('x');
-                $res = $this->mUtama->getGambar($kode);
+                $res = $this->mAbsensi->getGambar($kode);
 
                 if($res){
                     echo $res;

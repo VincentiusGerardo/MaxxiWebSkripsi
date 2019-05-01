@@ -7,25 +7,25 @@
         <title>MaXXi | Login Page</title>
 
         <!--jQuery 3-->
-        <script src="<?php echo base_url('js/jquery/jquery.min.js'); ?>"></script>
+        <script src="<?= base_url('js/jquery/jquery.min.js') ?>"></script>
 
         <!--Bootstrap 3.3.7-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/bootstrap/bootstrap.min.css'); ?>"/>
-        <script src="<?php echo base_url('js/bootstrap/bootstrap.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?= base_url('css/bootstrap/bootstrap.min.css') ?>"/>
+        <script src="<?= base_url('js/bootstrap/bootstrap.min.js') ?>"></script>
 
         <!--Font Awesome-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('font-awesome/css/font-awesome.min.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?= base_url('font-awesome/css/font-awesome.min.css') ?>"/>
 
         <!--Ionicons-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/Ionicons/css/ionicons.min.css'); ?>"/>
+        <link rel="stylesheet" type="text/css" href="<?= base_url('css/Ionicons/css/ionicons.min.css') ?>"/>
 
         <!--AdminLTE Theme-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/theme/AdminLTE.min.css'); ?>"/>
-        <script src="<?php echo base_url('js/theme/adminlte.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?= base_url('css/theme/AdminLTE.min.css') ?>"/>
+        <script src="<?= base_url('js/theme/adminlte.min.js') ?>"></script>
 
         <!--iCheck-->
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/iCheck/square/blue.css'); ?>"/>
-        <script src="<?php echo base_url('css/iCheck/icheck.min.js'); ?>"></script>
+        <link rel="stylesheet" type="text/css" href="<?= base_url('css/iCheck/square/blue.css') ?>"/>
+        <script src="<?= base_url('css/iCheck/icheck.min.js') ?>"></script>
 
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
@@ -41,11 +41,11 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<?php echo base_url(); ?>"><b>Admin</b> MaXXi</a>
+                <a href="<?= base_url() ?>"><b>Admin</b> MaXXi</a>
             </div>
             <div class="login-box-body">
-                <p class="login-box-msg"><?php echo $this->session->flashdata('message'); ?></p>
-                <form action="<?php echo base_url('Login/doLogin'); ?>" method="POST">
+                <p class="login-box-msg"><?= $this->session->flashdata('message') ?></p>
+                <form action="<?= base_url('Login/doLogin') ?>" method="POST">
                     <div class="form-group has-feedback">
                         <input type="text" name="username" class="form-control" placeholder="Kode Karyawan" required autofocus/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>

@@ -1,8 +1,8 @@
-<script src="<?php echo base_url('js/setTable/Admin/masterSubMenu.js'); ?>"></script>
+<script src="<?= base_url('js/setTable/Admin/masterSubMenu.js') ?>"></script>
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Master Sub Menu</h1>
-        <div id="msg"><?php echo $this->session->flashdata("message"); ?></div>
+        <div id="msg"><?= $this->session->flashdata("message") ?></div>
         <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addSubMenu"><span class="glyphicon glyphicon-plus"></span> Add</button>
         <table id="tableSubMenu" data-search="true" data-height="400">
             <tbody>
@@ -11,15 +11,15 @@
                     foreach($submenu as $sm){
                 ?>
                 <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo $sm->NamaSubMenu; ?></td>
-                    <td><?php echo $sm->NamaMenu; ?></td>
+                    <td><?= $i ?></td>
+                    <td><?= $sm->NamaSubMenu ?></td>
+                    <td><?= $sm->NamaMenu ?></td>
                     <td>
-                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#update<?php echo $sm->ID_SubMenu; ?>">
+                        <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#update<?= $sm->ID_SubMenu ?>">
                             <span class="glyphicon glyphicon-edit"></span>
                         </button>
                         &nbsp;
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<?php echo $sm->ID_SubMenu; ?>">
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<?= $sm->ID_SubMenu ?>">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </td>
@@ -41,7 +41,7 @@
                 <h4 class="modal-title">Add Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?php echo $path . 'doInsertSubMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= $path . 'doInsertSubMenu' ?>" method="POST">
                     <div class="form-group">
                         <label class="control-label col-sm-4">Sub Menu Name:</label>
                         <div class="col-sm-7">
@@ -53,7 +53,7 @@
                         <div class="col-sm-7">
                             <select class="selectpicker form-control" title="Select Parent Menu" name="menu">
                                 <?php foreach($men as $m){ ?>
-                                    <option value="<?php echo $m->ID_Menu; ?>"><?php echo $m->NamaMenu; ?></option>
+                                    <option value="<?= $m->ID_Menu ?>"><?= $m->NamaMenu ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -80,7 +80,7 @@
 </div>
 <?php foreach($submenu as $sm){ ?>
 <!--Update-->
-<div class="modal fade" id="update<?php echo $sm->ID_SubMenu; ?>" role="dialog">
+<div class="modal fade" id="update<?= $sm->ID_SubMenu ?>" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -88,12 +88,12 @@
                 <h4 class="modal-title">Update Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?php echo $path . 'doUpdateSubMenu' ?>" method="POST">
-                    <input type="hidden" name="no" value="<?php echo $sm->ID_SubMenu; ?>"/>
+                <form class="form-horizontal" id="formInput" action="<?= $path . 'doUpdateSubMenu' ?>" method="POST">
+                    <input type="hidden" name="no" value="<?= $sm->ID_SubMenu ?>"/>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Sub Menu Name:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="namaSubMenu" value="<?php echo $sm->NamaSubMenu; ?>"/>
+                            <input type="text" class="form-control" name="namaSubMenu" value="<?= $sm->NamaSubMenu ?>"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,7 +101,7 @@
                         <div class="col-sm-7">
                             <select class="selectpicker form-control" title="Select Parent Menu" name="menu">
                                 <?php foreach($men as $m){ ?>
-                                    <option value="<?php echo $m->ID_Menu; ?>" <?php if($sm->ID_Menu === $m->ID_Menu){ echo "selected";} ?>><?php echo $m->NamaMenu; ?></option>
+                                    <option value="<?= $m->ID_Menu ?>" <?php if($sm->ID_Menu === $m->ID_Menu){ echo "selected";} ?>><?= $m->NamaMenu ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-4">URL:</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="url" value="<?php echo $sm->URL; ?>"/>
+                            <input type="text" class="form-control" name="url" value="<?= $sm->URL ?>"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,7 +128,7 @@
     </div>
 </div>
 <!--Delete-->
-<div class="modal fade" id="delete<?php echo $sm->ID_SubMenu; ?>" role="dialog">
+<div class="modal fade" id="delete<?= $sm->ID_SubMenu ?>" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -136,8 +136,8 @@
                 <h4 class="modal-title">Delete Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?php echo $path . 'doDeleteSubMenu' ?>" method="POST">
-                    <input type="hidden" name="no" value="<?php echo $sm->ID_SubMenu; ?>"/>
+                <form class="form-horizontal" id="formInput" action="<?= $path . 'doDeleteSubMenu' ?>" method="POST">
+                    <input type="hidden" name="no" value="<?= $sm->ID_SubMenu ?>"/>
                     <h1 style="text-align: center;">Are You Sure?</h1>
             </div>
             <div class="modal-footer">

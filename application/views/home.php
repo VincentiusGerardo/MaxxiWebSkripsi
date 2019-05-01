@@ -1,20 +1,20 @@
-<script src="<?php echo base_url('js/jam.js') ?>"></script>
+<script src="<?= base_url('js/jam.js') ?>"></script>
 <div>
     
     <div class="pentings">
-        Welcome <?php echo $namaKaryawan;?> 
+        Welcome <?= $namaKaryawan;?> 
         <br> 
-        <?php echo date("l, j F Y"); ?>
+        <?= date("l, j F Y") ?>
     </div>
         <table class="pentings" align="center">
             <tr>
-                <td id="Jam"><?php echo date("h"); ?></td>
+                <td id="Jam"><?= date("h") ?></td>
                 <td>:</td>
-                <td id="Menit"><?php echo date("i"); ?></td>
+                <td id="Menit"><?= date("i") ?></td>
                 <td>:</td>
-                <td id="Detik"><?php echo date("s"); ?></td>
+                <td id="Detik"><?= date("s") ?></td>
                 <td>&nbsp;</td>
-                <td><?php echo date("A"); ?></td>
+                <td><?= date("A") ?></td>
             </tr>
         </table>
 </div>

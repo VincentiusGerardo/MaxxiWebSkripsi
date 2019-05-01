@@ -9,6 +9,7 @@
             if(!$this->session->userdata('is_logged')){
                 redirect(base_url(),'refresh');
             }
+            $this->load->model('my_model','mUtama');
         }
 
         public function getHeader(){

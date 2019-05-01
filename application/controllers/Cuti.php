@@ -4,6 +4,7 @@
    class Cuti extends MY_Controller{
        public function __construct(){
            parent::__construct();
+           $this->load->model('model_cuti','mCuti');
        }
 
        public function index(){
