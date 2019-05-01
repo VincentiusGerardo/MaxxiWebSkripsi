@@ -35,16 +35,11 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" name="btnSubmit" value="Submit" class="btn btn-primary">
-                    <input type="reset" name="btnReset" value="Cancel" class="btn btn-danger">
+                    <input type="reset" name="btnReset" value="Cancel" class="btn btn-danger" data-dismiss="modal">
                 </div>
                 </form>
                 </div>
-
             </div>
-<<<<<<< HEAD
         </div>
-=======
-            </div>
->>>>>>> a08f8f39e2ce8dd7f8816f1054f17f0df5a24b8c
     </body>
 </html>
