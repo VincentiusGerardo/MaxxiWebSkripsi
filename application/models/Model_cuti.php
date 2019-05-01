@@ -12,11 +12,16 @@
             return $query->result();
         }
 
-        public function insertCuti(){
-
+        public function insertCuti($data){
+            $q = $this->db->insert('tr_cuti',$data);
+            if($q) return true; else return false;
         }
 
         public function updateCuti(){
 
+        }
+
+        public function cancelCuti(){
+            
         }
     }
