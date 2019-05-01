@@ -18,7 +18,7 @@
         var kd = $(this).val();
         $.ajax({
             type: "POST",
-            url: "<?= base_url('Administrator/getSubMenuByID') ?>",
+            url: "<?= base_url('Module/MissionControl/getSubMenuByID') ?>",
             data: { kd: kd },
             beforeSend:function(){
                 $("#forRoles").html('<img src="<?= base_url('Media/loading.gif') ?>" class="gambarloadingajax"/>');

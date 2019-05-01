@@ -41,7 +41,7 @@
                 <h4 class="modal-title">Add Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doInsertSubMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doInsertSubMenu') ?>" method="POST">
                     <div class="form-group">
                         <label class="control-label col-sm-4">Sub Menu Name:</label>
                         <div class="col-sm-7">
@@ -88,7 +88,7 @@
                 <h4 class="modal-title">Update Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doUpdateSubMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doUpdateSubMenu') ?>" method="POST">
                     <input type="hidden" name="no" value="<?= $sm->ID_SubMenu ?>"/>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Sub Menu Name:</label>
@@ -136,7 +136,7 @@
                 <h4 class="modal-title">Delete Master Sub Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doDeleteSubMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doDeleteSubMenu') ?>" method="POST">
                     <input type="hidden" name="no" value="<?= $sm->ID_SubMenu ?>"/>
                     <h1 style="text-align: center;">Are You Sure?</h1>
             </div>

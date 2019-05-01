@@ -62,3 +62,4 @@ $route['Source/do/getAbsensi'] = 'Module/getDataAbsen';
 $route['Source/do/Cuti/(:any)']  = 'Cuti/$1';
 $route['Source/do/Karyawan/(:any)'] = 'Karyawan/$1';
 $route['Source/do/Absensi/(:any)'] = 'Absensi/$1';
+$route['Source/do/doChangePassword'] = 'Module/doChangePassword';
