@@ -121,6 +121,21 @@
                 ?>
                     <li><a href="<?= base_url('Module/' . $m->URL) ?>"><i class="fa <?= $m->Logo ?>"></i> <span><?= $m->NamaMenu ?></span></a></li>
                     <?php } }?>
+                <?php if($this->session->userdata('role') == 1){ ?>
+                  <li class="treeview">
+                        <a href="#"><i class="fa fa-rocket"></i> <span>Mission Control</span>
+                          <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                        <li><a href="<?= base_url('Module/MissionControl/MasterMenu') ?>">Master Menu</a></li>
+                        <li><a href="<?= base_url('Module/MissionControl/MasterSubMenu') ?>">Master Sub Menu</a></li>
+                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeMenu') ?>">Autorize Menu</a></li>
+                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeSubMenu') ?>">Autorize Sub Menu</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
               </ul>
               <!-- /.sidebar-menu -->
             </section>

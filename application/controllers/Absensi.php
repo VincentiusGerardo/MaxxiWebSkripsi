@@ -17,7 +17,7 @@
                 $kode = $this->input->post('x');
                 $tgl = date('Y-m-d');
 
-                $result = $this->model_utama->absensi($kode,$tgl);
+                $result = $this->mUtama->absensi($kode,$tgl);
             }else{
                 echo "Kode Karyawan Kosong!";
             }
@@ -27,7 +27,7 @@
             $this->form_validation->set_rules('x','KodeKaryawan','required|xss_clean|trim');
             if($this->form_validation->run() == TRUE){
                 $kode = $this->input->post('x');
-                $res = $this->model_utama->getGambar($kode);
+                $res = $this->mUtama->getGambar($kode);
 
                 if($res){
                     echo $res;

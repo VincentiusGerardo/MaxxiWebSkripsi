@@ -8,6 +8,7 @@
 
        public function index(){
         $this->getHeader();
+        $this->load->view('cuti');
         $this->load->view('footer');
        }
        
@@ -17,5 +18,9 @@
 
         public function doUpdateCuti(){
 
+        }
+
+        public function doCancelCuti(){
+            
         }
    }

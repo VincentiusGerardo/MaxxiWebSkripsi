@@ -81,7 +81,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo base_url('Absensi/doAbsensi'); ?>',
+                    url: '<?php echo base_url('Source/do/Absensi/doAbsensi'); ?>',
                     data: {x:x},
                     beforeSend:function(){
                         $("#tombol").html("<img src = <?php echo base_url('Media/loading.gif'); ?> />");
@@ -95,7 +95,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '<?php echo base_url('Absensi/getGambar'); ?>',
+                    url: '<?php echo base_url('Source/do/Absensi/getGambar'); ?>',
                     data: {x:x},
                     success:function(html){
                         $("#foto").attr("src", "<?php echo base_url(); ?>Media/Karyawan/" + html);

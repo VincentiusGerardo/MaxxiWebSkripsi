@@ -54,12 +54,11 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /* Custom Routes */
-
 $route['Module/Cuti'] = 'Cuti/index';
-$route['Source/do/(:any)'] = 'Cuti/$1';
-
 $route['Module/MissionControl'] = 'MissionControl/index';
-$route['Source/do/(:any)'] = 'MissionControl/$1';
-
 $route['Module/Karyawan'] = 'Karyawan/index';
-$route['Source/do/(:any)'] = 'Karyawan/$1';
+$route['Module/MissionControl/(:any)'] = 'MissionControl/$1';
+$route['Source/do/getAbsensi'] = 'Module/getDataAbsen';
+$route['Source/do/Cuti/(:any)']  = 'Cuti/$1';
+$route['Source/do/Karyawan/(:any)'] = 'Karyawan/$1';
+$route['Source/do/Absensi/(:any)'] = 'Absensi/$1';
