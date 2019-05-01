@@ -106,8 +106,8 @@
                         </a>
                         <ul class="treeview-menu">
                           <?php
-                            $sql = "select b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu from tr_authorizesubmenu a, ms_submenu b where a.ID_SubMenu = b.ID_SubMenu and a.KodeKaryawan = ? and b.FlagActive = 'Y' and b.ID_Menu = ?";
-                            $query = $this->db->query($sql, array($kodeUser,$m->ID_Menu)) ;
+                            $sql = "select b.ID_SubMenu,b.NamaSubMenu,b.URL,b.ID_Menu from tr_authorizesubmenu a, ms_submenu b where a.ID_SubMenu = b.ID_SubMenu and a.ID_Karyawan = ? and b.FlagActive = 'Y' and b.ID_Menu = ?";
+                            $query = $this->db->query($sql, array($this->session->userdata('username'),$m->ID_Menu)) ;
                             foreach($query->result() as $s){
                           ?>
                           <li><a href="<?= base_url('Module/' . $s->URL) ?>"><?= $s->NamaSubMenu ?></a></li>
@@ -131,8 +131,8 @@
                         <ul class="treeview-menu">
                         <li><a href="<?= base_url('Module/MissionControl/MasterMenu') ?>">Master Menu</a></li>
                         <li><a href="<?= base_url('Module/MissionControl/MasterSubMenu') ?>">Master Sub Menu</a></li>
-                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeMenu') ?>">Autorize Menu</a></li>
-                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeSubMenu') ?>">Autorize Sub Menu</a></li>
+                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeMenu') ?>">Authorize Menu</a></li>
+                          <li><a href="<?= base_url('Module/MissionControl/AuthorizeSubMenu') ?>">Authorize Sub Menu</a></li>
                         </ul>
                     </li>
                 <?php } ?>

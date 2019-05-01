@@ -1,4 +1,4 @@
-<script src="<?= base_url('js/setTable/Admin/masterMenu.js') ?>"></script>
+<script src="<?= base_url('js/setTable/masterMenu.js') ?>"></script>
 <div class="container">
     <div clas="row">
         <h1 class="judulHalaman">Master Menu</h1>

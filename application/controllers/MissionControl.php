@@ -29,7 +29,7 @@
             foreach($id as $i){
                 array_push($menu, array(
                     'ID_Menu' => $i,
-                    'KodeKaryawan' => $kar
+                    'ID_Karyawan' => $kar
                 ));
             }
             $result = $this->mMissionControl->insertAuthMenu($menu);
@@ -242,7 +242,7 @@
           foreach($idSub as $s){
             array_push($sub,array(
               'ID_SubMenu' => $s,
-              'KodeKaryawan' => $kar
+              'ID_Karyawan' => $kar
             ));
           }
           $result = $this->mMissionControl->insertAuthSubMenu($sub);

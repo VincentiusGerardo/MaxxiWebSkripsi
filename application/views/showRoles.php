@@ -1,5 +1,5 @@
-<script src="<?= base_url('js/setTable/Admin/showrole.js') ?>"></script>
-<form action="<?= base_url('Administrator/doInsertAuthMenu') ?>" method="POST">
+<script src="<?= base_url('js/setTable/showrole.js') ?>"></script>
+<form action="<?= base_url('Module/MissionControl/doInsertAuthMenu') ?>" method="POST">
     <input type="hidden" name="kodeK" value="<?= $kode ?>" />
     <table class="table" id="tableRoles" data-height="350">
         <tbody>

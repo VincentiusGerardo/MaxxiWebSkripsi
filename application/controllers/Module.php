@@ -29,20 +29,20 @@
             if($isi == TRUE){
                if($old === $new){
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Password cannot be The Same as Old!</div>");
-                    redirect($this->agent->referrer());
+                    redirect($this->agent->referrer(),'refresh');
                 }else if($new === $rep){
                     $result = $this->mAbsensi->updatePass($new,$this->session->userdata('username'));
                     if($result){
                         $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Password Changed!</div>");
-                        redirect($this->agent->referrer());
+                        redirect($this->agent->referrer(),'refresh');
                     }
                 }else{
                     $this->session->set_flashdata("message","<div class='alert alert-warning'><strong>Warning!</strong> New Passwords Mismatch!</div>");
-                    redirect($this->agent->referrer());
+                    redirect($this->agent->referrer(),'refresh');
                 }
             }else{
                 $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Fail!</strong> Wrong Password Inserted.</div>");
-                redirect($this->agent->referrer());
+                redirect($this->agent->referrer(),'refresh');
             }
         }
 
