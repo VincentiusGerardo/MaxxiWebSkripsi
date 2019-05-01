@@ -72,7 +72,7 @@
                           <li>
                             <ul class="menu">
                             <li>
-                                    <a href="<?= base_url('changePassword') ?>"><i class="fa fa-key fa-fw"></i> Change Password</a>
+                                    <a data-toggle="modal" data-target="#changePassword"><i class="fa fa-key fa-fw"></i> Change Password</a>
                               </li>
                               <li>
                                   <a href="<?= base_url('Login/doLogOut') ?>"><i class="fa fa-sign-out fa-fw"></i> Log Out</a>

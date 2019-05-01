@@ -43,7 +43,7 @@
                 <h4 class="modal-title">Add Master Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doInsertMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doInsertMenu') ?>" method="POST">
                     <div class="form-group">
                         <label class="control-label col-sm-4">Menu Name:</label>
                         <div class="col-sm-7">
@@ -87,7 +87,7 @@
                 <h4 class="modal-title">Update Master Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doUpdateMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doUpdateMenu') ?>" method="POST">
                     <input type="hidden" name="kode" value="<?= $m->ID_Menu ?>"/>
                     <div class="form-group">
                         <label class="control-label col-sm-4">Menu Name:</label>
@@ -131,7 +131,7 @@
                 <h4 class="modal-title">Delete Master Menu</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="formInput" action="<?= $path . 'doDeleteMenu' ?>" method="POST">
+                <form class="form-horizontal" id="formInput" action="<?= base_url('Module/MissionControl/doDeleteMenu') ?>" method="POST">
                     <input type="hidden" name="kode" value="<?= $m->ID_Menu ?>"/>
                     <h1 style="text-align: center;">Are You Sure?</h1>
             </div>
