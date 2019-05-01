@@ -71,4 +71,9 @@
             $query = $this->db->get_where('ms_karyawan', array('FlagActive' => 'Y'));
             return $query->result();
         }
+
+        public function getRoleName($id){
+            $query = $this->db->get_where('ms_role',array('ID_Role' => $id));
+            return $query->row()->NamaRole;
+        }
     }

@@ -1,5 +1,5 @@
 $(function(){
-    $("#tableC").bootstrapTable({
+    $(".tableC").bootstrapTable({
         columns:[
             {
                 title: "No",

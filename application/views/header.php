@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Admin MaXXi</title>
+        <title>Admin MaXXi | <?= $namaRole ?></title>
 
         <!--jQuery 3-->
         <script src="<?= base_url('js/jquery/jquery.min.js') ?>"></script>
@@ -54,7 +54,7 @@
           <header class="main-header">
             <a class="logo">
               <span class="logo-mini"><b>MaXXi</b></span>
-              <span class="logo-lg"><b>Admin</b> MaXXi</span>
+              <span class="logo-lg"><b><?= $namaRole ?></b> MaXXi</span>
             </a>
             <nav class="navbar navbar-static-top" role="navigation">
               <!-- <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

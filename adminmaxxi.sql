@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2019 at 12:26 PM
+-- Generation Time: May 01, 2019 at 11:33 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -42,10 +42,10 @@ CREATE TABLE `ms_karyawan` (
 --
 
 INSERT INTO `ms_karyawan` (`ID_Karyawan`, `NamaKaryawan`, `Password`, `ID_Role`, `Foto`, `FlagActive`) VALUES
-('0000', 'Administrator', '$2y$10$hBESqbZLkhUZ2t7hdOSPGuxOWHg3SnMQSfuwNj0OpEJtXtp5.hrci', 1, '0000.jpg', 'Y'),
+('0000', 'Administrator', '$2y$10$Y.gcBhuR96RFEC8ExxyZQOg3MtQWtIhCVK1qse5Knfu9L7e8FU/SW', 1, '0000.jpg', 'Y'),
 ('0001', 'Director', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', 2, '0001.jpg', 'Y'),
 ('0002', 'HRD', '$2y$10$etjxn0cpNewzeDDRG07Jeer9KAE7LyaoQ/5zl4jj1kKKR/.GE12EC', 3, NULL, 'Y'),
-('0003', 'Employee', '$2y$10$7APJawCdNmGn2WnC2A45eO/5pd0YmntEwME2gDJrjzpZ/wI80HO6.', 4, NULL, 'Y');
+('0003', 'Employee', '$2y$10$pPnhu/QEsD7xwN8V5qBg0OhP/YF.pL0UGyN1MPgAVKKqpNzDGI0BS', 4, NULL, 'Y');
 
 -- --------------------------------------------------------
 
@@ -60,6 +60,14 @@ CREATE TABLE `ms_menu` (
   `Logo` text NOT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ms_menu`
+--
+
+INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `Logo`, `FlagActive`) VALUES
+(1, 'Karyawan', '#', 'fa-user', 'N'),
+(2, 'Testing', 'Testing', 'fa-rocket', 'Y');
 
 -- --------------------------------------------------------
 
@@ -97,6 +105,13 @@ CREATE TABLE `ms_submenu` (
   `URL` text NOT NULL,
   `FlagActive` char(1) NOT NULL DEFAULT 'Y'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ms_submenu`
+--
+
+INSERT INTO `ms_submenu` (`ID_SubMenu`, `ID_Menu`, `NamaSubMenu`, `URL`, `FlagActive`) VALUES
+(1, 1, 'Add Karyawan', 'AddKaryawan', 'Y');
 
 -- --------------------------------------------------------
 
@@ -138,7 +153,11 @@ INSERT INTO `tr_absensi` (`ID_Absensi`, `ID_Karyawan`, `Tanggal`, `ClockIn`, `Cl
 (28, '0000', '2019-04-30', '14:06:59', '14:09:42', '00:05:02'),
 (29, '0001', '2019-04-30', '14:11:16', NULL, NULL),
 (30, '0000', '2019-04-30', '15:20:52', '15:44:15', '01:39:35'),
-(31, '0000', '2019-04-30', '15:45:32', '15:51:43', '00:06:11');
+(31, '0000', '2019-04-30', '15:45:32', '15:51:43', '00:06:11'),
+(32, '0000', '2019-05-01', '11:20:16', '11:22:36', '00:04:20'),
+(33, '0000', '2019-05-01', '11:21:44', '11:25:26', '00:03:42'),
+(34, '0000', '2019-05-01', '11:25:42', '11:27:16', '00:01:34'),
+(35, '0003', '2019-05-01', '11:05:09', '12:05:46', '01:00:37');
 
 -- --------------------------------------------------------
 
@@ -152,6 +171,15 @@ CREATE TABLE `tr_authorizemenu` (
   `ID_Karyawan` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tr_authorizemenu`
+--
+
+INSERT INTO `tr_authorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `ID_Karyawan`) VALUES
+(1, 1, '0000'),
+(2, 1, '0003'),
+(3, 2, '0003');
+
 -- --------------------------------------------------------
 
 --
@@ -163,6 +191,13 @@ CREATE TABLE `tr_authorizesubmenu` (
   `ID_SubMenu` int(11) NOT NULL,
   `ID_Karyawan` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tr_authorizesubmenu`
+--
+
+INSERT INTO `tr_authorizesubmenu` (`ID_AuthorizeSubMenu`, `ID_SubMenu`, `ID_Karyawan`) VALUES
+(1, 1, '0000');
 
 -- --------------------------------------------------------
 
@@ -176,11 +211,24 @@ CREATE TABLE `tr_cuti` (
   `TanggalCuti` date NOT NULL,
   `TanggalKembali` date NOT NULL,
   `Keterangan` text NOT NULL,
-  `StatusAcceptKepBag` char(1) DEFAULT 'N',
-  `StatusAcceptHRD` char(1) DEFAULT 'N',
-  `StatusAcceptDirektur` char(1) DEFAULT 'N',
-  `StatusCuti` char(1) DEFAULT 'N'
+  `StatusAcceptHRD` char(1) DEFAULT NULL,
+  `StatusAcceptDirektur` char(1) DEFAULT NULL,
+  `StatusCuti` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tr_cuti`
+--
+
+INSERT INTO `tr_cuti` (`ID_Cuti`, `ID_Karyawan`, `TanggalCuti`, `TanggalKembali`, `Keterangan`, `StatusAcceptHRD`, `StatusAcceptDirektur`, `StatusCuti`) VALUES
+(1, '0003', '2019-05-06', '2019-05-10', 'Testing', 'Y', 'Y', 'Y'),
+(2, '0003', '2019-05-13', '2019-05-24', '<p>asdasdasd<br></p>', 'Y', 'Y', 'Y'),
+(3, '0003', '2019-05-06', '2019-05-07', '<p>urusan keluarga<br></p>', 'Y', 'Y', 'Y'),
+(4, '0003', '2019-05-20', '2019-05-24', 'coba ya<br>', 'Y', 'N', 'N'),
+(5, '0001', '2019-05-20', '2019-05-24', '<p>asdasd<br></p>', 'Y', 'Y', 'Y'),
+(6, '0002', '2019-05-20', '2019-05-24', '<p>tes<br></p>', 'Y', 'N', 'N'),
+(7, '0000', '2019-05-20', '2019-05-24', '<p>asdasd<br></p>', 'Y', 'Y', 'Y'),
+(8, '0003', '2019-05-26', '2019-05-31', '<p>coba ya<br></p>', 'Y', 'Y', 'Y');
 
 --
 -- Indexes for dumped tables
@@ -249,7 +297,7 @@ ALTER TABLE `tr_cuti`
 -- AUTO_INCREMENT for table `ms_menu`
 --
 ALTER TABLE `ms_menu`
-  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ms_role`
@@ -261,31 +309,31 @@ ALTER TABLE `ms_role`
 -- AUTO_INCREMENT for table `ms_submenu`
 --
 ALTER TABLE `ms_submenu`
-  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_SubMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tr_absensi`
 --
 ALTER TABLE `tr_absensi`
-  MODIFY `ID_Absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `ID_Absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizesubmenu`
 --
 ALTER TABLE `tr_authorizesubmenu`
-  MODIFY `ID_AuthorizeSubMenu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_AuthorizeSubMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tr_cuti`
 --
 ALTER TABLE `tr_cuti`
-  MODIFY `ID_Cuti` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

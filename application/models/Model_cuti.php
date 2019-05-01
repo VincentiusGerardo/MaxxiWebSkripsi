@@ -17,11 +17,17 @@
             if($q) return true; else return false;
         }
 
-        public function updateCuti(){
-
+        public function updateCuti($kode, $data){
+            $query = $this->db->update('tr_cuti',$data,array('ID_Cuti' => $kode));
+            if($query) return true; else return false;
         }
 
         public function cancelCuti(){
             
+        }
+
+        public function getCutiKaryawan($cond){
+            $query = $this->db->get_where('tr_cuti',$cond);
+            return $query->result();
         }
     }

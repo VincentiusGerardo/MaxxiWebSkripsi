@@ -15,7 +15,7 @@
         public function getHeader(){
             $data['menu'] = $this->mUtama->getMenu($this->session->userdata('username'));
             $data['namaKaryawan'] = $this->mUtama->getUserName($this->session->userdata('username'));
-
+            $data['namaRole'] = $this->mUtama->getRoleName($this->session->userdata('role'));
             $this->load->view('header',$data);
         }
     }
