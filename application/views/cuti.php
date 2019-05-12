@@ -1,4 +1,3 @@
-<script src="<?= base_url('js/setTable/tableCuti.js') ?>"></script>
 <div class="container">
     <div class="row">
         <h1 class="judulHalaman">Cuti Karyawan</h1>
@@ -11,7 +10,17 @@
         <div class="tab-content">
           <div id="home" class="tab-pane fade in active">
           <div id="msg"><?= $this->session->flashdata('message') ?></div>
-            <table class="tableC" data-height="400" data-search="true">
+            <table data-toggle="table" data-height="400" data-search="true">
+                <thead>
+                  <tr>
+                    <th data-align="center">No</th>
+                    <th data-align="center">Tanggal Cuti</th>
+                    <th data-align="center">Tanggal Kembali</th>
+                    <th data-align="center">Keterangan</th>
+                    <th data-align="center">Data Absensi</th>
+                    <th data-align="center">Action</th>
+                  </tr>
+                </thead>
                 <tbody>
                     <?php $i = 1; foreach($cutiK as $cK) {?>
                     <tr>
@@ -19,6 +28,7 @@
                         <td><?= date("d F Y",strtotime($cK->TanggalCuti)) ?></td>
                         <td><?= date("d F Y",strtotime($cK->TanggalKembali)) ?></td>
                         <td><?= $cK->Keterangan ?></td>
+                        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#rekapAbsen<?= $cK->ID_Cuti ?>" data-toggle="tooltip" title="Approve Cuti">View</button></td>
                         <td>
                           <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#approveCuti<?= $cK->ID_Cuti ?>" data-toggle="tooltip" title="Approve Cuti"><span class="glyphicon glyphicon-check"></span></button>
                           &nbsp;
@@ -32,7 +42,16 @@
           <div id="menu1" class="tab-pane fade">
           <div id="msg"><?= $this->session->flashdata('message') ?></div>
             <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addCuti"><span class="glyphicon glyphicon-plus"></span> Add</button>
-            <table class="tableC" data-height="400" data-search="true">
+            <table data-toggle="table" data-height="400" data-search="true">
+            <thead>
+                  <tr>
+                    <th data-align="center">No</th>
+                    <th data-align="center">Tanggal Cuti</th>
+                    <th data-align="center">Tanggal Kembali</th>
+                    <th data-align="center">Keterangan</th>
+                    <th data-align="center">Action</th>
+                  </tr>
+                </thead>
                 <tbody>
                     <?php $i = 1; foreach($cuti as $c) {?>
                     <tr>
@@ -127,6 +146,46 @@ foreach($cutiK as $cK){
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
       </form>
+    </div>
+  </div>
+</div>
+<!-- Rekap Absensi -->
+<div id="rekapAbsen<?= $cK->ID_Cuti ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Rekap Absensi</h4>
+      </div>
+      <div class="modal-body">
+      <table data-toggle="table">
+        <thead>
+          <tr>
+            <th data-align="center">No</th>
+            <th data-align="center">Tanggal</th>
+            <th data-align="center">Clock In</th>
+            <th data-align="center">Clock Out</th>
+            <th data-align="center">Lama Kerja</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php
+            $q = $this->db->query("SELECT * FROM tr_absensi WHERE ID_Karyawan = '" . $cK->ID_Karyawan . "' AND Tanggal BETWEEN '" . date("Y-m-01") . "' AND '" . date("Y-m-d") . "' ORDER BY Tanggal");
+            $x = 1;
+            foreach($q->result() as $a){
+          ?>
+            <td><?= $x ?></td>
+            <td><?= date("j F Y",strtotime($a->Tanggal)) ?></td>
+            <td><?= $a->ClockIn ?></td>
+            <td><?= $a->ClockOut ?></td>
+            <td><?= $a->LamaKerja ?></td>
+            <?php $x++;} ?>
+        </tbody>
+      </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

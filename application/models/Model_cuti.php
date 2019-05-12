@@ -30,4 +30,20 @@
             $query = $this->db->get_where('tr_cuti',$cond);
             return $query->result();
         }
+
+        /* Rekapan Absensi */
+
+        public function getAbsen($kode){
+            $this->db->select('*');
+            $this->db->from('tr_absensi');
+            $this->db->where('ID_Karyawan',$kode);
+            $this->db->where('Tanggal BETWEEN "'. date("Y-m-01") . '" AND "' . date("Y-m-d") .'"');
+            $this->db->order_by('Tanggal', 'ASC');
+
+            $sql = $this->db->get();
+
+            return $sql->result();
+            /*$sql = $this->db->get_compiled_select();
+            echo $sql;*/
+        }
     }

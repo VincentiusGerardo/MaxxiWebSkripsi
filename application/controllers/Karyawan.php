@@ -8,7 +8,7 @@
 
        public function index(){
            $this->getHeader();
-           
+           $this->load->view('karyawan');
            $this->load->view('footer');
        }
    }

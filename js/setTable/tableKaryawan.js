@@ -1,5 +1,5 @@
 $(function(){
-    $(".tableC").bootstrapTable({
+    $("#tableK").bootstrapTable({
         columns:[
             {
                 title: "No",
@@ -14,12 +14,12 @@ $(function(){
                 field: "TanggalKembali",
                 align: "center"
             }, {
-                title: "Keterangan",
-                field: "Keterangan",
+                title: "Jabatan",
+                field: "Jabatan",
                 align: "center"
             }, {
-                title: "Status Cuti",
-                field: "StatusCuti",
+                title: "Action",
+                field: "Action",
                 align: "center"
             }
         ]
