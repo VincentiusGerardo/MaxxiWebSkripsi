@@ -24,4 +24,11 @@ $(function(){
         height: 300,                 // set editor height
         disableResizeEditor: true
     });
+
+    // Tanggal Lahir
+    $('.tanggalan').datepicker({
+        autoclose: true,
+        startView: 2
+    })
+    
 });

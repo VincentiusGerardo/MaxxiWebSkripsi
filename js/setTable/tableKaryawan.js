@@ -2,20 +2,16 @@ $(function(){
     $("#tableK").bootstrapTable({
         columns:[
             {
-                title: "No",
-                field: "No",
+                title: "Kode Karyawan",
+                field: "ID_Karyawan",
                 align: "center"
             }, {
-                title: "Tanggal Cuti",
-                field: "TanggalCuti",
+                title: "Nama Karyawan",
+                field: "NamaKaryawan",
                 align: "center"
             }, {
-                title: "Tanggal Kembali",
-                field: "TanggalKembali",
-                align: "center"
-            }, {
-                title: "Jabatan",
-                field: "Jabatan",
+                title: "Role",
+                field: "Role",
                 align: "center"
             }, {
                 title: "Action",
