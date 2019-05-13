@@ -72,6 +72,9 @@
                           <li>
                             <ul class="menu">
                             <li>
+                              <a href="<?= base_url('Module/Profile') ?>"><i class="fa fa-user fa-fw"></i> Profile</a>
+                            </li>
+                            <li>
                                     <a data-toggle="modal" data-target="#changePassword"><i class="fa fa-key fa-fw"></i> Change Password</a>
                               </li>
                               <li>

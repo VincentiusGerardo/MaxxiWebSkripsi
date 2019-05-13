@@ -80,4 +80,11 @@
                 $this->load->view('hasilrekap',$data);
             }
         }
+
+        public function profile(){
+            $data['kary'] = $this->mAbsensi->getCurrentUser($this->session->userdata('username'));
+            $this->getHeader();
+            $this->load->view('profile',$data);
+            $this->load->view('footer');
+        }
    }

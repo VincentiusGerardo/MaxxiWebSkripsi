@@ -76,4 +76,15 @@
             $query = $this->db->get_where('ms_role',array('ID_Role' => $id));
             return $query->row()->NamaRole;
         }
+
+        public function getCurrentUser($id){
+            $this->db->select('a.*,b.NamaRole');
+            $this->db->from('ms_karyawan a');
+            $this->db->join('ms_role b', 'a.ID_Role = b.ID_Role', 'inner');
+            $this->db->where('a.FlagActive','Y');
+            $this->db->where('a.ID_Karyawan',$id);
+            $this->db->order_by("a.ID_Karyawan", "asc");
+            $q = $this->db->get();
+            return $q->result();
+        }
     }
