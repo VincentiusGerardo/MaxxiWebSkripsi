@@ -1,7 +1,7 @@
 <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
 
-    class Model_karyawan extends CI_Model{
+    class Model_karyawan extends MY_Model{
         public function getAllKaryawan(){
             $this->db->select('a.*,b.NamaRole');
             $this->db->from('ms_karyawan a');
@@ -14,12 +14,6 @@
         
         public function insertKaryawan($data){
             $q = $this->db->insert('ms_karyawan',$data);
-            if($q) return true; else return false;
-        }
-
-        public function updateKaryawan($id,$data){
-            $cond = array('ID_Karyawan' => $id);
-            $q = $this->db->update('ms_karyawan',$data,$cond);
             if($q) return true; else return false;
         }
 

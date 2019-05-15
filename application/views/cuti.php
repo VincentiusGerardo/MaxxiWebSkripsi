@@ -43,7 +43,7 @@
           <div id="msg"><?= $this->session->flashdata('message') ?></div>
             <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addCuti"><span class="glyphicon glyphicon-plus"></span> Add</button>
             <table data-toggle="table" data-height="400" data-search="true">
-            <thead>
+              <thead>
                   <tr>
                     <th data-align="center">No</th>
                     <th data-align="center">Tanggal Cuti</th>
@@ -69,7 +69,16 @@
         <?php }else{ ?>
         <div id="msg"><?= $this->session->flashdata('message') ?></div>
         <button class="btn btn-primary btn-sm tombolAdd" data-toggle="modal" data-target="#addCuti"><span class="glyphicon glyphicon-plus"></span> Add</button>
-        <table class="tableC" data-height="400" data-search="true">
+        <table data-toggle="table" data-height="400" data-search="true">
+            <thead>
+              <tr>
+                <th data-align="center">No</th>
+                <th data-align="center">Tanggal Cuti</th>
+                <th data-align="center">Tanggal Kembali</th>
+                <th data-align="center">Keterangan</th>
+                <th data-align="center">Action</th>
+              </tr>
+            </thead>
             <tbody>
                 <?php $i = 1; foreach($cuti as $c) {?>
                 <tr>

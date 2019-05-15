@@ -80,17 +80,18 @@
        }
 
        public function doUpdateKaryawan(){
-        $this->form_validation->set_rules('idK', 'Nama Karyawan', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('namaK', 'Nama Karyawan', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('tempatLahir', 'Tempat Lahir', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('TanggalLahir', 'Tanggal Lahir', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('agama', 'Agama', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('role', 'ID Role', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('alt', 'Alamat', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('wrg', 'Kewarganegaraan', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('stat', 'Status Pernikahan', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('NoHP', 'Nomor HP', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('idK', 'Nama Karyawan', 'trim|xss_clean');
+        $this->form_validation->set_rules('namaK', 'Nama Karyawan', 'trim|xss_clean');
+        $this->form_validation->set_rules('tempatLahir', 'Tempat Lahir', 'trim|xss_clean');
+        $this->form_validation->set_rules('TanggalLahir', 'Tanggal Lahir', 'trim|xss_clean');
+        $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'trim|xss_clean');
+        $this->form_validation->set_rules('agama', 'Agama', 'trim|xss_clean');
+        $this->form_validation->set_rules('role', 'ID Role', 'trim|xss_clean');
+        $this->form_validation->set_rules('alt', 'Alamat', 'trim|xss_clean');
+        $this->form_validation->set_rules('wrg', 'Kewarganegaraan', 'trim|xss_clean');
+        $this->form_validation->set_rules('stat', 'Status Pernikahan', 'trim|xss_clean');
+        $this->form_validation->set_rules('NoHP', 'Nomor HP', 'trim|xss_clean');
+        $this->form_validation->set_rules('flag', 'Flag Active', 'trim|xss_clean');
         if($this->form_validation->run() == TRUE){
             $data = array(
                 'NamaKaryawan' => $this->input->post('namaK'),
@@ -102,7 +103,8 @@
                 'Alamat' => $this->input->post('alt'),
                 'Kewarganegaraan' => $this->input->post('wrg'),
                 'StatusPernikahan' => $this->input->post('stat'),
-                'NoHP' => $this->input->post('NoHP')
+                'NoHP' => $this->input->post('NoHP'),
+                'FlagActive' => $this->input->post('flag')
             );
 
             $res = $this->mKaryawan->updateKaryawan($this->input->post('idK'),$data);

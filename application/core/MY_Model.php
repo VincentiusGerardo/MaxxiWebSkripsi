@@ -87,4 +87,10 @@
             $q = $this->db->get();
             return $q->result();
         }
+
+        public function updateKaryawan($id,$data){
+            $cond = array('ID_Karyawan' => $id);
+            $q = $this->db->update('ms_karyawan',$data,$cond);
+            if($q) return true; else return false;
+        }
     }

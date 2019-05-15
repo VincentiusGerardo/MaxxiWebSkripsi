@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2019 at 12:19 PM
+-- Generation Time: May 15, 2019 at 08:10 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -54,8 +54,8 @@ INSERT INTO `ms_karyawan` (`ID_Karyawan`, `NamaKaryawan`, `TempatLahir`, `Tangga
 ('0000', 'Administrator', '', '0000-00-00', '', '$2y$10$Y.gcBhuR96RFEC8ExxyZQOg3MtQWtIhCVK1qse5Knfu9L7e8FU/SW', '', 1, '', '', '', '', 0000, '0000.jpg', 'Y'),
 ('0001', 'Director', '', '0000-00-00', '', '$2y$10$VM6op8KxC/3lMdPcxQ87audLLl3SZPDXdaQOgMuwfcxmmE0vBuIcK', '', 2, '', '', '', '', 0000, '0001.jpg', 'Y'),
 ('0002', 'HRD', '', '0000-00-00', '', '$2y$10$etjxn0cpNewzeDDRG07Jeer9KAE7LyaoQ/5zl4jj1kKKR/.GE12EC', '', 3, '', '', '', '', 0000, NULL, 'Y'),
-('0003', 'Employee', '', '0000-00-00', '', '$2y$10$pPnhu/QEsD7xwN8V5qBg0OhP/YF.pL0UGyN1MPgAVKKqpNzDGI0BS', '', 4, '', '', '', '', 0000, NULL, 'Y'),
-('0005', 'Richard', 'Jakarta', '1995-11-24', 'L', '$2y$10$VqRC5nHh/5M/wqnd5cZIYOQi86LB.QV83Ad9IZjNSobwYwrZqASEG', 'Kristen', 3, '<p>Kelapa Gading<br></p>', 'WNI', 'BelumNikah', '081293654545', 2019, '0005.jpg', 'Y');
+('0003', 'Employee', '', '1970-01-01', '', '$2y$10$pPnhu/QEsD7xwN8V5qBg0OhP/YF.pL0UGyN1MPgAVKKqpNzDGI0BS', '', 4, '', '', '', '', 0000, NULL, 'Y'),
+('0005', 'Richard', 'Jakarta', '1995-11-24', 'L', '$2y$10$VqRC5nHh/5M/wqnd5cZIYOQi86LB.QV83Ad9IZjNSobwYwrZqASEG', 'Kristen', 3, 'Jl. Giro No 3<br>', 'WNI', 'BelumNikah', '088809693341', 2019, '0005.jpg', 'Y');
 
 -- --------------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE `ms_menu` (
 
 INSERT INTO `ms_menu` (`ID_Menu`, `NamaMenu`, `URL`, `Logo`, `FlagActive`) VALUES
 (1, 'Karyawan', '#', 'fa-user', 'N'),
-(2, 'Testing', 'Testing', 'fa-rocket', 'Y'),
+(2, 'Testing', 'Testing', 'fa-rocket', 'N'),
 (3, 'Karyawan', 'Karyawan', 'fa-users', 'Y');
 
 -- --------------------------------------------------------
@@ -122,7 +122,7 @@ CREATE TABLE `ms_submenu` (
 --
 
 INSERT INTO `ms_submenu` (`ID_SubMenu`, `ID_Menu`, `NamaSubMenu`, `URL`, `FlagActive`) VALUES
-(1, 1, 'Add Karyawan', 'AddKaryawan', 'Y');
+(1, 1, 'Add Karyawan', 'AddKaryawan', 'N');
 
 -- --------------------------------------------------------
 
@@ -188,10 +188,10 @@ CREATE TABLE `tr_authorizemenu` (
 
 INSERT INTO `tr_authorizemenu` (`ID_AuthorizeMenu`, `ID_Menu`, `ID_Karyawan`) VALUES
 (1, 1, '0000'),
-(2, 1, '0003'),
 (3, 2, '0003'),
 (4, 3, '0002'),
-(5, 3, '0000');
+(5, 3, '0000'),
+(7, 3, '0005');
 
 -- --------------------------------------------------------
 
@@ -334,7 +334,7 @@ ALTER TABLE `tr_absensi`
 -- AUTO_INCREMENT for table `tr_authorizemenu`
 --
 ALTER TABLE `tr_authorizemenu`
-  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_AuthorizeMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tr_authorizesubmenu`

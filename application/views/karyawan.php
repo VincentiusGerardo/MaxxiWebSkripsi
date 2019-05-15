@@ -261,6 +261,15 @@
                           <input type="text" class="form-control numberOnly" name="NoHP" value="<?= $k->NoHP ?>"/>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4">Status Karyawan:</label>
+                        <div class="col-sm-7">
+                            <select class="selectpicker form-control" title="Select Status" name="flag">
+                                <option value="Y" <?php if($k->FlagActive == "Y") echo 'selected'; ?>>Aktif</option>
+                                <option value="N" <?php if($k->FlagActive == "N") echo 'selected'; ?>>Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Update</button>

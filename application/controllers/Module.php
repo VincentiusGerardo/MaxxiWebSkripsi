@@ -87,4 +87,27 @@
             $this->load->view('profile',$data);
             $this->load->view('footer');
         }
+
+        public function doUpdateProfile(){
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('noHP', 'Nomor HP', 'trim|required|xss_clean');
+            
+            if($this->form_validation->run() == TRUE){
+                $data = array(
+                    'Alamat' => $this->input->post('alamat'),
+                    'NoHP' => $this->input->post('noHP')
+                );
+                $res = $this->mAbsensi->updateKaryawan($this->session->userdata('username'),$data);
+                if($res == true){
+                    $this->session->set_flashdata("message","<div class='alert alert-success'><strong>Success!</strong> Data Updated!</div>");
+                    redirect('Module/Profile');
+                }else{
+                    $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Data Not Updated!</div>");
+                    redirect('Module/Profile');
+                }
+            }else{
+                $this->session->set_flashdata("message","<div class='alert alert-danger'><strong>Failed!</strong> Data Error!</div>");
+                redirect('Module/Profile');
+            }
+        }
    }
